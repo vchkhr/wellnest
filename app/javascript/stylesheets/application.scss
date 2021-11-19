@@ -1,1 +1,24 @@
 @import "~bootstrap/scss/bootstrap";
+
+header {
+    background-color: #495057;
+}
+
+a.logo {
+    color: #DEE2E6;
+}
+
+header ul li a {
+    color: #ADB5BD !important;
+}
+
+header ul li,
+header a.logo {
+    margin-right: 30px;
+}
+
+header button {
+    color: #ADB5BD !important;
+    border-color: #ADB5BD !important;
+    background-color: transparent !important;
+}
