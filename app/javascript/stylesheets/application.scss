@@ -5,11 +5,11 @@ header {
 }
 
 a.logo {
-    color: #DEE2E6;
+    color: #dee2e6;
 }
 
 header ul li a {
-    color: #ADB5BD !important;
+    color: #adb5bd !important;
 }
 
 header ul li,
@@ -18,7 +18,59 @@ header a.logo {
 }
 
 header button {
-    color: #ADB5BD !important;
-    border-color: #ADB5BD !important;
+    color: #adb5bd !important;
+    border-color: #adb5bd !important;
     background-color: transparent !important;
+}
+
+.index {
+    .top-banner {
+        width: 100vw;
+        height: calc(100vh - 40px - 16px * 2);
+        background-color: #495057;
+        padding: 30px 70px 0px 70px;
+
+        .lead {
+            color: #ffffff;
+            font-size: 5em;
+        }
+
+        .description {
+            color: #adb5bd;
+            font-size: 1.5em;
+        }
+
+        img {
+            filter: grayscale(70%);
+            margin-left: 70px;
+            height: 100%;
+        }
+
+        .btn-primary {
+            background-color: #212529;
+            border-color: #212529;
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        .rates {
+            margin-top: 70px;
+
+            p {
+                text-align: center;
+                margin: 0px;
+                line-height: 100%;
+            }
+
+            .lead {
+                font-weight: 700;
+                font-size: 3em;
+            }
+
+            .description  {
+                font-size: 1.2em;
+                margin-top: 20px;
+            }
+        }
+    }
 }

@@ -1,3 +1,36 @@
 <%= render 'layouts/navigation/home' %>
 
-<h1>Welcome</h1>
+<div class="index">
+  <div class="top-banner">
+    <div class="d-flex">
+      <div class="flex-fill">
+        <p class="lead">Coaching<br />
+          WEB Platform</p>
+
+        <p class="description">Where coaches help users to deal<br />
+          with anxiety and depression</p>
+
+        <%= link_to "JOIN US", "/", class: "btn btn-primary" %>
+      </div>
+
+      <%= image_tag("top-banner.jpg", :alt => "rss feed") %>
+    </div>
+
+    <div class="d-flex rates">
+      <div class="flex-fill">
+        <p class="lead">151</p>
+        <p class="description">Effective techniques</p>
+      </div>
+
+      <div class="flex-fill">
+        <p class="lead">50</p>
+        <p class="description">Qualified coaches</p>
+      </div>
+
+      <div class="flex-fill">
+        <p class="lead">356</p>
+        <p class="description">Satisfied users</p>
+      </div>
+    </div>
+  </div>
+</div>
