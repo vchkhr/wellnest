@@ -1,5 +1,5 @@
 # mobidev-rubyInternship-mhc
-Mental Health Coaching is a project written during a Ruby Internship at MobiDev.
+Find a Trainer and Learn Special Meditation Techniques with Mental Health Coaching.
 
 ## Installation
 1. Clone the repository and open it in the Terminal.
