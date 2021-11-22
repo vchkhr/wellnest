@@ -1,17 +1,22 @@
-<%= render 'layouts/navigation/start' %>
+<header class="p-3">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start fixed-top nav p-2">
 
-<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-  <li><a href="#" class="nav-link px-2">How does it work?</a></li>
-  <li><a href="#" class="nav-link px-2">Techniques</a></li>
-  <li><a href="#" class="nav-link px-2">Coaches</a></li>
-</ul>
+      <%= render 'layouts/navigation/logo' %>
 
-<%# <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-  <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-</form> %>
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/" class="nav-link px-2">How does it work?</a></li>
+        <li><a href="/" class="nav-link px-2">Techniques</a></li>
+        <li><a href="/" class="nav-link px-2">Coaches</a></li>
+      </ul>
 
-<div class="text-end">
-  <button type="button" class="btn btn-primary me-2">SIGN IN</button>
-</div>
+      <%# <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+          </form> %>
 
-<%= render 'layouts/navigation/end' %>
+      <div class="text-end">
+        <button type="button" class="btn btn-primary me-2">SIGN IN</button>
+      </div>
+    </div>
+  </div>
+</header>
