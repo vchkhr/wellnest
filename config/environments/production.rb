@@ -119,4 +119,6 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.serve_static_files = true
+
+  config.action_mailer.default_url_options = { host: 'mental.vchkhr.com', port: 3000 }
 end
