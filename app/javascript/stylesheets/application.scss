@@ -1,6 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
 
-header div.nav {
+div.app-errors div {
+    margin: 0px;
+}
+
+header.navigation {
     background-color: #495057;
 
     a.logo {
