@@ -6,12 +6,12 @@ class Coach < ApplicationRecord
   validates :gender_id, presence: true
   validates :edu, presence: true
   validates :work, presence: true
-  validates :licanses, presence: true
+  validates :licenses, presence: true
   validates :links, presence: true
-  # validates :is_verified, presence: false, default: false
   validate :is_verified
 
   belongs_to :user
   belongs_to :gender
-  # has_and_belongs_to_many :problem
+  has_and_belongs_to_many :clients
+  has_and_belongs_to_many :problems
 end

@@ -4,10 +4,9 @@ class Client < ApplicationRecord
   validate :photo_url
   validates :age, presence: true
   validate :bio
-  # validate :user_id
   
   belongs_to :user
   belongs_to :gender
-  # has_and_belongs_to_many :problem
-  # has_many :coaches, through: :invitations
+  has_and_belongs_to_many :problems
+  has_and_belongs_to_many :coaches
 end
