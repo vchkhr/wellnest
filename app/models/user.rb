@@ -1,9 +1,8 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  
-  extend Devise::Models
+  self.primary_key = "id"
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  validates :name, presence: true
+
+  has_one :client
+  has_one :coach
 end

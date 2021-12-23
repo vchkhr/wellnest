@@ -10,21 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_01_155336) do
+ActiveRecord::Schema.define(version: 2021_12_23_112258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+  create_table "clients", force: :cascade do |t|
+    t.string "photo_url"
+    t.integer "age", null: false
+    t.string "bio"
+    t.bigint "user_id"
+    t.bigint "gender_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["gender_id"], name: "index_clients_on_gender_id"
+    t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "coaches", force: :cascade do |t|
+    t.string "photo_url"
+    t.integer "age", null: false
+    t.string "edu", null: false
+    t.string "work", null: false
+    t.string "licenses", null: false
+    t.string "links", null: false
+    t.string "is_verified", null: false
+    t.bigint "user_id"
+    t.integer "gender_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_coaches_on_user_id"
+  end
+
+  create_table "genders", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_hash", null: false
+    t.boolean "is_verified", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
