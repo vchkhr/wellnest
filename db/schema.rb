@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_23_155334) do
+ActiveRecord::Schema.define(version: 2021_12_24_123831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,20 @@ ActiveRecord::Schema.define(version: 2021_12_23_155334) do
     t.index ["problem_id"], name: "index_clients_problems_on_problem_id"
   end
 
+  create_table "clients_steps", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "step_id"
+    t.index ["client_id"], name: "index_clients_steps_on_client_id"
+    t.index ["step_id"], name: "index_clients_steps_on_step_id"
+  end
+
+  create_table "clients_techniques", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "technique_id"
+    t.index ["client_id"], name: "index_clients_techniques_on_client_id"
+    t.index ["technique_id"], name: "index_clients_techniques_on_technique_id"
+  end
+
   create_table "coaches", force: :cascade do |t|
     t.string "photo_url"
     t.integer "age", null: false
@@ -67,8 +81,52 @@ ActiveRecord::Schema.define(version: 2021_12_23_155334) do
     t.string "name", null: false
   end
 
+  create_table "genders_techniques", force: :cascade do |t|
+    t.bigint "technique_id"
+    t.bigint "gender_id"
+    t.index ["gender_id"], name: "index_genders_techniques_on_gender_id"
+    t.index ["technique_id"], name: "index_genders_techniques_on_technique_id"
+  end
+
   create_table "problems", force: :cascade do |t|
     t.string "name", null: false
+  end
+
+  create_table "problems_techniques", force: :cascade do |t|
+    t.bigint "technique_id"
+    t.bigint "problem_id"
+    t.index ["problem_id"], name: "index_problems_techniques_on_problem_id"
+    t.index ["technique_id"], name: "index_problems_techniques_on_technique_id"
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description", null: false
+    t.integer "photo_url"
+    t.integer "video_url"
+    t.integer "audio_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "techniques", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description", null: false
+    t.integer "age_start", null: false
+    t.integer "age_end", null: false
+    t.integer "duration_start", null: false
+    t.integer "duration_end", null: false
+    t.integer "likes", default: 0
+    t.integer "dislikes", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "techniques_steps", force: :cascade do |t|
+    t.bigint "technique_id"
+    t.bigint "step_id"
+    t.index ["step_id"], name: "index_techniques_steps_on_step_id"
+    t.index ["technique_id"], name: "index_techniques_steps_on_technique_id"
   end
 
   create_table "users", force: :cascade do |t|

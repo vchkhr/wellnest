@@ -1,0 +1,2 @@
+class ProblemsTechnique < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class GendersTechnique < ApplicationRecord
+end

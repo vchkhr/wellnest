@@ -16,27 +16,28 @@ Problem.create(name: 'Stress')
 
 # Testing the models
 
-u1 = User.create(name: 'a', email: 'a@a.a', password_hash: 'a')
-c1 = Client.create(age: 20, gender_id: 1)
+u1 = User.create(name: 'Ann Albertson', email: 'ann@albertson.com', password_hash: 'abc12345')
+c1 = Client.create(age: 30, gender: Gender.find_by_name('Female'))
 c1.user = u1
+c1.problems << Problem.find_by_name('Depression')
 
-c1.problems << Problem.find_by_name('Irritability')
-
-u2 = User.create(name: 'b', email: 'b@b.b', password_hash: 'b')
-c2 = Coach.create(age: 30, gender: Gender.find_by_name('Female'))
+u2 = User.create(name: 'James Brown', email: 'b@b.b', password_hash: 'b')
+c2 = Coach.create(age: 36, gender: Gender.find_by_name('Male'))
 c2.user = u2
-
-c2.problems << Problem.find_by_name('Irritability')
+c2.problems << Problem.find_by_name('Anxiety')
+c2.problems << Problem.find_by_name('Depression')
 
 c1.coaches << c2
 
-u3 = User.create(name: 'c', email: 'c@c.c', password_hash: 'c')
-c3 = Coach.create(age: 40, gender: Gender.find_by_name('Male'))
-c3.user = u3
+t1 = Technique.create(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, likes: 124, dislikes: 12)
+t1.problems << Problem.find_by_name('Depression')
+t1.genders << Gender.find_by_name('Male')
+t1.genders << Gender.find_by_name('Female')
 
-c3.problems << Problem.find_by_name('Anxiety')
-c3.problems << Problem.find_by_name('Depression')
+t2 = Technique.create(title: 'Lifestyle changes', description: 'Eliminating the lack of control that makes people feel worse.', age_start: 30, age_end: 45, duration_start: 6, duration_end: 7, likes: 124, dislikes: 12)
+t2.problems << Problem.find_by_name('Depression')
+t2.problems << Problem.find_by_name('Anxiety')
+t2.genders << Gender.find_by_name('Male')
+t2.genders << Gender.find_by_name('Female')
 
-c1.coaches << c3
-
-puts c1.coaches.inspect
+puts t2.inspect

@@ -5,4 +5,6 @@ class Gender < ApplicationRecord
 
   has_many :clients
   has_many :coaches
+  
+  has_and_belongs_to_many :techniques
 end
