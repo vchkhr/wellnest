@@ -4,14 +4,14 @@ class Technique < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
-  validates :age_start, presence: true
-  validates :age_end, presence: true
+  validates :age_start, numericality: { only_integer: true, in: 18..99 }
+  validates :age_end, numericality: { only_integer: true, in: 18..99 }
 
-  validates :duration_start, presence: true
-  validates :duration_end, presence: true
+  validates :duration_start, numericality: { only_integer: true, in: 18..99 }
+  validates :duration_end, numericality: { only_integer: true, in: 18..99 }
 
-  validate :likes
-  validate :dislikes
+  validates :likes, numericality: { only_integer: true, minimum: 0 }
+  validates :dislikes, numericality: { only_integer: true, minimum: 0 }
 
   has_and_belongs_to_many :problems
   has_and_belongs_to_many :genders

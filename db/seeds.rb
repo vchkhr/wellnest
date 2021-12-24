@@ -16,12 +16,12 @@ Problem.create(name: 'Stress')
 
 # Testing the models
 
-u1 = User.create(name: 'Ann Albertson', email: 'ann@albertson.com', password_hash: 'abc12345')
+u1 = User.create(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345')
 c1 = Client.create(age: 30, gender: Gender.find_by_name('Female'))
 c1.user = u1
 c1.problems << Problem.find_by_name('Depression')
 
-u2 = User.create(name: 'James Brown', email: 'b@b.b', password_hash: 'b')
+u2 = User.create(name: 'James Brown', email: 'b@b.b', password: 'b')
 c2 = Coach.create(age: 36, gender: Gender.find_by_name('Male'))
 c2.user = u2
 c2.problems << Problem.find_by_name('Anxiety')

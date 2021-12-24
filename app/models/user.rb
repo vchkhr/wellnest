@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, email: true
-  validates :password_hash, presence: true, confirmation: true
+  validates :password, presence: true, confirmation: true
   validate :is_verified
 
   has_one :client

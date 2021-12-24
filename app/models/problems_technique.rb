@@ -1,2 +1,0 @@
-class ProblemsTechnique < ApplicationRecord
-end
