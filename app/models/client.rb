@@ -1,7 +1,7 @@
 class Client < ApplicationRecord
   self.primary_key = "id"
 
-  validate :photo_url
+  validate :image_url
   validates :age, numericality: { only_integer: true, in: 18..99 }
   validate :bio
   
@@ -14,4 +14,5 @@ class Client < ApplicationRecord
   has_and_belongs_to_many :problems
   has_and_belongs_to_many :techniques
   has_and_belongs_to_many :steps
+  has_and_belongs_to_many :notifications
 end

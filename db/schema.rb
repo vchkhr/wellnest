@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_24_131822) do
+ActiveRecord::Schema.define(version: 2021_12_24_144158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
-    t.string "photo_url"
+    t.string "image_url"
     t.integer "age", null: false
     t.string "bio"
     t.bigint "user_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_131822) do
   end
 
   create_table "coaches", force: :cascade do |t|
-    t.string "photo_url"
+    t.string "image_url"
     t.integer "age", null: false
     t.string "edu", null: false
     t.string "work", null: false
@@ -91,6 +91,14 @@ ActiveRecord::Schema.define(version: 2021_12_24_131822) do
     t.index ["coach_id"], name: "index_invitations_on_coach_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "description"
+    t.bigint "client_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_notifications_on_client_id"
+  end
+
   create_table "problems", force: :cascade do |t|
     t.string "name", null: false
   end
@@ -105,17 +113,24 @@ ActiveRecord::Schema.define(version: 2021_12_24_131822) do
   create_table "steps", force: :cascade do |t|
     t.string "title", null: false
     t.string "description", null: false
-    t.integer "photo_url"
-    t.integer "video_url"
-    t.integer "audio_url"
+    t.string "image_url"
+    t.string "video_url"
+    t.string "audio_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "steps_techniques", force: :cascade do |t|
+    t.bigint "technique_id"
+    t.bigint "step_id"
+    t.index ["step_id"], name: "index_steps_techniques_on_step_id"
+    t.index ["technique_id"], name: "index_steps_techniques_on_technique_id"
   end
 
   create_table "techniques", force: :cascade do |t|
     t.string "title", null: false
     t.string "description", null: false
-    t.string "photo_url"
+    t.string "image_url"
     t.integer "age_start", null: false
     t.integer "age_end", null: false
     t.integer "duration_start", null: false
@@ -126,18 +141,12 @@ ActiveRecord::Schema.define(version: 2021_12_24_131822) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "techniques_steps", force: :cascade do |t|
-    t.bigint "technique_id"
-    t.bigint "step_id"
-    t.index ["step_id"], name: "index_techniques_steps_on_step_id"
-    t.index ["technique_id"], name: "index_techniques_steps_on_technique_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "password", null: false
     t.boolean "is_verified", default: false
+    t.boolean "send_email_notifications", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

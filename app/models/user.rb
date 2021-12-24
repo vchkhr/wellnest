@@ -13,6 +13,7 @@ class User < ApplicationRecord
   validates :email, presence: true, email: true
   validates :password, presence: true, confirmation: true
   validate :is_verified
+  validate :send_email_notifications
 
   has_one :client
   has_one :coach

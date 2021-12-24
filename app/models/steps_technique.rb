@@ -1,0 +1,2 @@
+class StepsTechnique < ApplicationRecord
+end

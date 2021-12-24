@@ -3,7 +3,7 @@ class CreateTechniques < ActiveRecord::Migration[6.1]
     create_table :techniques do |t|
       t.string :title, null: false
       t.string :description, null: false
-      t.string :photo_url, null: true
+      t.string :image_url, null: true
 
       t.integer :age_start, null: false
       t.integer :age_end, null: false

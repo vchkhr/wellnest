@@ -4,9 +4,9 @@ class Step < ApplicationRecord
     validates :title, presence: true
     validates :description, presence: true
   
-    validate photo_url
-    validate video_url
-    validate audio_url
+    validate :image_url
+    validate :video_url
+    validate :audio_url
 
     has_and_belongs_to_many :techniques
     has_and_belongs_to_many :clients
