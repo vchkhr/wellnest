@@ -9,9 +9,11 @@ class Coach < ApplicationRecord
   validates :licenses, presence: true
   validates :links, presence: true
   validates :is_verified, inclusion: [true, false]
-
+  
+  has_many :invitations
+  has_many :clients, through: :invitations
+  
   belongs_to :user
   belongs_to :gender
-  has_and_belongs_to_many :clients
   has_and_belongs_to_many :problems
 end

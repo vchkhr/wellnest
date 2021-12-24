@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_24_123831) do
+ActiveRecord::Schema.define(version: 2021_12_24_131822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,13 +25,6 @@ ActiveRecord::Schema.define(version: 2021_12_24_123831) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["gender_id"], name: "index_clients_on_gender_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
-  end
-
-  create_table "clients_coaches", force: :cascade do |t|
-    t.bigint "client_id"
-    t.bigint "coach_id"
-    t.index ["client_id"], name: "index_clients_coaches_on_client_id"
-    t.index ["coach_id"], name: "index_clients_coaches_on_coach_id"
   end
 
   create_table "clients_problems", force: :cascade do |t|
@@ -88,6 +81,16 @@ ActiveRecord::Schema.define(version: 2021_12_24_123831) do
     t.index ["technique_id"], name: "index_genders_techniques_on_technique_id"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.integer "status"
+    t.bigint "client_id"
+    t.bigint "coach_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_invitations_on_client_id"
+    t.index ["coach_id"], name: "index_invitations_on_coach_id"
+  end
+
   create_table "problems", force: :cascade do |t|
     t.string "name", null: false
   end
@@ -112,6 +115,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_123831) do
   create_table "techniques", force: :cascade do |t|
     t.string "title", null: false
     t.string "description", null: false
+    t.string "photo_url"
     t.integer "age_start", null: false
     t.integer "age_end", null: false
     t.integer "duration_start", null: false

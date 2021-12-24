@@ -8,8 +8,10 @@ class Client < ApplicationRecord
   belongs_to :user
   belongs_to :gender
   
+  has_many :invitations
+  has_many :coaches, through: :invitations
+  
   has_and_belongs_to_many :problems
-  has_and_belongs_to_many :coaches
   has_and_belongs_to_many :techniques
   has_and_belongs_to_many :steps
 end
