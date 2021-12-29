@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_24_144158) do
+ActiveRecord::Schema.define(version: 2021_12_29_151813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_144158) do
     t.string "work", null: false
     t.string "licenses", null: false
     t.string "links", null: false
-    t.string "is_verified", null: false
+    t.string "is_verified", default: "f", null: false
     t.bigint "user_id"
     t.integer "gender_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -91,8 +91,19 @@ ActiveRecord::Schema.define(version: 2021_12_24_144158) do
     t.index ["coach_id"], name: "index_invitations_on_coach_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "text", null: false
+    t.boolean "from_client"
+    t.bigint "client_id"
+    t.bigint "coach_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_messages_on_client_id"
+    t.index ["coach_id"], name: "index_messages_on_coach_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
-    t.string "description"
+    t.string "text"
     t.bigint "client_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -145,8 +156,8 @@ ActiveRecord::Schema.define(version: 2021_12_24_144158) do
     t.string "name", null: false
     t.string "email", null: false
     t.string "password", null: false
-    t.boolean "is_verified", default: false
-    t.boolean "send_email_notifications", default: false
+    t.boolean "is_verified", default: false, null: false
+    t.boolean "send_email_notifications", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

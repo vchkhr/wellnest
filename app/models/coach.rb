@@ -8,11 +8,14 @@ class Coach < ApplicationRecord
   validates :work, presence: true
   validates :licenses, presence: true
   validates :links, presence: true
-  validates :is_verified, inclusion: [true, false]
+  validate :is_verified
   
   has_many :invitations
   has_many :clients, through: :invitations
   
+  has_many :messages
+  has_many :clients, through: :messages
+
   belongs_to :user
   belongs_to :gender
   has_and_belongs_to_many :problems

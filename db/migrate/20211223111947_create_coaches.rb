@@ -7,7 +7,7 @@ class CreateCoaches < ActiveRecord::Migration[6.1]
       t.string :work, null: false
       t.string :licenses, null: false
       t.string :links, null: false
-      t.string :is_verified, null: false
+      t.string :is_verified, null: false, default: false
       
       t.belongs_to :user
       t.integer :gender_id, null: false

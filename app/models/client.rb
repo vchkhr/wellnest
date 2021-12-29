@@ -10,9 +10,21 @@ class Client < ApplicationRecord
   
   has_many :invitations
   has_many :coaches, through: :invitations
+
+  has_many :notifications
   
+  has_many :messages
+  has_many :coaches, through: :messages
+
   has_and_belongs_to_many :problems
   has_and_belongs_to_many :techniques
   has_and_belongs_to_many :steps
-  has_and_belongs_to_many :notifications
+
+  def invitation
+    return self.invitations.where(status: 1).last
+  end
+
+  def coach
+    return self.invitation.coach
+  end
 end
