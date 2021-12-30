@@ -2,6 +2,8 @@
 
 <h1>Login</h1>
 
+<p>Don't have an account? <strong><%= link_to 'Sign up', signup_path %></strong></p>
+
 <%= form_tag sessions_path do |form| %>
   <div class="field">
     <%= label_tag :email %>
