@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_141223) do
+ActiveRecord::Schema.define(version: 2022_01_03_151917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,8 +96,10 @@ ActiveRecord::Schema.define(version: 2022_01_03_141223) do
   end
 
   create_table "clients_techniques", force: :cascade do |t|
-    t.bigint "client_id"
-    t.bigint "technique_id"
+    t.bigint "client_id", null: false
+    t.bigint "technique_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_clients_techniques_on_client_id"
     t.index ["technique_id"], name: "index_clients_techniques_on_technique_id"
   end
@@ -223,6 +225,8 @@ ActiveRecord::Schema.define(version: 2022_01_03_141223) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "genders"
   add_foreign_key "clients", "users"
+  add_foreign_key "clients_techniques", "clients"
+  add_foreign_key "clients_techniques", "techniques"
   add_foreign_key "coaches", "genders"
   add_foreign_key "coaches", "users"
 end

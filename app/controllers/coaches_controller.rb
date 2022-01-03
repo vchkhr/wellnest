@@ -24,10 +24,11 @@ class CoachesController < ApplicationController
     @coach = Coach.new(coach_params)
     @coach.user = User.find(session[:user_id])
 
+    problem = Problem.find_by_id(params[:problems][:id])
+    @coach.problems << problem unless problem.nil?
+
     respond_to do |format|
       if @coach.save
-        @coach.problems << Problem.find(params[:problems][:id])
-
         format.html { redirect_to coach_url(@coach), notice: "Coach was successfully created." }
         format.json { render :show, status: :created, location: @coach }
       else

@@ -24,11 +24,12 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
     @client.user = User.find(session[:user_id])
 
+    problem = Problem.find_by_id(params[:problems][:id])
+    @client.problems << problem unless problem.nil?
+    
     respond_to do |format|
       if @client.save
-        @client.problems << Problem.find(params[:problems][:id])
-
-        format.html { redirect_to client_url(@client), notice: "Client was successfully created." }
+        format.html { redirect_to '/dashboard', notice: "Client was successfully created." }
         format.json { render :show, status: :created, location: @client }
       else
         format.html { render :new, status: :unprocessable_entity }

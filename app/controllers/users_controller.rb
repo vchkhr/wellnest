@@ -8,9 +8,6 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    if @user.profile == nil
-      redirect_to '/clients/new'
-    end
   end
 
   # GET /users/new
@@ -28,7 +25,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        format.html { redirect_to '/clients/new', notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,6 +55,12 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def dashboard
+    @user = User.find(session['user_id'])
+
+    redirect_to '/clients/new' if @user.profile.nil?
   end
 
   private

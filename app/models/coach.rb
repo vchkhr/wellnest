@@ -16,6 +16,10 @@ class Coach < ApplicationRecord
   has_many :clients, through: :messages
 
   belongs_to :user
+
   belongs_to :gender
+  validates :gender, presence: true
+
   has_and_belongs_to_many :problems
+  validates :problems, presence: true
 end

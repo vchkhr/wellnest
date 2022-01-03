@@ -6,7 +6,9 @@ class Client < ApplicationRecord
   validate :bio
   
   belongs_to :user
+
   belongs_to :gender
+  validates :gender, presence: true
   
   has_many :invitations
   has_many :coaches, through: :invitations
@@ -16,8 +18,12 @@ class Client < ApplicationRecord
   has_many :messages
   has_many :coaches, through: :messages
 
+  has_many :clients_technique
+  has_many :techniques, through: :clients_technique
+
   has_and_belongs_to_many :problems
-  has_and_belongs_to_many :techniques
+  validates :problems, presence: true
+
   has_and_belongs_to_many :steps
 
   def invitation

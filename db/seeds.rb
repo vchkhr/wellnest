@@ -19,17 +19,17 @@ Problem.create(name: 'Stress')
 # Testing the models
 
 user1 = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345')
-client1 = Client.create!(age: 30, user: user1, gender: Gender.find_by_name('Female'))
+client1 = Client.create(age: 30, user: user1, gender: Gender.find_by_name('Female'))
 client1.problems << Problem.find_by_name('Depression')
 client1.problems << Problem.find_by_name('Irritability')
 client1.problems << Problem.find_by_name('Stress')
 
 user2 = User.create!(name: 'James Brown', email: 'james@brown.com', password: 'abc12345')
-coach1 = Coach.create!(age: 36, user: user2, gender: Gender.find_by_name('Male'), edu: 'edu', work: 'work', licenses: 'licenses', links: 'http://example.org')
+coach1 = Coach.create(age: 36, user: user2, gender: Gender.find_by_name('Male'), edu: 'edu', work: 'work', licenses: 'licenses', links: 'http://example.org')
 coach1.problems << [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')]
 
 user3 = User.create!(name: 'Amelia Adamson', email: 'amelia@adamson.com', password: 'abc12345')
-coach2 = Coach.create!(age: 25, user: user3, gender: Gender.find_by_name('Female'), edu: 'edu', work: 'work', licenses: 'licenses', links: 'http://example.org')
+coach2 = Coach.create(age: 25, user: user3, gender: Gender.find_by_name('Female'), edu: 'edu', work: 'work', licenses: 'licenses', links: 'http://example.org')
 coach2.problems << [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')]
 
 Invitation.create!(client: client1, coach: coach1, status: 0)
