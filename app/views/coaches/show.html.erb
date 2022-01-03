@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @coach.image_url %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @coach.age %>
+</p>
+
+<p>
+  <strong>Edu:</strong>
+  <%= @coach.edu %>
+</p>
+
+<p>
+  <strong>Work:</strong>
+  <%= @coach.work %>
+</p>
+
+<p>
+  <strong>Licenses:</strong>
+  <%= @coach.licenses %>
+</p>
+
+<p>
+  <strong>Links:</strong>
+  <%= @coach.links %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @coach.user_id %>
+  <%= @coach.user %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @coach.gender_id %>
+</p>
+
+<%= link_to 'Edit', edit_coach_path(@coach) %> |
+<%= link_to 'Back', coaches_path %>

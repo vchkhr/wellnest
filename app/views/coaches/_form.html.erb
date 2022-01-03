@@ -1,0 +1,57 @@
+<%= form_with(model: coach) do |form| %>
+  <% if coach.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(coach.errors.count, "error") %> prohibited this coach from being saved:</h2>
+
+      <ul>
+        <% coach.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age %>
+  </div>
+
+  <div class="field">
+    <%= form.label :edu %>
+    <%= form.text_field :edu %>
+  </div>
+
+  <div class="field">
+    <%= form.label :work %>
+    <%= form.text_field :work %>
+  </div>
+
+  <div class="field">
+    <%= form.label :licenses %>
+    <%= form.text_field :licenses %>
+  </div>
+
+  <div class="field">
+    <%= form.label :links %>
+    <%= form.text_field :links %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender_id %>
+    <%= form.text_field :gender_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

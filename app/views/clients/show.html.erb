@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @client.image_url %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @client.age %>
+</p>
+
+<p>
+  <strong>Bio:</strong>
+  <%= @client.bio %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @client.user_id %>
+  <%= @client.user %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @client.gender_id %>
+</p>
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>

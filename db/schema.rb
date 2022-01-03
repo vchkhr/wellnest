@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_30_104210) do
+ActiveRecord::Schema.define(version: 2022_01_03_110629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
     t.string "image_url"
-    t.integer "age", null: false
+    t.integer "age"
     t.string "bio"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.bigint "gender_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -50,16 +50,16 @@ ActiveRecord::Schema.define(version: 2021_12_30_104210) do
 
   create_table "coaches", force: :cascade do |t|
     t.string "image_url"
-    t.integer "age", null: false
-    t.string "edu", null: false
-    t.string "work", null: false
-    t.string "licenses", null: false
-    t.string "links", null: false
-    t.string "is_verified", default: "f", null: false
-    t.bigint "user_id"
-    t.integer "gender_id", null: false
+    t.integer "age"
+    t.string "edu"
+    t.string "work"
+    t.string "licenses"
+    t.string "links"
+    t.bigint "user_id", null: false
+    t.bigint "gender_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["gender_id"], name: "index_coaches_on_gender_id"
     t.index ["user_id"], name: "index_coaches_on_user_id"
   end
 
@@ -165,4 +165,8 @@ ActiveRecord::Schema.define(version: 2021_12_30_104210) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "clients", "genders"
+  add_foreign_key "clients", "users"
+  add_foreign_key "coaches", "genders"
+  add_foreign_key "coaches", "users"
 end

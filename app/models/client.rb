@@ -23,8 +23,4 @@ class Client < ApplicationRecord
   def invitation
     return self.invitations.where(status: 1).last
   end
-
-  def coach
-    return self.invitation.coach
-  end
 end
