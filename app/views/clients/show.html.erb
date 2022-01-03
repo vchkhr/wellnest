@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Image url:</strong>
-  <%= @client.image_url %>
+  <strong>Image:</strong>
+  <%= @client.image.attached? ? image_tag(@client.image) : "" %>
 </p>
 
 <p>

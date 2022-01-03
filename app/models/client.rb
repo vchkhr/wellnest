@@ -1,7 +1,7 @@
 class Client < ApplicationRecord
   self.primary_key = "id"
 
-  validate :image_url
+  has_one_attached :image
   validates :age, numericality: { only_integer: true, in: 18..99 }
   validate :bio
   

@@ -1,14 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  image_url: MyString
+  image: MyString
   age: 1
   bio: MyString
   user: one
   gender: one
 
 two:
-  image_url: MyString
+  image: MyString
   age: 1
   bio: MyString
   user: two

@@ -17,7 +17,7 @@ class CoachesTest < ApplicationSystemTestCase
     fill_in "Age", with: @coach.age
     fill_in "Edu", with: @coach.edu
     fill_in "Gender", with: @coach.gender_id
-    fill_in "Image url", with: @coach.image_url
+    fill_in "Image", with: @coach.image
     fill_in "Licenses", with: @coach.licenses
     fill_in "Links", with: @coach.links
     fill_in "User", with: @coach.user_id
@@ -35,7 +35,7 @@ class CoachesTest < ApplicationSystemTestCase
     fill_in "Age", with: @coach.age
     fill_in "Edu", with: @coach.edu
     fill_in "Gender", with: @coach.gender_id
-    fill_in "Image url", with: @coach.image_url
+    fill_in "Image", with: @coach.image
     fill_in "Licenses", with: @coach.licenses
     fill_in "Links", with: @coach.links
     fill_in "User", with: @coach.user_id

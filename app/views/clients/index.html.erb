@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Image url</th>
+      <th>image</th>
       <th>Age</th>
       <th>User</th>
       <th>Gender</th>
@@ -20,7 +20,7 @@
     <% @clients.each do |client| %>
       <tr>
         <td><%= client.id %></td>
-        <td><%= client.image_url %></td>
+        <td><%= client.image %></td>
         <td><%= client.age %></td>
         <td><%= client.user_id %> <%= client.user.email %></td>
         <td><%= client.gender_id %> <%= client.gender.name %></td>

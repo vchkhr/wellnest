@@ -13,8 +13,8 @@
   <% end %>
 
   <div class='field'>
-    <%= f.label :image_url %>
-    <%= f.text_field :image_url %>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
   </div>
 
   <div class='field'>
@@ -29,7 +29,7 @@
 
   <div class='field'>
     <%= f.label :problems %>
-    <%= select("problems", Problem.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+    <%= select("problems", "id", Problem.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
   </div>
 
   <div class='actions'>

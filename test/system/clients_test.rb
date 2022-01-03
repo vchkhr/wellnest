@@ -17,7 +17,7 @@ class ClientsTest < ApplicationSystemTestCase
     fill_in "Age", with: @client.age
     fill_in "Bio", with: @client.bio
     fill_in "Gender", with: @client.gender_id
-    fill_in "Image url", with: @client.image_url
+    fill_in "Image", with: @client.image
     fill_in "User", with: @client.user_id
     click_on "Create Client"
 
@@ -32,7 +32,7 @@ class ClientsTest < ApplicationSystemTestCase
     fill_in "Age", with: @client.age
     fill_in "Bio", with: @client.bio
     fill_in "Gender", with: @client.gender_id
-    fill_in "Image url", with: @client.image_url
+    fill_in "Image", with: @client.image
     fill_in "User", with: @client.user_id
     click_on "Update Client"
 

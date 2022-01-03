@@ -4,7 +4,7 @@ class Step < ApplicationRecord
     validates :title, presence: true
     validates :description, presence: true
   
-    validate :image_url
+    validate :image
     validate :video_url
     validate :audio_url
 
