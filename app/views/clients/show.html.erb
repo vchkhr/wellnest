@@ -2,7 +2,7 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @client.image.attached? ? image_tag(@client.image) : "" %>
+  <%= @client.image.attached? ? image_tag(@client.image, size: "50x50", alt: @client.user.name) : "" %>
 </p>
 
 <p>

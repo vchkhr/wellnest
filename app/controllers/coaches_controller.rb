@@ -22,9 +22,12 @@ class CoachesController < ApplicationController
   # POST /coaches or /coaches.json
   def create
     @coach = Coach.new(coach_params)
+    @coach.user = User.find(session[:user_id])
 
     respond_to do |format|
       if @coach.save
+        @coach.problems << Problem.find(params[:problems][:id])
+
         format.html { redirect_to coach_url(@coach), notice: "Coach was successfully created." }
         format.json { render :show, status: :created, location: @coach }
       else
@@ -65,6 +68,6 @@ class CoachesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def coach_params
-      params.require(:coach).permit(:image, :age, :edu, :work, :licenses, :links, :user_id, :gender_id)
+      params.require(:coach).permit(:image, :age, :edu, :work, :licenses, :links, :user_id, :gender_id, :problems)
     end
 end

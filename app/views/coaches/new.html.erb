@@ -1,5 +1,58 @@
-<h1>New Coach</h1>
+<h1>Hello, <%= User.find(session['user_id']).name %></h1>
 
-<%= render 'form', coach: @coach %>
+<%= form_for @coach do |f| %>
+  <% if @coach.errors.any? %>
+    <div class='error_messages'>
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @coach.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= link_to 'Back', coaches_path %>
+  <div class='field'>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :age %>
+    <%= f.number_field :age, in: 18..99 %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :gender %>
+    <%= select("coach", "gender_id", Gender.all.collect {|g| [ g.name, g.id ] }, { include_blank: true }) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :problems %>
+    <%= select("problems", "id", Problem.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :edu %>
+    <%= f.text_field :edu %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :work %>
+    <%= f.text_field :work %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :licenses %>
+    <%= f.text_field :licenses %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :links %>
+    <%= f.text_field :links %>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit 'Continue' %>
+  </div>
+<% end %>

@@ -2,7 +2,7 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @coach.image %>
+  <%= @coach.image.attached? ? image_tag(@coach.image, size: "50x50", alt: @coach.user.name) : "" %>
 </p>
 
 <p>

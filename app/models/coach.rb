@@ -1,7 +1,7 @@
 class Coach < ApplicationRecord
   self.primary_key = "id"
 
-  validate :image
+  has_one_attached :image
   validates :age, numericality: { only_integer: true, in: 18..99 }
   validates :gender_id, presence: true
   validates :edu, presence: true
