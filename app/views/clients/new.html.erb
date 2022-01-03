@@ -28,8 +28,8 @@
   </div>
 
   <div class='field'>
-    <%= f.label :problem %>
-    <%= select("f", "problem", Problem.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+    <%= f.label :problems %>
+    <%= select("problems", Problem.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
   </div>
 
   <div class='actions'>

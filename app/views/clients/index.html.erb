@@ -8,9 +8,10 @@
       <th>ID</th>
       <th>Image url</th>
       <th>Age</th>
-      <th>Bio</th>
       <th>User</th>
       <th>Gender</th>
+      <th>Problems</th>
+      <th>Bio</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,9 +22,10 @@
         <td><%= client.id %></td>
         <td><%= client.image_url %></td>
         <td><%= client.age %></td>
+        <td><%= client.user_id %> <%= client.user.email %></td>
+        <td><%= client.gender_id %> <%= client.gender.name %></td>
+        <td><%= client.problems.collect {|p| p.name } %></td>
         <td><%= client.bio %></td>
-        <td><%= client.user_id %></td>
-        <td><%= client.gender_id %></td>
         <td><%= link_to 'Show', client %></td>
         <td><%= link_to 'Edit', edit_client_path(client) %></td>
         <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -23,9 +23,11 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     @client.user = User.find(session[:user_id])
-    
+
     respond_to do |format|
       if @client.save
+        @client.problems << Problem.find(params[:problems][:id])
+
         format.html { redirect_to client_url(@client), notice: "Client was successfully created." }
         format.json { render :show, status: :created, location: @client }
       else
@@ -66,6 +68,6 @@ class ClientsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def client_params
-      params.require(:client).permit(:image_url, :age, :bio, :user_id, :gender_id)
+      params.require(:client).permit(:image_url, :age, :bio, :user_id, :gender_id, :problems)
     end
 end
