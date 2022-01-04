@@ -1,7 +1,7 @@
 class Notification < ApplicationRecord
-    self.primary_key = "id"
+  self.primary_key = "id"
 
-    validates :text, presence: true
+  validates :text, presence: true
 
-    has_many :client
+  has_many :client
 end

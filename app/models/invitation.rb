@@ -1,8 +1,8 @@
 class Invitation < ApplicationRecord
-    self.primary_key = "id"
+  self.primary_key = "id"
 
-    validates :status, numericality: { only_integer: true, in: -1..1 }
+  validates :status, numericality: { only_integer: true, in: -1..1 }
 
-    belongs_to :client
-    belongs_to :coach
+  belongs_to :client
+  belongs_to :coach
 end

@@ -4,10 +4,10 @@
 <p><strong><%= @user.email %></strong></p>
 <p><strong><%= @user.profile.age %> years | <%= @user.profile.gender.name %></strong></p>
 
-<p>Total progress: <strong><%= @user.client.techniques_completed_count %></strong> techniques completed</p>
-<p>Current progress: <strong><%= @user.client.techniques_in_progress_count %></strong> techniques in process</p>
-<p>Total time: <strong><%= @user.client.hours_completed %></strong> hours for techniques</p>
-<p>Current time: <strong><%= @user.client.hours_in_progress %></strong> hours for techniques</p>
+<p>Total progress: <strong><%= ClientManager::TechniquesCompletedCount.call(current_user.client) %></strong> techniques completed</p>
+<p>Current progress: <strong><%= ClientManager::TechniquesInProgressCount.call(current_user.client) %></strong> techniques in process</p>
+<p>Total time: <strong><%= ClientManager::HoursCompleted.call(current_user.client) %></strong> hours for techniques</p>
+<p>Current time: <strong><%= ClientManager::HoursInProgress.call(current_user.client) %></strong> hours for techniques</p>
 
 <p>Problems: <strong>
   <% @user.profile.problems.each do |problem| %>
@@ -15,7 +15,7 @@
   <% end %>
 </strong></p>
 
-<p>Current coach: <strong><%= @user.client.coach_user.name unless @user.client.coach_user.nil? %></strong></p>
+<p>Current coach: <strong><%= ClientManager::CoachUser.call(current_user.client).name unless ClientManager::CoachUser.call(current_user.client).nil? %></strong></p>
 
 <p>Notifications:</p>
 <p>
@@ -60,9 +60,9 @@
     <span>Dislikes: <strong><%= technique.dislikes %></strong><br></span>
 
     <span>
-      <% if @user.client.completed_steps_count(technique) == 0 %>
+      <% if ClientManager::CompletedStepsCount.call(technique) == 0 %>
         GET STARTED
-      <% elsif @user.client.completed_steps_count(technique) < technique.steps.count %>
+      <% elsif ClientManager::CompletedStepsCount.call(technique) < technique.steps.count %>
         CONTINUE
       <% else %>
         RESTART
