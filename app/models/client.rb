@@ -40,15 +40,31 @@ class Client < ApplicationRecord
 
   def completed_steps_count(technique)
     count = 0
+    technique.steps.each { |step| count += 1 unless CompletedStep.find_by_step_id(step.id).nil?}
+    count
+  end
 
-    technique.steps.each do |step|
-      completed_steps = CompletedStep.find_by_step_id(step.id)
+  def techniques_completed_count
+    count = 0
+    self.techniques.each { |technique| count += 1 if self.completed_steps_count(technique) == technique.steps.count }
+    count
+  end
 
-      unless completed_steps.nil?
-        count += 1
-      end
-    end
+  def techniques_in_progress_count
+    count = 0
+    self.techniques.each { |technique| count += 1 if self.completed_steps_count(technique) > 0 and self.completed_steps_count(technique) < technique.steps.count }
+    count
+  end
 
+  def hours_completed
+    count = 0
+    self.techniques.each { |technique| count += (technique.duration_start + technique.duration_end) / 2.0 if self.completed_steps_count(technique) == technique.steps.count }
+    count
+  end
+
+  def hours_in_progress
+    count = 0
+    self.techniques.each { |technique| count += (technique.duration_start + technique.duration_end) / 2.0 / technique.steps.count * self.completed_steps_count(technique) if self.completed_steps_count(technique) > 0 and self.completed_steps_count(technique) < technique.steps.count }
     count
   end
 end

@@ -88,8 +88,6 @@ technique4.genders << Gender.find_by_name('Female')
   end
 end
 
-puts client1.completed_steps.inspect
-
 client1.notifications << Notification.create!(text: 'You changed your profile settings')
 client1.notifications << Notification.create!(text: 'You have sent an invitation to coach Emily Smith')
 client1.notifications << Notification.create!(text: 'Coach Emily Smith refused to become your coach')

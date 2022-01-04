@@ -4,6 +4,11 @@
 <p><%= @user.email %></p>
 <p><%= @user.profile.age %> years | <%= @user.profile.gender.name %></p>
 
+<p>Total progress: <strong><%= @user.client.techniques_completed_count %></strong> techniques completed</p>
+<p>Current progress: <strong><%= @user.client.techniques_in_progress_count %></strong> techniques in process</p>
+<p>Total time: <strong><%= @user.client.hours_completed %></strong> hours for techniques</p>
+<p>Current time: <strong><%= @user.client.hours_in_progress %></strong> hours for techniques</p>
+
 <p>Problems:
   <% @user.profile.problems.each do |problem| %>
     <%= problem.name %>
