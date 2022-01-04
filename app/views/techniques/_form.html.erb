@@ -1,0 +1,52 @@
+<%= form_with(model: technique) do |form| %>
+  <% if technique.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(technique.errors.count, "error") %> prohibited this technique from being saved:</h2>
+
+      <ul>
+        <% technique.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.text_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age_start %>
+    <%= form.number_field :age_start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age_end %>
+    <%= form.number_field :age_end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration_start %>
+    <%= form.number_field :duration_start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration_end %>
+    <%= form.number_field :duration_end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

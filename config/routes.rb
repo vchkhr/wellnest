@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :steps_techniques
+  resources :messages
+  resources :notifications
+  resources :completed_steps
+  resources :problems_techniques
+  resources :steps
+  resources :clients_techniques
+  resources :genders_techniques
+  resources :likes
+  resources :techniques
+  resources :coaches_problems
+  resources :clients_problems
+  resources :problems
+  resources :genders
   root 'home#index'
 
   # Admin Panel

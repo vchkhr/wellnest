@@ -72,8 +72,8 @@
 
 
     <span>Participants: <strong><%= technique.clients.count %></strong><br></span>
-    <span>Likes: <strong><%= technique.likes %></strong><br></span>
-    <span>Dislikes: <strong><%= technique.dislikes %></strong><br></span>
+    <span>Likes: <strong><%= technique.likes.where(is_like: true).count %></strong><br></span>
+    <span>Dislikes: <strong><%= technique.likes.where(is_like: false).count %></strong><br></span>
 
     <span>
       <% if ClientManager::CompletedStepsCount.call(technique) == 0 %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @completed_step.client_id %>
+</p>
+
+<p>
+  <strong>Step:</strong>
+  <%= @completed_step.step_id %>
+</p>
+
+<%= link_to 'Edit', edit_completed_step_path(@completed_step) %> |
+<%= link_to 'Back', completed_steps_path %>

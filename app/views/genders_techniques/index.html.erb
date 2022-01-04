@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Genders Techniques</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gender</th>
+      <th>Technique</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @genders_techniques.each do |genders_technique| %>
+      <tr>
+        <td><%= genders_technique.gender_id %></td>
+        <td><%= genders_technique.technique_id %></td>
+        <td><%= link_to 'Show', genders_technique %></td>
+        <td><%= link_to 'Edit', edit_genders_technique_path(genders_technique) %></td>
+        <td><%= link_to 'Destroy', genders_technique, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Genders Technique', new_genders_technique_path %>

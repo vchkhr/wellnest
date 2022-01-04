@@ -21,6 +21,9 @@ class Client < ApplicationRecord
   has_many :completed_steps
   has_many :steps, through: :completed_steps
 
+  has_many :likes
+  has_many :techniques, through: :likes
+
   has_and_belongs_to_many :problems
   validates :problems, presence: true
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_04_144946) do
+ActiveRecord::Schema.define(version: 2022_01_04_194223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,8 +82,10 @@ ActiveRecord::Schema.define(version: 2022_01_04_144946) do
   end
 
   create_table "clients_problems", force: :cascade do |t|
-    t.bigint "client_id"
-    t.bigint "problem_id"
+    t.bigint "client_id", null: false
+    t.bigint "problem_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_clients_problems_on_client_id"
     t.index ["problem_id"], name: "index_clients_problems_on_problem_id"
   end
@@ -113,8 +115,10 @@ ActiveRecord::Schema.define(version: 2022_01_04_144946) do
   end
 
   create_table "coaches_problems", force: :cascade do |t|
-    t.bigint "coach_id"
-    t.bigint "problem_id"
+    t.bigint "coach_id", null: false
+    t.bigint "problem_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["coach_id"], name: "index_coaches_problems_on_coach_id"
     t.index ["problem_id"], name: "index_coaches_problems_on_problem_id"
   end
@@ -129,12 +133,16 @@ ActiveRecord::Schema.define(version: 2022_01_04_144946) do
   end
 
   create_table "genders", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "genders_techniques", force: :cascade do |t|
-    t.bigint "technique_id"
-    t.bigint "gender_id"
+    t.bigint "gender_id", null: false
+    t.bigint "technique_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["gender_id"], name: "index_genders_techniques_on_gender_id"
     t.index ["technique_id"], name: "index_genders_techniques_on_technique_id"
   end
@@ -149,11 +157,21 @@ ActiveRecord::Schema.define(version: 2022_01_04_144946) do
     t.index ["coach_id"], name: "index_invitations_on_coach_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.boolean "is_like"
+    t.bigint "technique_id", null: false
+    t.bigint "client_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_likes_on_client_id"
+    t.index ["technique_id"], name: "index_likes_on_technique_id"
+  end
+
   create_table "messages", force: :cascade do |t|
-    t.string "text", null: false
+    t.string "text"
     t.boolean "from_client"
-    t.bigint "client_id"
-    t.bigint "coach_id"
+    t.bigint "client_id", null: false
+    t.bigint "coach_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_messages_on_client_id"
@@ -162,50 +180,54 @@ ActiveRecord::Schema.define(version: 2022_01_04_144946) do
 
   create_table "notifications", force: :cascade do |t|
     t.string "text"
-    t.bigint "client_id"
+    t.bigint "client_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_notifications_on_client_id"
   end
 
   create_table "problems", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "problems_techniques", force: :cascade do |t|
-    t.bigint "technique_id"
-    t.bigint "problem_id"
+    t.bigint "problem_id", null: false
+    t.bigint "technique_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["problem_id"], name: "index_problems_techniques_on_problem_id"
     t.index ["technique_id"], name: "index_problems_techniques_on_technique_id"
   end
 
   create_table "steps", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description", null: false
+    t.string "title"
+    t.string "description"
     t.string "image"
-    t.string "video_url"
-    t.string "audio_url"
+    t.string "video"
+    t.string "audio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "steps_techniques", force: :cascade do |t|
-    t.bigint "technique_id"
-    t.bigint "step_id"
+    t.bigint "step_id", null: false
+    t.bigint "technique_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["step_id"], name: "index_steps_techniques_on_step_id"
     t.index ["technique_id"], name: "index_steps_techniques_on_technique_id"
   end
 
   create_table "techniques", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description", null: false
+    t.string "title"
+    t.string "description"
     t.string "image"
-    t.integer "age_start", null: false
-    t.integer "age_end", null: false
-    t.integer "duration_start", null: false
-    t.integer "duration_end", null: false
-    t.integer "likes", default: 0
-    t.integer "dislikes", default: 0
+    t.integer "age_start"
+    t.integer "age_end"
+    t.integer "duration_start"
+    t.integer "duration_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -227,12 +249,27 @@ ActiveRecord::Schema.define(version: 2022_01_04_144946) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "genders"
   add_foreign_key "clients", "users"
+  add_foreign_key "clients_problems", "clients"
+  add_foreign_key "clients_problems", "problems"
   add_foreign_key "clients_techniques", "clients"
   add_foreign_key "clients_techniques", "techniques"
   add_foreign_key "coaches", "genders"
   add_foreign_key "coaches", "users"
+  add_foreign_key "coaches_problems", "coaches"
+  add_foreign_key "coaches_problems", "problems"
   add_foreign_key "completed_steps", "clients"
   add_foreign_key "completed_steps", "steps"
+  add_foreign_key "genders_techniques", "genders"
+  add_foreign_key "genders_techniques", "techniques"
   add_foreign_key "invitations", "clients"
   add_foreign_key "invitations", "coaches"
+  add_foreign_key "likes", "clients"
+  add_foreign_key "likes", "techniques"
+  add_foreign_key "messages", "clients"
+  add_foreign_key "messages", "coaches"
+  add_foreign_key "notifications", "clients"
+  add_foreign_key "problems_techniques", "problems"
+  add_foreign_key "problems_techniques", "techniques"
+  add_foreign_key "steps_techniques", "steps"
+  add_foreign_key "steps_techniques", "techniques"
 end
