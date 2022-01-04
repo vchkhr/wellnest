@@ -4,7 +4,7 @@ class Coach < ApplicationRecord
   has_one_attached :image
   validates :age, numericality: { only_integer: true, in: 18..99 }
   validates :gender_id, presence: true
-  validates :edu, presence: true
+  validates :education, presence: true
   validates :work, presence: true
   validates :licenses, presence: true
   validates :links, presence: true

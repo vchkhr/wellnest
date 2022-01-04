@@ -5,12 +5,12 @@ ActiveAdmin.register Coach do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :image, :age, :edu, :work, :licenses, :links, :user_id, :gender_id
+  # permit_params :image, :age, :education, :work, :licenses, :links, :user_id, :gender_id
   #
   # or
   #
   # permit_params do
-  #   permitted = [:image, :age, :edu, :work, :licenses, :links, :user_id, :gender_id]
+  #   permitted = [:image, :age, :education, :work, :licenses, :links, :user_id, :gender_id]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end

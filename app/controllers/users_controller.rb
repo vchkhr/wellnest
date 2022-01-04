@@ -53,10 +53,8 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @user = User.find(session['user_id'])
-
-    redirect_to new_client_path and return if @user.profile.nil? 
-    unless @user.client.nil?
+    redirect_to new_client_path and return if current_user.profile.nil? 
+    unless current_user.client.nil?
       render :action => 'dashboard_client', :view => 'users'
     else
       render :action => 'dashboard_coach', :view => 'users'

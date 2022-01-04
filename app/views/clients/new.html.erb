@@ -1,6 +1,8 @@
-<h1>Hello, <%= User.find(session['user_id']).name %></h1>
+<h1>Hello, <%= current_user.name %></h1>
 
-<p>You have registered as a User in our system. Please, share some personal information about you so that we can personalize your onboarding experience</p>
+<p><strong>USER &nbsp; <%= link_to "COACH", new_coach_path %></strong></p>
+
+<p>You are registering as a User in our system. Please, share some personal information about you so that we can personalize your onboarding experience</p>
 
 <%= form_for @client do |f| %>
   <% if @client.errors.any? %>
@@ -36,6 +38,6 @@
   </div>
 
   <div class='actions'>
-    <%= f.submit 'Continue' %>
+    <%= f.submit 'CONTINUE' %>
   </div>
 <% end %>

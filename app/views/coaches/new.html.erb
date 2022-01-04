@@ -1,4 +1,8 @@
-<h1>Hello, <%= User.find(session['user_id']).name %></h1>
+<h1>Hello, <%= current_user.name %></h1>
+
+<p><strong><%= link_to "USER", new_client_path %> &nbsp; CLIENT</strong></p>
+
+<p>You are registering as a Coach in our system. Please, share some personal information about you so that we can personalize your onboarding experience</p>
 
 <%= form_for @coach do |f| %>
   <% if @coach.errors.any? %>
@@ -23,18 +27,18 @@
   </div>
 
   <div class='field'>
-    <%= f.label :gender %>
-    <%= select("coach", "gender_id", Gender.all.collect {|g| [ g.name, g.id ] }, { include_blank: true }) %>
+    <%= f.label :gender_id %>
+    <%= collection_radio_buttons('coach', 'gender_id', Gender.all, :id, :name) %>
   </div>
 
   <div class='field'>
     <%= f.label :problems %>
-    <%= select("problems", "id", Problem.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+    <%= collection_check_boxes('coach', 'problems', Problem.all, :id, :name) %>
   </div>
 
   <div class='field'>
-    <%= f.label :edu %>
-    <%= f.text_field :edu %>
+    <%= f.label :education %>
+    <%= f.text_field :education %>
   </div>
 
   <div class='field'>
@@ -53,6 +57,6 @@
   </div>
 
   <div class='actions'>
-    <%= f.submit 'Continue' %>
+    <%= f.submit 'GET STARTED' %>
   </div>
 <% end %>

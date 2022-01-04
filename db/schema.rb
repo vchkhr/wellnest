@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2022_01_04_144946) do
   create_table "coaches", force: :cascade do |t|
     t.string "image"
     t.integer "age"
-    t.string "edu"
+    t.string "education"
     t.string "work"
     t.string "licenses"
     t.string "links"

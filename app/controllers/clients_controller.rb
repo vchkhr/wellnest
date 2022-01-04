@@ -19,8 +19,6 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
     @client.user = current_user
 
-    puts params
-
     params[:client][:problems].each do |pr|
       problem = Problem.find_by_id(pr)
       @client.problems << problem unless problem.nil?

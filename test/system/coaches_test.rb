@@ -15,7 +15,7 @@ class CoachesTest < ApplicationSystemTestCase
     click_on "New Coach"
 
     fill_in "Age", with: @coach.age
-    fill_in "Edu", with: @coach.edu
+    fill_in "Education", with: @coach.education
     fill_in "Gender", with: @coach.gender_id
     fill_in "Image", with: @coach.image
     fill_in "Licenses", with: @coach.licenses
@@ -33,7 +33,7 @@ class CoachesTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Age", with: @coach.age
-    fill_in "Edu", with: @coach.edu
+    fill_in "Education", with: @coach.education
     fill_in "Gender", with: @coach.gender_id
     fill_in "Image", with: @coach.image
     fill_in "Licenses", with: @coach.licenses

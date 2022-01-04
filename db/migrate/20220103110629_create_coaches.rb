@@ -3,7 +3,7 @@ class CreateCoaches < ActiveRecord::Migration[6.1]
     create_table :coaches do |t|
       t.string :image
       t.integer :age
-      t.string :edu
+      t.string :education
       t.string :work
       t.string :licenses
       t.string :links

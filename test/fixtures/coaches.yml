@@ -3,7 +3,7 @@
 one:
   image: MyString
   age: 1
-  edu: MyString
+  education: MyString
   work: MyString
   licenses: MyString
   links: MyString
@@ -13,7 +13,7 @@ one:
 two:
   image: MyString
   age: 1
-  edu: MyString
+  education: MyString
   work: MyString
   licenses: MyString
   links: MyString

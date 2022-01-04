@@ -19,8 +19,10 @@ class CoachesController < ApplicationController
     @coach = Coach.new(coach_params)
     @coach.user = current_user
 
-    problem = Problem.find_by_id(params[:problems][:id])
-    @coach.problems << problem unless problem.nil?
+    params[:coach][:problems].each do |pr|
+      problem = Problem.find_by_id(pr)
+      @coach.problems << problem unless problem.nil?
+    end
 
     respond_to do |format|
       if @coach.save
@@ -60,6 +62,6 @@ class CoachesController < ApplicationController
     end
 
     def coach_params
-      params.require(:coach).permit(:image, :age, :edu, :work, :licenses, :links, :user_id, :gender_id, :problems)
+      params.require(:coach).permit(:image, :age, :education, :work, :licenses, :links, :user_id, :gender_id, :problems)
     end
 end
