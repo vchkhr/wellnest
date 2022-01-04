@@ -19,7 +19,7 @@ class CoachesController < ApplicationController
     @coach = Coach.new(coach_params)
     @coach.user = current_user
 
-    params[:coach][:problems].each do |pr|
+    params[:coach][:problem_ids].each do |pr|
       problem = Problem.find_by_id(pr)
       @coach.problems << problem unless problem.nil?
     end
@@ -38,7 +38,7 @@ class CoachesController < ApplicationController
   def update
     respond_to do |format|
       if @coach.update(coach_params)
-        format.html { redirect_to coach_url(@coach), notice: "Coach was successfully updated." }
+        format.html { redirect_to dashboard_path, notice: "Personal information was successfully updated." }
         format.json { render :show, status: :ok, location: @coach }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,10 +58,11 @@ class CoachesController < ApplicationController
 
   private
     def set_coach
-      @coach = Coach.find(params[:id])
+      @coach = Coach.find_by_id(params[:id])
+      @coach = current_user.coach if @coach.nil?
     end
 
     def coach_params
-      params.require(:coach).permit(:image, :age, :education, :work, :licenses, :links, :user_id, :gender_id, :problems)
+      params.require(:coach).permit(:image, :age, :education, :work, :licenses, :links, :user_id, :gender_id, :problem_ids)
     end
 end

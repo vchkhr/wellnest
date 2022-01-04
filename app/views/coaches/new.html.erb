@@ -32,8 +32,8 @@
   </div>
 
   <div class='field'>
-    <%= f.label :problems %>
-    <%= collection_check_boxes('coach', 'problems', Problem.all, :id, :name) %>
+    <%= f.label :problem_ids %>
+    <%= collection_check_boxes('coach', 'problem_ids', Problem.all, :id, :name) %>
   </div>
 
   <div class='field'>

@@ -1,6 +1,60 @@
-<h1>Editing Coach</h1>
+<h1>Personal information</h1>
 
-<%= render 'form', coach: @coach %>
+<p><%= link_to "Update your credentials", update_user_info_path %></p>
 
-<%= link_to 'Show', @coach %> |
-<%= link_to 'Back', coaches_path %>
+<%= form_for @coach do |f| %>
+  <% if @coach.errors.any? %>
+    <div class='error_messages'>
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @coach.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='field'>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :age %>
+    <%= f.number_field :age, in: 18..99 %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :gender_id %>
+    <%= collection_radio_buttons('coach', 'gender_id', Gender.all, :id, :name) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :problem_ids %>
+    <%= collection_check_boxes('coach', 'problem_ids', Problem.all, :id, :name) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :education %>
+    <%= f.text_field :education %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :work %>
+    <%= f.text_field :work %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :licenses %>
+    <%= f.text_field :licenses %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :links %>
+    <%= f.text_field :links %>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit 'GET STARTED' %>
+  </div>
+<% end %>

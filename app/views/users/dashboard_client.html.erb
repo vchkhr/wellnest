@@ -2,6 +2,7 @@
 
 <p id="notice"><%= notice %></p>
 
+<p><%= link_to "Edit Personal Information", update_client_info_path %></p>
 <p><strong><%= current_user.name %></strong></p>
 <p><strong><%= current_user.email %></strong></p>
 <p><strong><%= current_user.profile.age %> years | <%= current_user.profile.gender.name %></strong></p>

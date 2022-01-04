@@ -19,7 +19,7 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
     @client.user = current_user
 
-    params[:client][:problems].each do |pr|
+    params[:client][:problem_ids].each do |pr|
       problem = Problem.find_by_id(pr)
       @client.problems << problem unless problem.nil?
     end
@@ -38,7 +38,7 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update(client_params)
-        format.html { redirect_to client_url(@client), notice: "Client was successfully updated." }
+        format.html { redirect_to dashboard_path, notice: "Personal information was successfully updated." }
         format.json { render :show, status: :ok, location: @client }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,10 +58,11 @@ class ClientsController < ApplicationController
 
   private
     def set_client
-      @client = Client.find(params[:id])
+      @client = Client.find_by_id(params[:id])
+      @client = current_user.client if @client.nil?
     end
 
     def client_params
-      params.require(:client).permit(:image, :age, :bio, :user_id, :gender_id, :problems)
+      params.require(:client).permit(:image, :age, :bio, :user_id, :gender_id, :problem_ids)
     end
 end
