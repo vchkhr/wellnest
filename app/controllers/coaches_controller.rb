@@ -24,7 +24,7 @@ class CoachesController < ApplicationController
 
     respond_to do |format|
       if @coach.save
-        format.html { redirect_to '/dashboard', notice: "Coach was successfully created." }
+        format.html { redirect_to dashboard_path, notice: "Coach was successfully created." }
         format.json { render :show, status: :created, location: @coach }
       else
         format.html { render :new, status: :unprocessable_entity }

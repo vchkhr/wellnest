@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<p><%= @invitation.coach.user.name %></p>
+
+<p>Are you sure you want to end cooperation with this coach?</p>
+
+<%= link_to 'CANCEL', dashboard_path %>
+<%= link_to 'YES, I WANT', @invitation, method: :delete, data: { notice: 'Are you sure?' } %>

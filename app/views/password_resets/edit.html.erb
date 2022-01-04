@@ -1,4 +1,6 @@
-<h1>Reset Password</h1>
+<h1>Create new password</h1>
+
+<p>Your new password must contain at least 8 characters, include a number and lowercase letter</p>
 
 <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
   <% if @user.errors.any? %>
@@ -20,5 +22,6 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
-  <div class='actions'><%= f.submit 'Update password' %></div>
+
+  <div class='actions'><%= f.submit 'SAVE CHANGES' %></div>
 <% end %>

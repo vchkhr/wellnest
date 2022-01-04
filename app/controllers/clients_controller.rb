@@ -19,9 +19,13 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
     @client.user = current_user
 
-    problem = Problem.find_by_id(params[:problems][:id])
-    @client.problems << problem unless problem.nil?
-    
+    puts params
+
+    params[:client][:problems].each do |pr|
+      problem = Problem.find_by_id(pr)
+      @client.problems << problem unless problem.nil?
+    end
+
     respond_to do |format|
       if @client.save
         format.html { redirect_to dashboard_path, notice: "Client was successfully created." }

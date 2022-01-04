@@ -1,5 +1,7 @@
 <h1>Dashboard</h1>
 
+<p id="notice"><%= notice %></p>
+
 <p><strong><%= @user.name %></strong></p>
 <p><strong><%= @user.email %></strong></p>
 <p><strong><%= @user.profile.age %> years | <%= @user.profile.gender.name %></strong></p>
@@ -15,7 +17,14 @@
   <% end %>
 </strong></p>
 
-<p>Current coach: <strong><%= ClientManager::CoachUser.call(current_user.client).name unless ClientManager::CoachUser.call(current_user.client).nil? %></strong></p>
+<% if ClientManager::CoachUser.call(current_user.client).nil? %>
+  <p>You don't have a coach yet.</p>
+<% else %>
+  <p>Current coach:
+  <strong><%= ClientManager::CoachUser.call(current_user.client).name unless ClientManager::CoachUser.call(current_user.client).nil? %></strong><br>
+  <%= link_to 'End Cooperation', @user.client.invitations.where(status: 1).last %>
+  </p>
+<% end %>
 
 <p>Notifications:</p>
 <p>

@@ -1,5 +1,7 @@
 <h1>Hello, <%= User.find(session['user_id']).name %></h1>
 
+<p>You have registered as a User in our system. Please, share some personal information about you so that we can personalize your onboarding experience</p>
+
 <%= form_for @client do |f| %>
   <% if @client.errors.any? %>
     <div class='error_messages'>
@@ -15,6 +17,7 @@
   <div class='field'>
     <%= f.label :image %>
     <%= f.file_field :image %>
+    <p>Image format should be png, jpg no more than 5 Mb</p>
   </div>
 
   <div class='field'>
@@ -23,13 +26,13 @@
   </div>
 
   <div class='field'>
-    <%= f.label :gender %>
-    <%= select("client", "gender_id", Gender.all.collect {|g| [ g.name, g.id ] }, { include_blank: true }) %>
+    <%= f.label :gender_id %>
+    <%= collection_radio_buttons('client', 'gender_id', Gender.all, :id, :name) %>
   </div>
 
   <div class='field'>
     <%= f.label :problems %>
-    <%= select("problems", "id", Problem.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+    <%= collection_check_boxes('client', 'problems', Problem.all, :id, :name) %>
   </div>
 
   <div class='actions'>

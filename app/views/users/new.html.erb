@@ -1,4 +1,6 @@
-<h1>New User</h1>
+<h1>Create account</h1>
+
+<p>Already have an account? &nbsp; <strong><%= link_to "Sign in", login_path %></strong></p>
 
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
