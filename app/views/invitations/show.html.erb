@@ -2,7 +2,11 @@
 
 <p><%= @invitation.coach.user.name %></p>
 
-<p>Are you sure you want to end cooperation with this coach?</p>
+<% if @invitation.status == 0 %>
+  <p>Are you sure you want to cancel your invitation to cooperation with this coach?</p>
+<% elsif @invitation.status == 1 %>
+  <p>Are you sure you want to end cooperation with this coach?</p>
+<% end %>
 
 <%= link_to 'CANCEL', dashboard_path %>
 <%= link_to 'YES, I WANT', @invitation, method: :delete, data: { notice: 'Are you sure?' } %>

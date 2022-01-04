@@ -18,7 +18,13 @@
 </strong></p>
 
 <% if ClientManager::CoachUser.call(current_user.client).nil? %>
-  <p><%= link_to "You don't have a coach yet", coaches_path %></p>
+  <% if ClientManager::UnconfirmedInvitation.call(current_user.client).nil? %>
+    <p><%= link_to "You don't have a coach yet", coaches_path %></p>
+  <% else %>
+    <p>Waiting for confirmation</p>
+    <p><strong><%= ClientManager::UnconfirmedInvitation.call(current_user.client).user.name %></strong></p>
+    <p><%= link_to 'CANCEL', current_user.client.invitations.where(status: 0).last %></p>
+  <% end %>
 <% else %>
   <p>Current coach:
   <strong><%= ClientManager::CoachUser.call(current_user.client).name unless ClientManager::CoachUser.call(current_user.client).nil? %></strong><br>
