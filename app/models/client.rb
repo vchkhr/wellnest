@@ -31,11 +31,11 @@ class Client < ApplicationRecord
   end
 
   def coach
-    self.invitation.coach
+    self.invitation.coach unless self.invitation.nil?
   end
 
   def coach_user
-    self.coach.user
+    self.coach.user unless self.coach.nil?
   end
 
   def completed_steps_count(technique)

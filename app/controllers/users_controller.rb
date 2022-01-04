@@ -1,31 +1,26 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
-  # GET /users or /users.json
   def index
     @users = User.all
   end
 
-  # GET /users/1 or /users/1.json
   def show
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # POST /users or /users.json
   def create
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to '/clients/new', notice: "User was successfully created." }
+        format.html { redirect_to login_path, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -60,7 +55,12 @@ class UsersController < ApplicationController
   def dashboard
     @user = User.find(session['user_id'])
 
-    redirect_to '/clients/new' if @user.profile.nil?
+    redirect_to new_client_path and return if @user.profile.nil? 
+    unless @user.client.nil?
+      render :action => 'dashboard_client', :view => 'users'
+    else
+      render :action => 'dashboard_coach', :view => 'users'
+    end
   end
 
   private

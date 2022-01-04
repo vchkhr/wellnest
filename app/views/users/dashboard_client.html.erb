@@ -1,21 +1,21 @@
 <h1>Dashboard</h1>
 
-<p><%= @user.name %></p>
-<p><%= @user.email %></p>
-<p><%= @user.profile.age %> years | <%= @user.profile.gender.name %></p>
+<p><strong><%= @user.name %></strong></p>
+<p><strong><%= @user.email %></strong></p>
+<p><strong><%= @user.profile.age %> years | <%= @user.profile.gender.name %></strong></p>
 
 <p>Total progress: <strong><%= @user.client.techniques_completed_count %></strong> techniques completed</p>
 <p>Current progress: <strong><%= @user.client.techniques_in_progress_count %></strong> techniques in process</p>
 <p>Total time: <strong><%= @user.client.hours_completed %></strong> hours for techniques</p>
 <p>Current time: <strong><%= @user.client.hours_in_progress %></strong> hours for techniques</p>
 
-<p>Problems:
+<p>Problems: <strong>
   <% @user.profile.problems.each do |problem| %>
     <%= problem.name %>
   <% end %>
-</p>
+</strong></p>
 
-<p>Current coach: <%= @user.client.coach_user.name %></p>
+<p>Current coach: <strong><%= @user.client.coach_user.name unless @user.client.coach_user.nil? %></strong></p>
 
 <p>Notifications:</p>
 <p>
@@ -30,7 +30,7 @@
     <span>Title: <strong><%= technique.title %></strong><br></span>
     <span>Description: <strong><%= technique.description %></strong><br></span>
     <span>Age: <strong><%= technique.age_start %>-<%= technique.age_end %> years</strong><br></span>
-    <span><strong><%= @user.client.completed_steps_count(technique) %>/<%= technique.steps.count %> steps passed</strong><br></span>
+    <span><strong><%= ClientManager::CompletedStepsCount.call(technique) %>/<%= technique.steps.count %> steps passed</strong><br></span>
 
     <span>Problems: <strong>
       <% technique.problems.each do |problem| %>
