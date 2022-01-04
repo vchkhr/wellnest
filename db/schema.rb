@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_151917) do
+ActiveRecord::Schema.define(version: 2022_01_04_120243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,13 +88,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_151917) do
     t.index ["problem_id"], name: "index_clients_problems_on_problem_id"
   end
 
-  create_table "clients_steps", force: :cascade do |t|
-    t.bigint "client_id"
-    t.bigint "step_id"
-    t.index ["client_id"], name: "index_clients_steps_on_client_id"
-    t.index ["step_id"], name: "index_clients_steps_on_step_id"
-  end
-
   create_table "clients_techniques", force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "technique_id", null: false
@@ -124,6 +117,15 @@ ActiveRecord::Schema.define(version: 2022_01_03_151917) do
     t.bigint "problem_id"
     t.index ["coach_id"], name: "index_coaches_problems_on_coach_id"
     t.index ["problem_id"], name: "index_coaches_problems_on_problem_id"
+  end
+
+  create_table "completed_steps", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "step_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_completed_steps_on_client_id"
+    t.index ["step_id"], name: "index_completed_steps_on_step_id"
   end
 
   create_table "genders", force: :cascade do |t|
@@ -229,4 +231,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_151917) do
   add_foreign_key "clients_techniques", "techniques"
   add_foreign_key "coaches", "genders"
   add_foreign_key "coaches", "users"
+  add_foreign_key "completed_steps", "clients"
+  add_foreign_key "completed_steps", "steps"
 end

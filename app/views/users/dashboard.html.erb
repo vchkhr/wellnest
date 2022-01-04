@@ -1,1 +1,68 @@
 <h1>Dashboard</h1>
+
+<p><%= @user.name %></p>
+<p><%= @user.email %></p>
+<p><%= @user.profile.age %> years | <%= @user.profile.gender.name %></p>
+
+<p>Problems:
+  <% @user.profile.problems.each do |problem| %>
+    <%= problem.name %>
+  <% end %>
+</p>
+
+<p>Current coach: <%= @user.client.coach_user.name %></p>
+
+<p>Notifications:</p>
+<p>
+  <% @user.profile.notifications.each do |notification| %>
+    <span><%= notification.text %><br></span>
+  <% end %>
+</p>
+
+<p>Techniques:</p>
+<p>
+  <% @user.profile.techniques.each do |technique| %>
+    <span>Title: <strong><%= technique.title %></strong><br></span>
+    <span>Description: <strong><%= technique.description %></strong><br></span>
+    <span>Age: <strong><%= technique.age_start %>-<%= technique.age_end %> years</strong><br></span>
+    <span><strong><%= @user.client.completed_steps_count(technique) %>/<%= technique.steps.count %> steps passed</strong><br></span>
+
+    <span>Problems: <strong>
+      <% technique.problems.each do |problem| %>
+        <span><%= problem.name %></span>
+      <% end %>
+    </strong><br></span>
+
+    <span>Gender: <strong>
+      <% technique.genders.each do |gender| %>
+        <span><%= gender.name %></span>
+      <% end %>
+    </strong><br></span>
+
+    <span>Steps: <strong><%= technique.steps.count %></strong><br></span>
+
+    <span>Duration: <strong>
+      <% if technique.duration_start == technique.duration_end %>
+        <%= technique.duration_start %>
+      <% else %>
+        <%= technique.duration_start %>-<%= technique.duration_end %>
+      <% end %>
+    hours</strong><br></span>
+
+
+    <span>Participants: <strong><%= technique.clients.count %></strong><br></span>
+    <span>Likes: <strong><%= technique.likes %></strong><br></span>
+    <span>Dislikes: <strong><%= technique.dislikes %></strong><br></span>
+
+    <span>
+      <% if @user.client.completed_steps_count(technique) == 0 %>
+        GET STARTED
+      <% elsif @user.client.completed_steps_count(technique) < technique.steps.count %>
+        CONTINUE
+      <% else %>
+        RESTART
+      <% end %>
+    <br></span>
+    <br>
+  <% end %>
+</p>

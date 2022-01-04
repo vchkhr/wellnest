@@ -18,15 +18,37 @@ class Client < ApplicationRecord
   has_many :messages
   has_many :coaches, through: :messages
 
-  has_many :clients_technique
-  has_many :techniques, through: :clients_technique
+  has_many :completed_steps
+  has_many :steps, through: :completed_steps
 
   has_and_belongs_to_many :problems
   validates :problems, presence: true
 
-  has_and_belongs_to_many :steps
+  has_and_belongs_to_many :techniques
 
   def invitation
-    return self.invitations.where(status: 1).last
+    self.invitations.where(status: 1).last
+  end
+
+  def coach
+    self.invitation.coach
+  end
+
+  def coach_user
+    self.coach.user
+  end
+
+  def completed_steps_count(technique)
+    count = 0
+
+    technique.steps.each do |step|
+      completed_steps = CompletedStep.find_by_step_id(step.id)
+
+      unless completed_steps.nil?
+        count += 1
+      end
+    end
+
+    count
   end
 end
