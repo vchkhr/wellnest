@@ -1,43 +1,18 @@
+<h1>Find Coach</h1>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Coaches</h1>
+<% if !ClientManager::Coach.call(current_user.client).nil? %>
+  <h3>Your Coach:</h3>
+  <%= render 'layouts/coaches/small', user: ClientManager::CoachUser.call(current_user.client) %>
+<% else %>
+  <h3>You don't have a coach yet</h3>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>image</th>
-      <th>Age</th>
-      <th>Education</th>
-      <th>Work</th>
-      <th>Licenses</th>
-      <th>Links</th>
-      <th>User</th>
-      <th>Gender</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @coaches.each do |coach| %>
-      <tr>
-        <td><%= coach.id %></td>
-        <td><%= coach.image %></td>
-        <td><%= coach.age %></td>
-        <td><%= coach.education %></td>
-        <td><%= coach.work %></td>
-        <td><%= coach.licenses %></td>
-        <td><%= coach.links %></td>
-        <td><%= coach.user_id %></td>
-        <td><%= coach.gender_id %></td>
-        <td><%= link_to 'Show', coach %></td>
-        <td><%= link_to 'Edit', edit_coach_path(coach) %></td>
-        <td><%= link_to 'Destroy', coach, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Coach', new_coach_path %>
+<h3>All Coaches:</h3>
+<% @coaches.each do |coach| %>
+  <% if !ClientManager::Coach.call(current_user.client).nil? and ClientManager::Coach.call(current_user.client).id == coach.id %>
+  <% else %>
+    <%= render 'layouts/coaches/small', user: coach.user %>
+  <% end %>
+<% end %>

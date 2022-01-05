@@ -1,6 +1,19 @@
 class InvitationsController < InheritedResources::Base
   before_action :set_invitation, only: %i[ show edit update destroy ]
 
+  def new
+    coach = Coach.find(params['coach_id'])
+    @coach_name = coach.user.name
+
+    if params.key?(:status)
+      Invitation.where(client: current_user.client).each { |invitation| invitation.destroy }
+
+      Invitation.create!(client: current_user.client, coach: coach, status: params['status'])
+
+      redirect_to dashboard_path, notice: "You asked #{@coach_name} to become your coach"
+    end
+  end
+
   def destroy
     coach_name = @invitation.coach.user.name
     @invitation.destroy

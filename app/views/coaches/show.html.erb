@@ -1,45 +1,5 @@
+<h1>Coach</h1>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Image:</strong>
-  <%= @coach.image.attached? ? image_tag(@coach.image, size: "50x50", alt: @coach.user.name) : "" %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @coach.age %>
-</p>
-
-<p>
-  <strong>Education:</strong>
-  <%= @coach.education %>
-</p>
-
-<p>
-  <strong>Work:</strong>
-  <%= @coach.work %>
-</p>
-
-<p>
-  <strong>Licenses:</strong>
-  <%= @coach.licenses %>
-</p>
-
-<p>
-  <strong>Links:</strong>
-  <%= @coach.links %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @coach.user_id %>
-  <%= @coach.user %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @coach.gender_id %>
-</p>
-
-<%= link_to 'Edit', edit_coach_path(@coach) %> |
-<%= link_to 'Back', coaches_path %>
+<%= render 'layouts/coaches/coach', user: @coach.user %>

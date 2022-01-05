@@ -1,0 +1,17 @@
+<p>
+  <%= image_tag(UserManager::ProfileImage.call(user), size: "50x50", alt: current_user.name) %>
+  <%= user.name %>
+  <strong><%= user.is_verified %></strong>
+</p>
+
+<p>Coach</p>
+<p><%= user.coach.age %> years | <%= user.coach.gender.name %> | <%= CoachManager::ActiveClients.call(user.coach) %> clients</p>
+
+<p>
+  Areas of Expertise
+  <% user.coach.problems.each do |problem| %>
+    <%= problem.name %>
+  <% end %>
+</p>
+
+<p><%= link_to 'SEE DETAILS', coach_path(user.coach) %></p>

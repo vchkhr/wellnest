@@ -40,6 +40,18 @@ user5 = User.create!(name: 'test2', email: 'test2@test2.com', password: 'abc1234
 client3 = Client.create(age: 21, user: user5, gender: Gender.find_by_name('Female'))
 client3.problems << Problem.find_by_name('Irritability')
 
+user6 = User.create!(name: 'Gabriel Wilson', email: 'gabriel@wilson.com', password: 'abc12345')
+coach3 = Coach.create(age: 32, user: user6, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
+
+user7 = User.create!(name: 'Leo Ellington', email: 'leo@ellington.com', password: 'abc12345')
+coach4 = Coach.create(age: 31, user: user7, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+
+user8 = User.create!(name: 'Tom Young', email: 'tom@young.com', password: 'abc12345')
+coach5 = Coach.create(age: 32, user: user8, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
+
+user9 = User.create!(name: 'Scarlett Davies', email: 'scarlett@davies.com', password: 'abc12345')
+coach6 = Coach.create(age: 31, user: user9, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+
 Invitation.create!(client: client1, coach: coach1, status: 0)
 client1.invitations.find_by_coach_id(coach1).destroy
 
