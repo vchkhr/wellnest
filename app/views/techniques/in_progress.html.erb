@@ -11,5 +11,5 @@
 <% end %>
 
 <% ClientManager::TechniquesInProgress.call(current_user.client).each do |technique| %>
-  <%= render 'layouts/techniques/technique', technique: technique %>
+  <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
 <% end %>

@@ -23,9 +23,11 @@ Rails.application.routes.draw do
   # App
   get 'dashboard', to: 'users#dashboard', as: 'dashboard'
   resources :invitations
-  
+  resources :techniques
+
   # Clients
   resources :clients
+  resources :completed_steps
   get 'update-client-info', to: 'clients#edit', as: 'update_client_info'
   get 'all-techniques', to: 'techniques#all', as: 'all_techniques'
   get 'recommended-techniques', to: 'techniques#recommended', as: 'recommended_techniques'
@@ -40,13 +42,11 @@ Rails.application.routes.draw do
   # resources :steps_techniques
   # resources :messages
   # resources :notifications
-  # resources :completed_steps
   # resources :problems_techniques
   # resources :steps
   # resources :clients_techniques
   # resources :genders_techniques
   # resources :likes
-  # resources :techniques
   # resources :coaches_problems
   # resources :clients_problems
   # resources :problems

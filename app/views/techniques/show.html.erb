@@ -1,39 +1,25 @@
+<h1>Technique</h1>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @technique.title %>
-</p>
+<%= render 'layouts/techniques/technique', technique: @technique, show_continue: false %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @technique.description %>
-</p>
+<h1><%= @step.title %></h1>
 
-<p>
-  <strong>Image:</strong>
-  <%= @technique.image %>
-</p>
+<p><%= @step.description %></p>
 
-<p>
-  <strong>Age start:</strong>
-  <%= @technique.age_start %>
-</p>
+<% if @step_count == 1 %>
+  <p>Go back</p>
+<% else %>
+  <p><%= link_to "Go Back", edit_completed_step_path(@step, step_id: (@step.id - 1), technique_id: @technique.id, delete: true) %></p>
+<% end %>
 
-<p>
-  <strong>Age end:</strong>
-  <%= @technique.age_end %>
-</p>
+<p>Step <%= @step_count %> of <%= @step_all %></p>
 
-<p>
-  <strong>Duration start:</strong>
-  <%= @technique.duration_start %>
-</p>
+<% if @step_count < @step_all %>
+  <p><%= link_to "Next Step", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: false) %></p>
+<% else %>
+  <p><%= link_to "Finish", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: true) %></p>
+<% end %>
 
-<p>
-  <strong>Duration end:</strong>
-  <%= @technique.duration_end %>
-</p>
-
-<%= link_to 'Edit', edit_technique_path(@technique) %> |
-<%= link_to 'Back', techniques_path %>
+<p>Step ID: <%= @step.id %></p>
