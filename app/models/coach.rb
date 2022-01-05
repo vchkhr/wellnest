@@ -1,14 +1,17 @@
 class Coach < ApplicationRecord
   self.primary_key = "id"
 
-  has_one_attached :image
+  validates :user_id, presence: true
   validates :age, numericality: { only_integer: true, in: 18..99 }
-  validates :gender_id, presence: true
+  validates :gender, presence: true
   validates :education, presence: true
   validates :work, presence: true
   validates :licenses, presence: true
   validates :links, presence: true
+  validates :problems, presence: true
   
+  has_one_attached :image
+
   has_many :invitations
   has_many :clients, through: :invitations
   
@@ -16,10 +19,7 @@ class Coach < ApplicationRecord
   has_many :clients, through: :messages
 
   belongs_to :user
-
   belongs_to :gender
-  validates :gender, presence: true
 
   has_and_belongs_to_many :problems
-  validates :problems, presence: true
 end

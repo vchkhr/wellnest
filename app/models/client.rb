@@ -1,14 +1,16 @@
 class Client < ApplicationRecord
   self.primary_key = "id"
 
+  validates :user_id, presence: true
+  validates :age, presence: true, numericality: { only_integer: true, in: 18..99 }
+  validates :gender, presence: true
+  validates :problems, presence: true
+
   has_one_attached :image
-  validates :age, numericality: { only_integer: true, in: 18..99 }
-  validate :bio
   
   belongs_to :user
 
   belongs_to :gender
-  validates :gender, presence: true
   
   has_many :invitations
   has_many :coaches, through: :invitations
@@ -25,7 +27,5 @@ class Client < ApplicationRecord
   has_many :techniques, through: :likes
 
   has_and_belongs_to_many :problems
-  validates :problems, presence: true
-
   has_and_belongs_to_many :techniques
 end
