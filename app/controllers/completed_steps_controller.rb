@@ -5,7 +5,7 @@ class CompletedStepsController < InheritedResources::Base
     CompletedStep.create!(client: current_user.client, step: Step.find(params[:step_id]))
 
     if params[:last_step] == "true"
-      redirect_to dashboard_path
+      redirect_to new_like_path(technique_id: technique_id)
     else
       redirect_to technique_path(Technique.find(technique_id))
     end

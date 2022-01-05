@@ -1,5 +1,8 @@
-<h1>New Like</h1>
+<h1>Congratulations!</h1>
 
-<%= render 'form', like: @like %>
+<p>You have finished completing the technique! Share with us your impressions and whether you like the technique.</p>
+<p>Do you like this technique?</p>
 
-<%= link_to 'Back', likes_path %>
+<p><%= link_to 'I DON\'T LIKE IT', new_like_path(is_like: false, technique_id: params['technique_id']) %></p>
+
+<p><%= link_to 'I LIKE IT', new_like_path(is_like: true, technique_id: params['technique_id']) %></p>

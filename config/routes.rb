@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'users#dashboard', as: 'dashboard'
   resources :invitations
   resources :techniques
+  resources :likes
 
   # Clients
   resources :clients
@@ -46,7 +47,6 @@ Rails.application.routes.draw do
   # resources :steps
   # resources :clients_techniques
   # resources :genders_techniques
-  # resources :likes
   # resources :coaches_problems
   # resources :clients_problems
   # resources :problems
