@@ -1,18 +1,4 @@
 Rails.application.routes.draw do
-  resources :steps_techniques
-  resources :messages
-  resources :notifications
-  resources :completed_steps
-  resources :problems_techniques
-  resources :steps
-  resources :clients_techniques
-  resources :genders_techniques
-  resources :likes
-  resources :techniques
-  resources :coaches_problems
-  resources :clients_problems
-  resources :problems
-  resources :genders
   root 'home#index'
 
   # Admin Panel
@@ -41,8 +27,28 @@ Rails.application.routes.draw do
   # Clients
   resources :clients
   get 'update-client-info', to: 'clients#edit', as: 'update_client_info'
+  get 'all-techniques', to: 'techniques#all', as: 'all_techniques'
+  get 'recommended-techniques', to: 'techniques#recommended', as: 'recommended_techniques'
+  get 'in-progress-techniques', to: 'techniques#in_progress', as: 'in_progress_techniques'
+  get 'completed-techniques', to: 'techniques#completed', as: 'completed_techniques'
 
   # Coaches
   resources :coaches
   get 'update-coach-info', to: 'coaches#edit', as: 'update_coach_info'
+
+  # All others
+  # resources :steps_techniques
+  # resources :messages
+  # resources :notifications
+  # resources :completed_steps
+  # resources :problems_techniques
+  # resources :steps
+  # resources :clients_techniques
+  # resources :genders_techniques
+  # resources :likes
+  # resources :techniques
+  # resources :coaches_problems
+  # resources :clients_problems
+  # resources :problems
+  # resources :genders
 end
