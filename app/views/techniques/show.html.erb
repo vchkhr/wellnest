@@ -8,6 +8,18 @@
 
 <p><%= @step.description %></p>
 
+<% unless @step.image.nil? %>
+  <%= image_tag @step.image, :alt => @step.title %>
+<% end %>
+
+<% unless @step.video.nil? %>
+  <%= video_tag @step.video, :controls => true %>
+<% end %>
+
+<% unless @step.audio.nil? %>
+  <%= audio_tag @step.audio, :controls => true %>
+<% end %>
+
 <% if @step_count == 1 %>
   <p>Go back</p>
 <% else %>
