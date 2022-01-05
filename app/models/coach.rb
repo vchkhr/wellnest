@@ -1,9 +1,7 @@
 class Coach < ApplicationRecord
   self.primary_key = "id"
 
-  validates :user_id, presence: true
   validates :age, numericality: { only_integer: true, in: 18..99 }
-  validates :gender, presence: true
   validates :education, presence: true
   validates :work, presence: true
   validates :licenses, presence: true

@@ -8,12 +8,11 @@ end
 
 class User < ApplicationRecord
   self.primary_key = "id"
-  has_secure_password
-
+  
   validates :name, presence: true
   validates :email, presence: true, email: true, uniqueness: true
-  validate :is_verified
-  validate :send_email_notifications
+  
+  has_secure_password
 
   has_one :client
   has_one :coach
