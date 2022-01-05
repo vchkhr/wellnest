@@ -1,0 +1,23 @@
+<p>
+  <%= image_tag(UserManager::ProfileImage.call(user), size: "50x50", alt: current_user.name) %>
+  <%= user.name %>
+  <strong><%= user.is_verified %></strong>
+</p>
+
+<p>Current Coach</p>
+<p><%= user.coach.bio %></p>
+
+<p><%= user.coach.age %> years | <%= user.coach.gender.name %> | <%= CoachManager::ActiveClients.call(user.coach) %> clients</p>
+
+<p>
+  Areas of Expertise
+  <% user.coach.problems.each do |problem| %>
+    <%= problem.name %>
+  <% end %>
+</p>
+
+<p>Education <%= user.coach.education %></p>
+<p>Work Experience <%= user.coach.work %></p>
+<p>Licenses and Certificates <%= user.coach.licenses %></p>
+
+<p><%= link_to 'End Cooperation', user.coach.invitations.where(client: current_user.client, status: 1).last %></p>

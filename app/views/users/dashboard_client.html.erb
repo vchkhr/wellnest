@@ -5,7 +5,10 @@
 <p><%= link_to "All Techniques", all_techniques_path %></p>
 
 <p><%= link_to "Edit Personal Information", update_client_info_path %></p>
-<p><strong><%= current_user.name %></strong></p>
+<p>
+  <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+  <strong><%= current_user.name %></strong>
+</p>
 <p><strong><%= current_user.email %></strong></p>
 <p><strong><%= current_user.profile.age %> years | <%= current_user.profile.gender.name %></strong></p>
 
@@ -29,10 +32,12 @@
     <p><%= link_to 'CANCEL', current_user.client.invitations.where(status: 0).last %></p>
   <% end %>
 <% else %>
-  <p>Current coach:
-  <strong><%= ClientManager::CoachUser.call(current_user.client).name unless ClientManager::CoachUser.call(current_user.client).nil? %></strong><br>
-  <%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %>
+  <p>
+    Current coach:
+    <%= image_tag(UserManager::ProfileImage.call(ClientManager::CoachUser.call(current_user.client)), size: "50x50", alt: ClientManager::CoachUser.call(current_user.client).name) %>
+    <strong><%= ClientManager::CoachUser.call(current_user.client).name %></strong>
   </p>
+  <p><%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %></p>
 <% end %>
 
 <p>Notifications:</p>

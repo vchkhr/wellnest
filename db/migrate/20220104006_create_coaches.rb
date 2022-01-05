@@ -7,6 +7,7 @@ class CreateCoaches < ActiveRecord::Migration[6.1]
       t.string :work
       t.string :licenses
       t.string :links
+      t.string :bio
       
       t.belongs_to :user, null: false, foreign_key: true
       t.belongs_to :gender, null: false, foreign_key: true

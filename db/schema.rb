@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2022_01_04_194223) do
     t.string "work"
     t.string "licenses"
     t.string "links"
+    t.string "bio"
     t.bigint "user_id", null: false
     t.bigint "gender_id", null: false
     t.datetime "created_at", precision: 6, null: false

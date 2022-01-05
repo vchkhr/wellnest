@@ -41,13 +41,16 @@ client3 = Client.create(age: 21, user: user5, gender: Gender.find_by_name('Femal
 client3.problems << Problem.find_by_name('Irritability')
 
 Invitation.create!(client: client1, coach: coach1, status: 0)
-client1.invitations.find_by_coach_id(coach1).delete
+client1.invitations.find_by_coach_id(coach1).destroy
 
 Invitation.create!(client: client1, coach: coach2, status: 0)
 client1.invitations.find_by_coach_id(coach2).update!(status: 1)
 
 Invitation.create!(client: client2, coach: coach1, status: 0)
 client2.invitations.find_by_coach_id(coach1).update!(status: 1)
+
+client1.invitations.find_by_coach_id(coach2).destroy
+Invitation.create!(client: client1, coach: coach1, status: 1)
 
 technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7)
 technique1.problems << Problem.find_by_name('Depression')
@@ -104,6 +107,7 @@ Notification.create!(text: 'Coach James Brown agreed to become your coach', clie
 Notification.create!(text: 'Coach James Brown replied to the message', client: client1)
 
 client1.update!(bio: 'I feel depressed all the time. I do not want to do anything, I have no strength. I am afraid to communicate with people.')
+coach1.update!(bio: 'I know how to help you overcome Depression and Anxiety. I know modern techniques that work.')
 
 Message.create!(client: client1, coach: coach1, from_client: false, text: 'How do you feel?')
 Message.create!(client: client1, coach: coach1, from_client: true, text: 'Better now. I began to sleep better at night.')

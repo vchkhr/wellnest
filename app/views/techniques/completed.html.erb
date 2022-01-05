@@ -6,6 +6,10 @@
 <p><%= link_to "In progress", in_progress_techniques_path %></p>
 <p>Completed</p>
 
+<% unless ClientManager::CoachUser.call(current_user.client).nil? %>
+  <%= render 'layouts/coaches/coach', user: ClientManager::CoachUser.call(current_user.client) %>
+<% end %>
+
 <% ClientManager::TechniquesCompleted.call(current_user.client).each do |technique| %>
   <%= render 'layouts/techniques/technique', technique: technique %>
 <% end %>
