@@ -38,6 +38,8 @@
 <% else %>
   <%= render 'layouts/techniques/coach', technique: @technique, show_details: false %>
 
+  <p><%= link_to 'RECOMMEND TO CLIENTS', new_clients_technique_path(technique_id: @technique.id) %>
+
   <% step_count = 0 %>
   <% @steps.each do |step| %>
     <% step_count += 1%>

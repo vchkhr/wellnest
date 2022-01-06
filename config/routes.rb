@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   resources :coaches
   get 'update-coach-info', to: 'coaches#edit', as: 'update_coach_info'
   get 'all-techniques', to: 'techniques#all', as: 'all_techniques'
+  resources :clients_techniques
 
   # All others
   # resources :steps_techniques
@@ -47,7 +48,6 @@ Rails.application.routes.draw do
   # resources :notifications
   # resources :problems_techniques
   # resources :steps
-  # resources :clients_techniques
   # resources :genders_techniques
   # resources :coaches_problems
   # resources :clients_problems

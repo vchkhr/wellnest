@@ -25,4 +25,8 @@ class Client < ApplicationRecord
 
   has_and_belongs_to_many :problems
   has_and_belongs_to_many :techniques
+
+  def name
+    self.user.name
+  end
 end
