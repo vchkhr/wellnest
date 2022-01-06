@@ -1,7 +1,7 @@
 <h1>My Techniques</h1>
 
 <p><%= link_to "Dashboard", dashboard_path %></p>
-<p><%= link_to "All", all_techniques_path %></p>
+<p><%= link_to "My", my_techniques_path %></p>
 <p><%= link_to "Recommended", recommended_techniques_path %></p>
 <p>In progress</p>
 <p><%= link_to "Completed", completed_techniques_path %></p>
@@ -11,5 +11,5 @@
 <% end %>
 
 <% ClientManager::TechniquesInProgress.call(current_user.client).each do |technique| %>
-  <%= render 'layouts/techniques/technique', technique: technique, show_continue: true, show_details: false %>
+  <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
 <% end %>

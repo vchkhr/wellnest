@@ -39,6 +39,6 @@
 <p>Techniques</p>
 <% CoachManager::ActiveClients.call(current_user.coach).each do |client| %>
   <% ClientManager::TechniquesInProgress.call(client).each do |technique| %>
-    <%= render 'layouts/techniques/technique', technique: technique, show_continue: false, show_details: true %>
+    <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
   <% end %>
 <% end %>

@@ -2,34 +2,60 @@
 
 <p id="notice"><%= notice %></p>
 
-<%= render 'layouts/techniques/technique', technique: @technique, show_continue: false, show_details: false %>
+<% if @steps.nil? %>
+  <%= render 'layouts/techniques/technique', technique: @technique, show_continue: false %>
 
-<h1><%= @step.title %></h1>
+  <h1><%= @step.title %></h1>
 
-<p><%= @step.description %></p>
+  <p><%= @step.description %></p>
 
-<% unless @step.image.nil? %>
-  <%= image_tag @step.image, :alt => @step.title %>
-<% end %>
+  <% unless @step.image.nil? %>
+    <%= image_tag @step.image, :alt => @step.title %>
+  <% end %>
 
-<% unless @step.video.nil? %>
-  <%= video_tag @step.video, :controls => true %>
-<% end %>
+  <% unless @step.video.nil? %>
+    <%= video_tag @step.video, :controls => true %>
+  <% end %>
 
-<% unless @step.audio.nil? %>
-  <%= audio_tag @step.audio, :controls => true %>
-<% end %>
+  <% unless @step.audio.nil? %>
+    <%= audio_tag @step.audio, :controls => true %>
+  <% end %>
 
-<% if @step_count == 1 %>
-  <p>Go back</p>
+  <% if @step_count == 1 %>
+    <p>Go back</p>
+  <% else %>
+    <p><%= link_to "Go Back", edit_completed_step_path(@step, step_id: (@step.id - 1), technique_id: @technique.id, delete: true) %></p>
+  <% end %>
+
+  <p>Step <%= @step_count %> of <%= @step_all %></p>
+
+  <% if @step_count < @step_all %>
+    <p><%= link_to "Next Step", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: false) %></p>
+  <% else %>
+    <p><%= link_to "Finish", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: true) %></p>
+  <% end %>
+
 <% else %>
-  <p><%= link_to "Go Back", edit_completed_step_path(@step, step_id: (@step.id - 1), technique_id: @technique.id, delete: true) %></p>
-<% end %>
+  <%= render 'layouts/techniques/coach', technique: @technique, show_details: false %>
 
-<p>Step <%= @step_count %> of <%= @step_all %></p>
+  <% step_count = 0 %>
+  <% @steps.each do |step| %>
+    <% step_count += 1%>
 
-<% if @step_count < @step_all %>
-  <p><%= link_to "Next Step", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: false) %></p>
-<% else %>
-  <p><%= link_to "Finish", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: true) %></p>
+    <h1><%= step_count %>/<%= @step_all %> <%= step.title %></h1>
+
+    <p><%= step.description %></p>
+
+    <% unless step.image.nil? %>
+      <%= image_tag step.image, :alt => step.title %>
+    <% end %>
+
+    <% unless step.video.nil? %>
+      <%= video_tag step.video, :controls => true %>
+    <% end %>
+
+    <% unless step.audio.nil? %>
+      <%= audio_tag step.audio, :controls => true %>
+    <% end %>
+  <% end %>
 <% end %>

@@ -23,6 +23,6 @@
 <p>Techniques:</p>
 <p>
   <% @client.techniques.each do |technique| %>
-    <%= render 'layouts/techniques/technique', technique: technique, show_continue: false, show_details: false %>
+    <%= render 'layouts/techniques/technique', technique: technique, show_continue: false %>
   <% end %>
 </p>

@@ -9,8 +9,6 @@
   <% end %>
 years</strong><br></span>
 
-<span><strong><%= ClientManager::CompletedStepsCount.call(technique) %>/<%= technique.steps.count %> steps passed</strong><br></span>
-
 <span>Problems: <strong>
 <% technique.problems.each do |problem| %>
   <span><%= problem.name %></span>
@@ -38,16 +36,8 @@ hours</strong><br></span>
 <span>Likes: <strong><%= technique.likes.where(is_like: true).count %></strong><br></span>
 <span>Dislikes: <strong><%= technique.likes.where(is_like: false).count %></strong><br></span>
 
-<% if show_continue == true %>
-  <span>
-  <% if ClientManager::CompletedStepsCount.call(technique) == 0 %>
-    <%= link_to "GET STARTED", technique_path(technique) %>
-  <% elsif ClientManager::CompletedStepsCount.call(technique) < technique.steps.count %>
-    <%= link_to "CONTINUE", technique_path(technique) %>
-  <% else %>
-    <%= link_to "RESTART", technique_path(technique) %>
-  <% end %>
-<br></span>
+<% if show_details == true %>
+  <span><%= link_to "DETAILS", technique_path(technique) %><br><span>
 <% end %>
 
 <br>

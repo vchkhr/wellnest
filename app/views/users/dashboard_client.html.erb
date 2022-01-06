@@ -2,7 +2,7 @@
 
 <p id="notice"><%= notice %></p>
 
-<p><%= link_to "All Techniques", all_techniques_path %></p>
+<p><%= link_to "My Techniques", my_techniques_path %></p>
 
 <p><%= link_to "Edit Personal Information", update_client_info_path %></p>
 <p>
@@ -50,6 +50,6 @@
 <p>Techniques:</p>
 <p>
   <% current_user.profile.techniques.each do |technique| %>
-    <%= render 'layouts/techniques/technique', technique: technique, show_continue: true, show_details: false %>
+    <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
   <% end %>
 </p>
