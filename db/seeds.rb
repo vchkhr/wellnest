@@ -118,6 +118,14 @@ Notification.create!(text: 'You have sent an invitation to coach James Brown', c
 Notification.create!(text: 'Coach James Brown agreed to become your coach', client: client1)
 Notification.create!(text: 'Coach James Brown replied to the message', client: client1)
 
+CoachNotification.create!(text: 'Your profile has been verified by the admin', coach: coach1)
+CoachNotification.create!(text: 'You have received an invitation to become a coach from a user Ann Albertson', coach: coach1)
+CoachNotification.create!(text: 'You agreed to become a coach for a user Ann Albertson', coach: coach1)
+CoachNotification.create!(text: 'You have recommended a Technique to a user Ann Albertson', coach: coach1)
+CoachNotification.create!(text: 'Your user Olivia Moore replied to the message', coach: coach1)
+CoachNotification.create!(text: 'Your user Olivia Moore has rated the Technique', coach: coach1)
+CoachNotification.create!(text: 'The system has a new Technique', coach: coach1)
+
 client1.update!(bio: 'I feel depressed all the time. I do not want to do anything, I have no strength. I am afraid to communicate with people.')
 coach1.update!(bio: 'I know how to help you overcome Depression and Anxiety. I know modern techniques that work.')
 

@@ -7,11 +7,11 @@
 <p>Current Coach</p>
 <p><%= user.coach.bio %></p>
 
-<p><%= user.coach.age %> years | <%= user.coach.gender.name %> | <%= CoachManager::ActiveClients.call(user.coach) %> clients</p>
+<p><%= user.profile.age %> years | <%= user.profile.gender.name %> | <%= CoachManager::ActiveClientsCount.call(user.coach) %> clients</p>
 
 <p>
   Areas of Expertise
-  <% user.coach.problems.each do |problem| %>
+  <% user.profile.problems.each do |problem| %>
     <%= problem.name %>
   <% end %>
 </p>

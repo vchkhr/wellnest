@@ -16,6 +16,8 @@ class Coach < ApplicationRecord
   has_many :messages
   has_many :clients, through: :messages
 
+  has_many :coach_notifications
+
   belongs_to :user
   belongs_to :gender
 

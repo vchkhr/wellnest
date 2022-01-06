@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @coach_notification.text %>
+</p>
+
+<p>
+  <strong>Coach:</strong>
+  <%= @coach_notification.coach_id %>
+</p>
+
+<%= link_to 'Edit', edit_coach_notification_path(@coach_notification) %> |
+<%= link_to 'Back', coach_notifications_path %>

@@ -5,7 +5,7 @@
 </p>
 
 <p>Coach</p>
-<p><%= user.coach.age %> years | <%= user.coach.gender.name %> | <%= CoachManager::ActiveClients.call(user.coach) %> clients</p>
+<p><%= user.coach.age %> years | <%= user.coach.gender.name %> | <%= CoachManager::ActiveClientsCount.call(user.coach) %> clients</p>
 
 <p>
   Areas of Expertise

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_04_194223) do
+ActiveRecord::Schema.define(version: 2022_01_06_101516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,14 @@ ActiveRecord::Schema.define(version: 2022_01_04_194223) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_clients_techniques_on_client_id"
     t.index ["technique_id"], name: "index_clients_techniques_on_technique_id"
+  end
+
+  create_table "coach_notifications", force: :cascade do |t|
+    t.string "text"
+    t.bigint "coach_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["coach_id"], name: "index_coach_notifications_on_coach_id"
   end
 
   create_table "coaches", force: :cascade do |t|
@@ -254,6 +262,7 @@ ActiveRecord::Schema.define(version: 2022_01_04_194223) do
   add_foreign_key "clients_problems", "problems"
   add_foreign_key "clients_techniques", "clients"
   add_foreign_key "clients_techniques", "techniques"
+  add_foreign_key "coach_notifications", "coaches"
   add_foreign_key "coaches", "genders"
   add_foreign_key "coaches", "users"
   add_foreign_key "coaches_problems", "coaches"

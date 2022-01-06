@@ -1,0 +1,25 @@
+<p>
+  <%= image_tag(UserManager::ProfileImage.call(user), size: "50x50", alt: current_user.name) %>
+  <%= user.name %>
+</p>
+
+<p>Current Client</p>
+<p><%= user.profile.age %> years | <%= user.profile.gender.name %></p>
+
+<p>
+  Problems
+  <% user.profile.problems.each do |problem| %>
+    <%= problem.name %>
+  <% end %>
+</p>
+
+<p>Techniques in process</p>
+<% if ClientManager::TechniquesInProgressCount.call(user.profile) == 0 %>
+  <p>All techniques completed</p>
+<% else %>
+  <% ClientManager::TechniquesInProgress.call(user.profile).each do |technique| %>
+    <p><strong><%= technique.title %></strong></p>
+  <% end %>
+<% end %>
+
+<p><%= link_to 'SEE DETAILS', client_path(user.client) %></p>

@@ -8,8 +8,6 @@ class Client < ApplicationRecord
   
   has_many :invitations
   has_many :coaches, through: :invitations
-
-  has_many :notifications
   
   has_many :messages
   has_many :coaches, through: :messages
@@ -19,6 +17,8 @@ class Client < ApplicationRecord
 
   has_many :likes
   has_many :techniques, through: :likes
+
+  has_many :notifications
   
   belongs_to :user
   belongs_to :gender

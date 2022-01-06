@@ -11,5 +11,5 @@
 <% end %>
 
 <% ClientManager::TechniquesNotStarted.call(current_user.client).each do |technique| %>
-  <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
+  <%= render 'layouts/techniques/technique', technique: technique, show_continue: true, show_details: false %>
 <% end %>

@@ -11,7 +11,9 @@ module CoachManager
     private
   
     def active_clients
-      @coach.invitations.where(status: 1).count
+      clients = []
+      @coach.invitations.where(status: 1).each { |invitation| clients << invitation.client }
+      clients
     end
   end
 end

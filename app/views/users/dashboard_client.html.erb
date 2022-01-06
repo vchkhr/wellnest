@@ -12,16 +12,16 @@
 <p><strong><%= current_user.email %></strong></p>
 <p><strong><%= current_user.profile.age %> years | <%= current_user.profile.gender.name %></strong></p>
 
-<p>Total progress: <strong><%= ClientManager::TechniquesCompletedCount.call(current_user.client) %></strong> techniques completed</p>
-<p>Current progress: <strong><%= ClientManager::TechniquesInProgressCount.call(current_user.client) %></strong> techniques in process</p>
-<p>Total time: <strong><%= ClientManager::HoursCompleted.call(current_user.client) %></strong> hours for techniques</p>
-<p>Current time: <strong><%= ClientManager::HoursInProgress.call(current_user.client) %></strong> hours for techniques</p>
-
 <p>Problems: <strong>
   <% current_user.profile.problems.each do |problem| %>
     <%= problem.name %>
   <% end %>
 </strong></p>
+
+<p>Total progress: <strong><%= ClientManager::TechniquesCompletedCount.call(current_user.client) %></strong> techniques completed</p>
+<p>Current progress: <strong><%= ClientManager::TechniquesInProgressCount.call(current_user.client) %></strong> techniques in process</p>
+<p>Total time: <strong><%= ClientManager::HoursCompleted.call(current_user.client) %></strong> hours for techniques</p>
+<p>Current time: <strong><%= ClientManager::HoursInProgress.call(current_user.client) %></strong> hours for techniques</p>
 
 <% if ClientManager::CoachUser.call(current_user.client).nil? %>
   <% if ClientManager::UnconfirmedInvitation.call(current_user.client).nil? %>
@@ -50,6 +50,6 @@
 <p>Techniques:</p>
 <p>
   <% current_user.profile.techniques.each do |technique| %>
-    <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
+    <%= render 'layouts/techniques/technique', technique: technique, show_continue: true, show_details: false %>
   <% end %>
 </p>
