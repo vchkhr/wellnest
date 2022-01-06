@@ -10,10 +10,10 @@ class Technique < ApplicationRecord
   validates :duration_start, numericality: { only_integer: true, in: 18..99 }
   validates :duration_end, numericality: { only_integer: true, in: 18..99 }
 
-  has_many :clients_technique
+  has_many :clients_technique, dependent: :delete_all
   has_many :clients, through: :clients_technique
 
-  has_many :likes
+  has_many :likes, dependent: :delete_all
   has_many :clients, through: :likes
 
   has_and_belongs_to_many :problems

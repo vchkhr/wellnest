@@ -10,13 +10,13 @@ class Coach < ApplicationRecord
   
   has_one_attached :image
 
-  has_many :invitations
+  has_many :invitations, dependent: :delete_all
   has_many :clients, through: :invitations
   
-  has_many :messages
+  has_many :messages, dependent: :delete_all
   has_many :clients, through: :messages
 
-  has_many :coach_notifications
+  has_many :coach_notifications, dependent: :delete_all
 
   belongs_to :user
   belongs_to :gender

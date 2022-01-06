@@ -14,8 +14,8 @@ class User < ApplicationRecord
   
   has_secure_password
 
-  has_one :client
-  has_one :coach
+  has_one :client, dependent: :delete
+  has_one :coach, dependent: :delete
 
   def send_password_reset
     generate_token(:password_reset_token)

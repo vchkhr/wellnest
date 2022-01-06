@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  age: 20
+  bio: MyString
+  user: one
+  gender: one
+
+two:
+  age: 21
+  bio: MyString
+  user: two
+  gender: two

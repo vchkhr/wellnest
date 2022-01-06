@@ -6,19 +6,19 @@ class Client < ApplicationRecord
 
   has_one_attached :image
   
-  has_many :invitations
+  has_many :invitations, dependent: :delete_all
   has_many :coaches, through: :invitations
   
-  has_many :messages
+  has_many :messages, dependent: :delete_all
   has_many :coaches, through: :messages
 
-  has_many :completed_steps
+  has_many :completed_steps, dependent: :delete_all
   has_many :steps, through: :completed_steps
 
-  has_many :likes
+  has_many :likes, dependent: :delete_all
   has_many :techniques, through: :likes
 
-  has_many :notifications
+  has_many :notifications, dependent: :delete_all
   
   belongs_to :user
   belongs_to :gender

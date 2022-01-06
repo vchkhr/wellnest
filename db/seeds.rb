@@ -8,49 +8,42 @@
 
 AdminUser.create!(:email => 'test@test.com', :password => 'password', :password_confirmation => 'password')
 
-Gender.create(name: 'Male')
-Gender.create(name: 'Female')
+Gender.create!(name: 'Male')
+Gender.create!(name: 'Female')
 
-Problem.create(name: 'Anxiety')
-Problem.create(name: 'Depression')
-Problem.create(name: 'Irritability')
-Problem.create(name: 'Stress')
+Problem.create!(name: 'Anxiety')
+Problem.create!(name: 'Depression')
+Problem.create!(name: 'Irritability')
+Problem.create!(name: 'Stress')
 
 # Testing the models
 
 user1 = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345')
-client1 = Client.create(age: 30, user: user1, gender: Gender.find_by_name('Female'))
-client1.problems << Problem.find_by_name('Depression')
-client1.problems << Problem.find_by_name('Irritability')
-client1.problems << Problem.find_by_name('Stress')
+client1 = Client.create!(age: 30, user: user1, gender: Gender.find_by_name('Female'), problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
 
 user2 = User.create!(name: 'James Brown', email: 'james@brown.com', password: 'abc12345')
-coach1 = Coach.create(age: 36, user: user2, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org')
-coach1.problems << [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')]
+coach1 = Coach.create!(age: 36, user: user2, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 user3 = User.create!(name: 'Amelia Adamson', email: 'amelia@adamson.com', password: 'abc12345')
-coach2 = Coach.create(age: 25, user: user3, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org')
-coach2.problems << [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')]
+coach2 = Coach.create!(age: 25, user: user3, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 user4 = User.create!(name: 'Olivia Moore', email: 'olivia@moore.com', password: 'abc12345')
-client2 = Client.create(age: 26, user: user4, gender: Gender.find_by_name('Female'))
-client2.problems << [Problem.find_by_name('Depression'), Problem.find_by_name('Anxiety')]
+client2 = Client.create!(age: 26, user: user4, gender: Gender.find_by_name('Female'), problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Anxiety')])
 
 user5 = User.create!(name: 'Jessica Aldridge', email: 'jessica@aldridge.com', password: 'abc12345')
-client3 = Client.create(age: 23, user: user5, gender: Gender.find_by_name('Female'))
-client3.problems << Problem.find_by_name('Depression')
+client3 = Client.create!(age: 23, user: user5, gender: Gender.find_by_name('Female'), problems: [Problem.find_by_name('Depression')])
 
 user6 = User.create!(name: 'Gabriel Wilson', email: 'gabriel@wilson.com', password: 'abc12345')
-coach3 = Coach.create(age: 32, user: user6, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
+coach3 = Coach.create!(age: 32, user: user6, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
 
 user7 = User.create!(name: 'Leo Ellington', email: 'leo@ellington.com', password: 'abc12345')
-coach4 = Coach.create(age: 31, user: user7, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+coach4 = Coach.create!(age: 31, user: user7, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 user8 = User.create!(name: 'Tom Young', email: 'tom@young.com', password: 'abc12345')
-coach5 = Coach.create(age: 32, user: user8, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
+coach5 = Coach.create!(age: 32, user: user8, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
 
 user9 = User.create!(name: 'Scarlett Davies', email: 'scarlett@davies.com', password: 'abc12345')
-coach6 = Coach.create(age: 31, user: user9, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+coach6 = Coach.create!(age: 31, user: user9, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 Invitation.create!(client: client1, coach: coach1, status: 0)
 client1.invitations.find_by_coach_id(coach1).destroy

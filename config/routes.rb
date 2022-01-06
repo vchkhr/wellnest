@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :coach_notifications
   root 'home#index'
-  get 'index', to: 'home#index', as: 'home_index'
 
   # Admin Panel
   devise_for :admin_users, ActiveAdmin::Devise.config
