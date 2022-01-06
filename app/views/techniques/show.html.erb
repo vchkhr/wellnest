@@ -33,5 +33,3 @@
 <% else %>
   <p><%= link_to "Finish", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: true) %></p>
 <% end %>
-
-<p>Step ID: <%= @step.id %></p>

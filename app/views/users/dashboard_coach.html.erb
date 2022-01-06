@@ -2,9 +2,10 @@
 
 <p id="notice"><%= notice %></p>
 
+<p><%= link_to "My Clients", clients_path %></p>
 <p><%= link_to "All Techniques", all_techniques_path %></p>
-
 <p><%= link_to "Edit Personal Information", update_coach_info_path %></p>
+
 <p>
   <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
   <strong><%= current_user.name %></strong>

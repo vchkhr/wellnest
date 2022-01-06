@@ -1,6 +1,10 @@
 class InvitationsController < InheritedResources::Base
   before_action :set_invitation, only: %i[ show edit update destroy ]
 
+  def index
+    @invitations = Invitation.where(status: 0, coach: current_user.coach)
+  end
+
   def new
     coach = Coach.find(params['coach_id'])
     @coach_name = coach.user.name
@@ -11,6 +15,23 @@ class InvitationsController < InheritedResources::Base
       Invitation.create!(client: current_user.client, coach: coach, status: params['status'])
 
       redirect_to dashboard_path, notice: "You asked #{@coach_name} to become your coach"
+    end
+  end
+
+  def edit
+    Invitation.where(client: Client.find(params['client_id']), coach: current_user.coach, status: 0).each { |invitation| invitation.destroy }
+
+    if params['is_confirmed'] == 'true'
+      @invitation = Invitation.new(client: Client.find(params['client_id']), coach: current_user.coach, status: 1)
+    end
+    
+    respond_to do |format|
+      if @invitation.save
+        action = params['is_confirmed'] == 'true' ? "confirmed" : "refused"
+
+        format.html { redirect_to dashboard_path, notice: "You #{action} invitation from client." }
+        format.json { render :show, status: :created, location: @invitation }
+      end
     end
   end
 

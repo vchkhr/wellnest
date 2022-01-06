@@ -32,13 +32,13 @@ user3 = User.create!(name: 'Amelia Adamson', email: 'amelia@adamson.com', passwo
 coach2 = Coach.create(age: 25, user: user3, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org')
 coach2.problems << [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')]
 
-user4 = User.create!(name: 'test', email: 'test@test.com', password: 'abc12345')
-client2 = Client.create(age: 21, user: user4, gender: Gender.find_by_name('Female'))
-client2.problems << Problem.find_by_name('Irritability')
+user4 = User.create!(name: 'Olivia Moore', email: 'olivia@moore.com', password: 'abc12345')
+client2 = Client.create(age: 26, user: user4, gender: Gender.find_by_name('Female'))
+client2.problems << [Problem.find_by_name('Depression'), Problem.find_by_name('Anxiety')]
 
-user5 = User.create!(name: 'test2', email: 'test2@test2.com', password: 'abc12345')
-client3 = Client.create(age: 21, user: user5, gender: Gender.find_by_name('Female'))
-client3.problems << Problem.find_by_name('Irritability')
+user5 = User.create!(name: 'Jessica Aldridge', email: 'jessica@aldridge.com', password: 'abc12345')
+client3 = Client.create(age: 23, user: user5, gender: Gender.find_by_name('Female'))
+client3.problems << Problem.find_by_name('Depression')
 
 user6 = User.create!(name: 'Gabriel Wilson', email: 'gabriel@wilson.com', password: 'abc12345')
 coach3 = Coach.create(age: 32, user: user6, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])

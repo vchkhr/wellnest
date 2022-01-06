@@ -2,7 +2,8 @@ class ClientsController < ApplicationController
   before_action :set_client, only: %i[ show edit update destroy ]
 
   def index
-    @clients = Client.all
+    @clients = []
+    Invitation.where(status: 1, coach: current_user.coach).each { |invitation| @clients << invitation.client }
   end
 
   def show

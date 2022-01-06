@@ -9,7 +9,7 @@ class LikesController < InheritedResources::Base
       
       respond_to do |format|
         if @like.save
-          action = params['is_like'] == true ? "liked" : "disliked"
+          action = params['is_like'] == 'true' ? "liked" : "disliked"
 
           format.html { redirect_to dashboard_path, notice: "You #{action} the technique." }
           format.json { render :show, status: :created, location: @like }
