@@ -8,7 +8,7 @@ Platform where coaches help users to deal with anxiety and depression.
 
 1. Select the last `challenge-x` branch.
 2. Clone the repository and open the their folder in the Terminal.
-3. Fill in the `.env` file. Create it using the `.env.template`.\
+3. Fill in the `.env` file. Create it using the `.env.example`.\
 Use `DATABASE_HOST=localhost` to use without Docker,\
 or `DATABASE_HOST=database` to use with Docker.
 

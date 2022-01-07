@@ -12,7 +12,7 @@ module ClientManager
   
     def completed_steps_count
       count = 0
-      @technique.steps.each { |step| count += 1 unless CompletedStep.find_by_step_id(step.id).nil?}
+      @technique.steps.each { |step| count += 1 unless CompletedStep.find_by_step_id(step.id).nil? }
       count
     end
   end
