@@ -1,5 +1,8 @@
-<h1>Coach</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
-<p id="notice"><%= notice %></p>
+<div class="card-view">
+  <p id="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
 
-<%= render 'layouts/coaches/coach', user: @coach.user %>
+  <%= render 'layouts/coaches/coach', user: @coach.user %>
+</div>

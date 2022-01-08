@@ -1,18 +1,123 @@
-<h1>Find Coach</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
+<p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
 
-<% if !ClientManager::Coach.call(current_user.client).nil? %>
-  <h3>Your Coach:</h3>
-  <%= render 'layouts/coaches/small', user: ClientManager::CoachUser.call(current_user.client) %>
-<% else %>
-  <h3>You don't have a coach yet</h3>
-<% end %>
+<div class="coaches-view">
+  <div class="left-column">
+    <div class="coach-card">
+      <% if ClientManager::CoachUser.call(current_user.client).nil? %>
+        <% if ClientManager::UnconfirmedInvitation.call(current_user.client).nil? %>
+          <p><%= link_to "You don't have a coach yet", coaches_path %></p>
+        <% else %>
+          <p>Waiting for confirmation</p>
+          <p><strong><%= ClientManager::UnconfirmedInvitation.call(current_user.client).user.name %></strong></p>
+          <p><%= link_to 'CANCEL', current_user.client.invitations.where(status: 0).last %></p>
+        <% end %>
+      <% else %>
 
-<h3>All Coaches:</h3>
-<% @coaches.each do |coach| %>
-  <% if !ClientManager::Coach.call(current_user.client).nil? and ClientManager::Coach.call(current_user.client).id == coach.id %>
-  <% else %>
-    <%= render 'layouts/coaches/small', user: coach.user %>
-  <% end %>
-<% end %>
+        <div class="image-info">
+          <div class="image">
+            <%= image_tag(UserManager::ProfileImage.call(ClientManager::CoachUser.call(current_user.client)), size: "50x50", alt: ClientManager::CoachUser.call(current_user.client).name) %>
+          </div>
+
+          <div class="info">
+            <p>
+              Current coach:<br>
+              <strong><%= ClientManager::CoachUser.call(current_user.client).name %></strong><br>
+              <%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="filters mt-3">
+      <h3>Filters</h3>
+
+      <div class="show">
+        <p>Show<br>
+          <input type="checkbox" id="all">
+          <label for="all">All</label><br>
+          <input type="checkbox" id="recommended">
+          <label for="recommended">Recommended</label>
+        </p>
+      </div>
+
+      <div class="expertise">
+        <p>Expertise<br>
+          <input type="checkbox" id="anxiety">
+          <label for="anxiety">Anxiety</label><br>
+          <input type="checkbox" id="depression">
+          <label for="depression">Depression</label><br>
+          <input type="checkbox" id="irriability">
+          <label for="irriability">Irriability</label><br>
+          <input type="checkbox" id="stress">
+          <label for="stress">Stress</label>
+        </p>
+      </div>
+
+      <div class="work-experience">
+        <p>Work experience<br>
+          <input type="checkbox" id="less-than-5-years">
+          <label for="less-than-5-years">Less than 5 years</label><br>
+          <input type="checkbox" id="more-than-5-years">
+          <label for="more-than-5-years">More-than-5-years</label>
+        </p>
+      </div>
+
+      <div class="number-of-users">
+        <p>Number of users in training<br>
+          <input type="checkbox" id="less-than-5-users">
+          <label for="less-than-5-users">Less than 5 users</label><br>
+          <input type="checkbox" id="5-10-users">
+          <label for="5-10-users">5-10 users</label><br>
+          <input type="checkbox" id="5-10-users">
+          <label for="5-10-users">5-10 users</label><br>
+          <input type="checkbox" id="10-20-users">
+          <label for="10-20-users">10-20 users</label><br>
+          <input type="checkbox" id="more-than-20-users">
+          <label for="more-than-20-users">More than 20 users</label>
+        </p>
+      </div>
+
+      <div class="gender">
+        <p>Gender<br>
+          <input type="checkbox" id="all">
+          <label for="all">All</label><br>
+          <input type="checkbox" id="male">
+          <label for="male">Male</label><br>
+          <input type="checkbox" id="female">
+          <label for="female">Female</label>
+        </p>
+      </div>
+
+      <div class="age">
+        <p>Age<br>
+          <input type="checkbox" id="to-25-years">
+          <label for="to-25-years">To 25 years</label><br>
+          <input type="checkbox" id="25-35-years">
+          <label for="25-35-years">25-35 years</label><br>
+          <input type="checkbox" id="35-45-years">
+          <label for="35-45-years">35-45 years</label><br>
+          <input type="checkbox" id="over-45-years">
+          <label for="over-45-years">Over 45 years</label>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-column">
+    <div class="coaches">
+      <% @coaches.each do |coach| %>
+        <% if !ClientManager::Coach.call(current_user.client).nil? and ClientManager::Coach.call(current_user.client).id == coach.id %>
+        <% else %>
+          <%= render 'layouts/coaches/small', user: coach.user %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<%= render 'layouts/footer/footer' %>
