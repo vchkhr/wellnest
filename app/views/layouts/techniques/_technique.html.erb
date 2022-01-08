@@ -1,53 +1,74 @@
-<span>Title: <strong><%= technique.title %></strong><br></span>
-<span>Description: <strong><%= technique.description %></strong><br></span>
+<div class="technique">
+  <div class="tag badge rounded-pill bg-secondary"><%= ClientManager::CompletedStepsCount.call(technique) %>/<%= technique.steps.count %> steps passed</div>
+  
+  <div class="symptoms d-flex">
+    <% technique.problems.each do |problem| %>
+      <div class="symptom"><%= problem.name %></div>
+    <% end %>
+  </div>
 
-<span>Age: <strong>
-  <% if technique.age_start == technique.age_end %>
-    <%= technique.age_start %>
-  <% else %>
-    <%= technique.age_start %>-<%= technique.age_end %>
-  <% end %>
-years</strong><br></span>
+  <%= image_tag("behaviour-therapy.jpg", :alt => technique.title, :class => "card-img-top") %>
 
-<span><strong><%= ClientManager::CompletedStepsCount.call(technique) %>/<%= technique.steps.count %> steps passed</strong><br></span>
+  <div class="card-body">
+    <h5 class="card-title"><%= technique.title %></h5>
+    <p class="card-text">
+      <small>
+        <span class="text-muted"><%= technique.description %></span><br />
+        <br />
 
-<span>Problems: <strong>
-<% technique.problems.each do |problem| %>
-  <span><%= problem.name %></span>
-<% end %>
-</strong><br></span>
+        <span class="text-muted">Age:</span>
+        <% if technique.age_start == technique.age_end %>
+          <%= technique.age_start %>
+        <% else %>
+          <%= technique.age_start %>-<%= technique.age_end %>
+        <% end %>
+        <span>years</span><br />
 
-<span>Gender: <strong>
-<% technique.genders.each do |gender| %>
-  <span><%= gender.name %></span>
-<% end %>
-</strong><br></span>
+        <span class="text-muted">Gender:</span>
+        <% technique.genders.each do |gender| %>
+          <span><%= gender.name %></span>
+        <% end %>
+        <br />
 
-<span>Steps: <strong><%= technique.steps.count %></strong><br></span>
+        <br />
+        <span class="text-muted">Steps:</span> <%= technique.steps.count %><br />
 
-<span>Duration: <strong>
-<% if technique.duration_start == technique.duration_end %>
-  <%= technique.duration_start %>
-<% else %>
-  <%= technique.duration_start %>-<%= technique.duration_end %>
-<% end %>
-hours</strong><br></span>
+        <span class="text-muted">Duration:</span>
+        <% if technique.duration_start == technique.duration_end %>
+          <%= technique.duration_start %>
+        <% else %>
+          <%= technique.duration_start %>-<%= technique.duration_end %>
+        <% end %>
+        <span>hours</span><br />
+
+        <br />
+      </small>
+    </p>
+  </div>
+
+  <div class="likes">
+    <p class="card-text">
+      <small>
+        <span class="text-muted">
+          Participants: <%= technique.clients.count %> &emsp;
+          Likes: <%= technique.likes.where(is_like: true).count %> &emsp;
+          Dislikes: <%= technique.likes.where(is_like: false).count %>
+        </span>
+      </small>
+      
+      <% if show_continue == true %>
+        <span>
+        <% if ClientManager::CompletedStepsCount.call(technique) == 0 %>
+          <%= link_to "GET STARTED", technique_path(technique) %>
+        <% elsif ClientManager::CompletedStepsCount.call(technique) < technique.steps.count %>
+          <%= link_to "CONTINUE", technique_path(technique) %>
+        <% else %>
+          <%= link_to "RESTART", technique_path(technique) %>
+        <% end %>
+      <br></span>
+      <% end %>
+    </p>
+  </div>
 
 
-<span>Participants: <strong><%= technique.clients.count %></strong><br></span>
-<span>Likes: <strong><%= technique.likes.where(is_like: true).count %></strong><br></span>
-<span>Dislikes: <strong><%= technique.likes.where(is_like: false).count %></strong><br></span>
-
-<% if show_continue == true %>
-  <span>
-  <% if ClientManager::CompletedStepsCount.call(technique) == 0 %>
-    <%= link_to "GET STARTED", technique_path(technique) %>
-  <% elsif ClientManager::CompletedStepsCount.call(technique) < technique.steps.count %>
-    <%= link_to "CONTINUE", technique_path(technique) %>
-  <% else %>
-    <%= link_to "RESTART", technique_path(technique) %>
-  <% end %>
-<br></span>
-<% end %>
-
-<br>
+</div>
