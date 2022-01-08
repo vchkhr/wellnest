@@ -1,15 +1,23 @@
-<h1>Reset Password</h1>
+<%= render 'layouts/navigation/login' %>
 
-<p id="notice"><%= notice %></p>
+<div class="login">
+  <p id="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
 
-<p>Enter the e-mail associated with your account and we'll send an e-mail with instructions to reset your password.</p>
+  <h1 class="text-center">Reset Password</h1>
 
-<%= form_tag password_resets_path, :method => :post do %>
-  <div class='field'>
-    <%= label_tag :email %>
-    <%= text_field_tag :email, params[:email] %>
-  </div>
-    <div class='actions'>
-    <%= submit_tag "SEND" %>
-  </div>
-<% end %>
+  <p class="text-center">Enter the e-mail associated with your account and we'll send an e-mail with instructions to reset your password.</p>
+
+  <%= form_tag password_resets_path, :method => :post do %>
+    <div class='field mb-3'>
+      <%= label_tag :email, nil, class: 'form-label' %>
+      <%= text_field_tag :email, params[:email], class: 'form-control' %>
+    </div>
+
+    <div class='actions mb-3'>
+      <%= submit_tag "SEND", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'layouts/footer/footer' %>

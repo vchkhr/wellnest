@@ -31,8 +31,12 @@ class PasswordResetsController < ApplicationController
       flash[:notice] = 'Password reset has expired'
       redirect_to new_password_reset_path
     
+    elsif user_params[:password].length <= 6
+      flash[:notice] = 'Password is too short'
+      redirect_to edit_password_reset_path(@user.password_reset_token)
+
     elsif @user.update(user_params)
-      flash[:notice] = 'Password has been reset!'
+      flash[:notice] = 'Password has been reset'
       redirect_to new_session_path
     
     else
