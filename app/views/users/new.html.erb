@@ -1,40 +1,46 @@
-<h1>Create account</h1>
+<%= render 'layouts/navigation/login' %>
 
-<p>Already have an account? &nbsp; <strong><%= link_to "Sign in", login_path %></strong></p>
+<div class="login">
+  <p id="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div class='error_messages'>
-      <h2>Form is invalid</h2>
-      <ul>
+  <h1 class="text-center">Create account</h1>
+
+  <p class="text-center">Already have an account? &nbsp; <strong><%= link_to "Sign in", login_path %></strong></p>
+
+  <%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+      <div class='error_messages'>
         <% for message in @user.errors.full_messages %>
-          <li><%= message %></li>
+          <p class='color-red'><%= message %></p>
         <% end %>
-      </ul>
+      </div>
+    <% end %>
+
+    <div class='field mb-3'>
+      <%= f.label :name, class: 'form-label' %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :email, class: 'form-label' %>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :password, class: 'form-label' %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :password_confirmation, class: 'form-label' %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+
+    <div class='actions mb-3'>
+      <%= f.submit 'SIGN UP', class: 'btn btn-primary' %>
     </div>
   <% end %>
+</div>
 
-  <div class='field'>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
-  <div class='actions'>
-    <%= f.submit 'Continue' %>
-  </div>
-<% end %>
+<%= render 'layouts/footer/footer' %>

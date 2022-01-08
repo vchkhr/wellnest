@@ -21,7 +21,7 @@ class PasswordResetsController < ApplicationController
   def edit
     @user = User.find_by_password_reset_token(params[:id])
 
-    redirect_to root_url, notice: 'Password reset has expired' unless @user
+    redirect_to root_url, notice: "Password reset has expired" unless @user
   end
 
   def update

@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to login_path, notice: "You can now login with your credentials." }
+        format.html { redirect_to login_path, notice: "You can now login with your credentials" }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to dashboard_path, notice: "Credentials was successfully updated." }
+        format.html { redirect_to dashboard_path, notice: "Credentials was successfully updated" }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_url, notice: "User was successfully destroyed" }
       format.json { head :no_content }
     end
   end
