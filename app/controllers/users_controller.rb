@@ -3,9 +3,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    redirect_to dashboard_path
   end
 
   def show
+    redirect_to dashboard_path
   end
 
   def new

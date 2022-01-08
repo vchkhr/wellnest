@@ -1,65 +1,71 @@
-<h1>Personal information</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
-<p><%= link_to "Update your credentials", update_user_info_path %></p>
+<div class="login">
+  <p id="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
 
-<%= form_for @coach do |f| %>
-  <% if @coach.errors.any? %>
-    <div class='error_messages'>
-      <h2>Form is invalid</h2>
-      <ul>
+  <h1 class="text-center">Personal information</h1>
+
+  <p class="text-center"><%= link_to "Update your credentials", update_user_info_path %></p>
+
+  <%= form_for @coach do |f| %>
+    <% if @coach.errors.any? %>
+      <div class='error_messages'>
         <% for message in @coach.errors.full_messages %>
-          <li><%= message %></li>
+          <p class='color-red'><%= message %></p>
         <% end %>
-      </ul>
+      </div>
+    <% end %>
+
+    <div class='field mb-3'>
+      <%= f.label :image, class: 'form-label' %>
+      <%= f.file_field :image, class: 'form-control' %>
+      <p class="text-muted font-size-small">Image format should be png, jpg no more than 5 Mb</p>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :age, class: 'form-label' %>
+      <%= f.number_field :age, in: 18..99, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :gender_id, class: 'form-label' %>
+      <%= collection_radio_buttons('coach', 'gender_id', Gender.all, :id, :name) %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :problem_ids, class: 'form-label' %>
+      <%= collection_check_boxes('coach', 'problem_ids', Problem.all, :id, :name) %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :education, class: 'form-label' %>
+      <%= f.text_field :education, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :work, class: 'form-label' %>
+      <%= f.text_field :work, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :licenses, class: 'form-label' %>
+      <%= f.text_field :licenses, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :links, class: 'form-label' %>
+      <%= f.text_field :links, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :bio, class: 'form-label' %>
+      <%= f.text_area :bio, class: 'form-control' %>
+      <p class="text-muted font-size-small text-center">This information will help the user to learn more about you and your expertise</p>
+    </div>
+
+    <div class='actions mb-3'>
+      <%= f.submit 'SAVE CHANGES', class: 'btn btn-primary' %>
     </div>
   <% end %>
-
-  <div class='field'>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :age %>
-    <%= f.number_field :age, in: 18..99 %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :gender_id %>
-    <%= collection_radio_buttons('coach', 'gender_id', Gender.all, :id, :name) %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :problem_ids %>
-    <%= collection_check_boxes('coach', 'problem_ids', Problem.all, :id, :name) %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :education %>
-    <%= f.text_field :education %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :work %>
-    <%= f.text_field :work %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :licenses %>
-    <%= f.text_field :licenses %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :links %>
-    <%= f.text_field :links %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :bio %>
-    <%= f.text_field :bio %>
-  </div>
-
-  <div class='actions'>
-    <%= f.submit 'GET STARTED' %>
-  </div>
-<% end %>
+</div>
