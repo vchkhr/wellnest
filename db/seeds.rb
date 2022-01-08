@@ -22,7 +22,7 @@ user1 = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password
 client1 = Client.create!(age: 30, user: user1, gender: Gender.find_by_name('Female'), problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
 
 user2 = User.create!(name: 'James Brown', email: 'james@brown.com', password: 'abc12345')
-coach1 = Coach.create!(age: 36, user: user2, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+coach1 = Coach.create!(age: 36, user: user2, gender: Gender.find_by_name('Male'), education: 'New York University, PhD in Psychology', work: 'Psychologist, ABC company, 12 years', licenses: 'New York / 081109, New York University, 2009', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 user3 = User.create!(name: 'Amelia Adamson', email: 'amelia@adamson.com', password: 'abc12345')
 coach2 = Coach.create!(age: 25, user: user3, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])

@@ -1,7 +1,16 @@
-<h1>All Techniques</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
-<p><%= link_to "Dashboard", dashboard_path %></p>
+<p id="alert"><%= alert %></p>
+<p id="notice"><%= notice %></p>
 
-<% Technique.all.each do |technique| %>
-  <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
-<% end %>
+<div class="all-techniques">
+  <h1>All Techniques</h1>
+
+  <p><%= link_to "Dashboard", dashboard_path %></p>
+
+  <% Technique.all.each do |technique| %>
+    <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
+  <% end %>
+</div>
+
+<%= render 'layouts/footer/footer' %>

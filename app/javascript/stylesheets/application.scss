@@ -329,6 +329,12 @@ div.dashboard {
     display: flex;
     padding: 25px;
 
+    a {
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
     div.left-column {
         width: 100%;
 
@@ -407,7 +413,6 @@ div.coach-card {
         }
 
         div.info {
-            line-height: 13px;
             margin: 0px;
             padding: 0px;
         }
@@ -464,5 +469,57 @@ div.technique {
         height: 160px;
         object-position: center;
         object-fit: none;
+    }
+}
+
+div.all-techniques {
+    padding: 25px;
+
+    a {
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+    }
+    
+    div.links {
+        display: flex;
+
+        p {
+            width: 25%;
+            text-align: center;
+        }
+    }
+
+    div.techniques-coach {
+        display: flex;
+
+        div.left-column {
+            width: 100%;
+
+            div.techniques {
+                display: flex;
+                flex-wrap: wrap;
+    
+                div.technique {
+                    width: calc(50% - 20px);
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                    border: 1px solid gray;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+            }
+        }
+
+        div.right-column {
+            width: 700px;
+
+            div.coach-card {
+                border-radius: 5px;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid gray;
+            }
+        }
     }
 }
