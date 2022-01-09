@@ -27,7 +27,10 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
-        format.html { redirect_to dashboard_path, notice: "You have completed the registration" }
+        text = "#{@client.user.name}, you have completed the registration"
+
+        Notification.create!(client: @client, text: text)
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :created, location: @client }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +42,10 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update(client_params)
-        format.html { redirect_to dashboard_path, notice: "Personal information was successfully updated" }
+        text = 'You have updated your personal information'
+
+        Notification.create!(client: @client, text: text)
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :ok, location: @client }
       else
         format.html { render :edit, status: :unprocessable_entity }

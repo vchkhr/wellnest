@@ -26,7 +26,10 @@ class CoachesController < ApplicationController
 
     respond_to do |format|
       if @coach.save
-        format.html { redirect_to dashboard_path, notice: "You have completed the registration as Coach" }
+        text = "#{@coach.user.name}, you have completed the registration"
+
+        CoachNotification.create!(coach: @coach, text: text)
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :created, location: @coach }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +41,10 @@ class CoachesController < ApplicationController
   def update
     respond_to do |format|
       if @coach.update(coach_params)
-        format.html { redirect_to dashboard_path, notice: "Personal information was successfully updated" }
+        text = 'You have updated your personal information'
+        CoachNotification.create!(coach: @coach, text: text)
+
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :ok, location: @coach }
       else
         format.html { render :edit, status: :unprocessable_entity }

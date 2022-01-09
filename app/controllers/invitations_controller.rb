@@ -14,22 +14,29 @@ class InvitationsController < InheritedResources::Base
 
       Invitation.create!(client: current_user.client, coach: coach, status: params['status'])
 
-      redirect_to dashboard_path, notice: "You asked #{@coach_name} to become your coach"
+      text = "You asked #{@coach_name} to become your coach"
+      Notification.create!(client: current_user.client, text: text)
+      redirect_to dashboard_path, notice: text
     end
   end
 
   def edit
     Invitation.where(client: Client.find(params['client_id']), coach: current_user.coach, status: 0).each { |invitation| invitation.destroy }
+    client = Client.find(params['client_id'])
 
     if params['is_confirmed'] == 'true'
-      @invitation = Invitation.new(client: Client.find(params['client_id']), coach: current_user.coach, status: 1)
+      @invitation = Invitation.new(client: client, coach: current_user.coach, status: 1)
     end
     
     respond_to do |format|
       if @invitation.save
         action = params['is_confirmed'] == 'true' ? "confirmed" : "refused"
 
-        format.html { redirect_to invitations_path, notice: "You #{action} invitation from the client" }
+        text = "You #{action} invitation from the client"
+        Notification.create!(client: client, text: "Coach #{current_user.name} #{action} your invitation")
+        CoachNotification.create!(coach: current_user.coach, text: text)
+
+        format.html { redirect_to invitations_path, notice: text }
         format.json { render :show, status: :created, location: @invitation }
       end
     end
@@ -40,7 +47,10 @@ class InvitationsController < InheritedResources::Base
     @invitation.destroy
 
     respond_to do |format|
-      format.html { redirect_to dashboard_path, notice: "You have ended cooperation with #{coach_name}" }
+      text = "You have ended cooperation with #{coach_name}"
+      Notification.create!(client: current_user.client, text: text)
+
+      format.html { redirect_to dashboard_path, notice: text }
       format.json { head :no_content }
     end
   end

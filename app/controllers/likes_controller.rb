@@ -11,7 +11,10 @@ class LikesController < InheritedResources::Base
         if @like.save
           action = params['is_like'] == 'true' ? "liked" : "disliked"
 
-          format.html { redirect_to dashboard_path, notice: "You #{action} the technique" }
+          text = "You #{action} the technique: #{technique.title}"
+          Notification.create!(client: current_user.client, text: text)
+
+          format.html { redirect_to dashboard_path, notice: text }
           format.json { render :show, status: :created, location: @like }
         else
           format.html { render :new, status: :unprocessable_entity }

@@ -130,7 +130,7 @@
     <div class="notifications">
       <h3>Notifications</h3>
 
-      <% current_user.profile.notifications.each do |notification| %>
+      <% current_user.profile.notifications.last(10).reverse.each do |notification| %>
         <div class="client-card">
           <div class="image-info">
             <div class="image">

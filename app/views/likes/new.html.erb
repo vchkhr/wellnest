@@ -10,9 +10,9 @@
   <p>Do you like this technique?</p>
 
   <div class="buttons">
-    <p><%= link_to 'I DON\'T LIKE IT', new_like_path(is_like: false, technique_id: params['technique_id']) , class: 'unsuccess'%></p>
+    <p><%= link_to 'I DON\'T LIKE IT', new_like_path(is_like: false, technique_id: params['technique_id'])%></p>
 
-    <p><%= link_to 'I LIKE IT', new_like_path(is_like: true, technique_id: params['technique_id']), class: 'success' %></p>
+    <p><%= link_to 'I LIKE IT', new_like_path(is_like: true, technique_id: params['technique_id']) %></p>
   </div>
 </div>
 

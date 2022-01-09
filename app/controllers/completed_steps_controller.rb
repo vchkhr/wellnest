@@ -5,6 +5,7 @@ class CompletedStepsController < InheritedResources::Base
     CompletedStep.create!(client: current_user.client, step: Step.find(params[:step_id]))
 
     if params[:last_step] == "true"
+      Notification.create!(client: current_user.client, text: "You have finished technique: #{Technique.find(technique_id).title}")
       redirect_to new_like_path(technique_id: technique_id)
     else
       redirect_to technique_path(Technique.find(technique_id))
@@ -21,7 +22,7 @@ class CompletedStepsController < InheritedResources::Base
 
   private
 
-  def completed_step_params
-    params.require(:completed_step).permit(:client_id, :step_id)
-  end
+    def completed_step_params
+      params.require(:completed_step).permit(:client_id, :step_id)
+    end
 end
