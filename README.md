@@ -2,6 +2,8 @@
 
 Platform where coaches help users to deal with anxiety and depression.
 
+
+
 ## Installation
 
 ### 1. Clone the Repository and setup Environment
@@ -24,6 +26,8 @@ Use `DATABASE_HOST=localhost` to use without Docker, or\
 ### 3. Open the Application
 1. Open the `http://localhost:3000` page in the browser.\
 You will see the application's front page.
+
+
 
 ## Usage
 
@@ -52,3 +56,16 @@ You will see the application's front page.
 1. After opening the Application, go to `http://localhost:3000/admin` page in the browser.
 2. Type `admin@example.com` into the email field, and `password` into the password field.\
 Press `Enter` and now you can use the ActiveAdmin Panel.
+
+
+
+## Resolving Problems
+```
+could not connect to server: Connection refused 
+Is the server running on host "localhost" (127.0.0.1) and accepting 
+TCP/IP connections on port 5432? 
+could not connect to server: Address not available 
+Is the server running on host "localhost" (::1) and accepting 
+TCP/IP connections on port 5432?
+```
+Complete the step 1.3 of Installation according to the usage of Docker.
