@@ -55,20 +55,20 @@ client2.invitations.find_by_coach_id(coach1).update!(status: 1)
 client1.invitations.find_by_coach_id(coach2).destroy
 Invitation.create!(client: client1, coach: coach1, status: 1)
 
-technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7)
+technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, image: 'behaviour-therapy.jpg')
 technique1.problems << Problem.find_by_name('Depression')
 technique1.genders << Gender.find_by_name('Male')
 technique1.genders << Gender.find_by_name('Female')
 
 client2.techniques << technique1
 
-technique2 = Technique.create!(title: 'Lifestyle changes', description: 'Eliminating the lack of control that makes people feel worse.', age_start: 30, age_end: 45, duration_start: 6, duration_end: 7)
+technique2 = Technique.create!(title: 'Lifestyle changes', description: 'Eliminating the lack of control that makes people feel worse.', age_start: 30, age_end: 45, duration_start: 6, duration_end: 7, image: 'lifestyle-changes.jpg')
 technique2.problems << Problem.find_by_name('Depression')
 technique2.problems << Problem.find_by_name('Anxiety')
 technique2.genders << Gender.find_by_name('Male')
 technique2.genders << Gender.find_by_name('Female')
 
-technique3 = Technique.create!(title: 'Inflammation and mood', description: 'Does a dysfunctional immune system cause inflammation in the body, leading to mood swings?', age_start: 30, age_end: 45, duration_start: 5, duration_end: 5)
+technique3 = Technique.create!(title: 'Inflammation and mood', description: 'Does a dysfunctional immune system cause inflammation in the body, leading to mood swings?', age_start: 30, age_end: 45, duration_start: 5, duration_end: 5, image: 'inflamation-and-mood.jpg')
 technique3.problems << Problem.find_by_name('Depression')
 technique3.genders << Gender.find_by_name('Male')
 technique3.genders << Gender.find_by_name('Female')

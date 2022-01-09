@@ -7,7 +7,7 @@
     <% end %>
   </div>
 
-  <%= image_tag("behaviour-therapy.jpg", :alt => technique.title, :class => "card-img-top") %>
+  <%= image_tag(TechniqueManager::CoverImage.call(technique), :alt => technique.title, :class => "card-img-top") %>
 
   <div class="card-body">
     <h5 class="card-title"><%= technique.title %></h5>

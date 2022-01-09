@@ -1,6 +1,7 @@
 # [mobidev-rubyInternship-mhc](https://mental.vchkhr.com/)
 
-Platform where coaches help users to deal with anxiety and depression.
+Platform where coaches help users to deal with anxiety and depression.\
+[DB Diagram](https://dbdiagram.io/d/6173d5cc6239e146477ecd2b)
 
 
 
@@ -13,10 +14,10 @@ Platform where coaches help users to deal with anxiety and depression.
 3. Fill in the `.env` file. Create it using the `.env.example`.\
 Use `DATABASE_HOST=localhost` to use without Docker, or\
 `DATABASE_HOST=database` to use with Docker.
+4. Run `npm install` in the console.
 
 ### 2a. Use without Docker
 1. Run `rails db:setup` in the console.
-2. Run `npm install`.
 3. Run `rails webpacker:compile; rails s`.
 
 ### 2b. Use with Docker

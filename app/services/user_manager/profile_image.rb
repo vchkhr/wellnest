@@ -11,9 +11,6 @@ module UserManager
     private
   
     def profile_image
-      size = "50x50"
-      alt = @user.name
-
       if @user.profile.image.attached?
         @user.profile.image
       else
