@@ -59,7 +59,20 @@ Press `Enter` and now you can use the ActiveAdmin Panel.
 
 
 
+### Testing the Application
+
+You are able to test 6 controllers and 5 Service Objects.
+
+1. Run `rails db:environment:set RAILS_ENV=test` in the console.
+2. Run `rails db:test:prepare RAILS_ENV=test`.\
+This will copy the database from the development environment to the test environment, so the dev database should exist.
+3. Run `rails test`.\
+You will see the result of testing in the console.
+
+
+
 ## Resolving Problems
+
 ```
 could not connect to server: Connection refused 
 Is the server running on host "localhost" (127.0.0.1) and accepting 
@@ -68,4 +81,5 @@ could not connect to server: Address not available
 Is the server running on host "localhost" (::1) and accepting 
 TCP/IP connections on port 5432?
 ```
+
 Complete the step 1.3 of Installation according to the usage of Docker.

@@ -15,10 +15,7 @@ class CoachesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create coach" do
-    user = User.create!(name: 'James Brown', email: 'james2@brown.com', password: 'abc12345')
-    coach = Coach.create!(age: 36, user: user, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
-
-    if coach.save
+    if @coach.valid?
       assert true
     else
       assert false
@@ -26,13 +23,11 @@ class CoachesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
-    @coach.save
     get edit_coach_url(@coach)
     assert_response :success
   end
 
   test "should update coach" do
-    @coach.save
     patch coach_url(@coach), params: { coach: { work: "Updated work" } }
     assert_redirected_to dashboard_url
   end
