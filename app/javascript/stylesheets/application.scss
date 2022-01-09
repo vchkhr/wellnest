@@ -513,20 +513,6 @@ div.all-techniques {
 
         div.left-column {
             width: 100%;
-
-            div.techniques {
-                display: flex;
-                flex-wrap: wrap;
-    
-                div.technique {
-                    width: calc(50% - 20px);
-                    margin-right: 20px;
-                    margin-bottom: 20px;
-                    border: 1px solid gray;
-                    border-radius: 5px;
-                    padding: 5px;
-                }
-            }
         }
 
         div.right-column {
@@ -540,9 +526,24 @@ div.all-techniques {
             }
         }
     }
+
+    div.techniques {
+        display: flex;
+        flex-wrap: wrap;
+
+        div.technique {
+            width: calc(50% - 20px);
+            margin-right: 20px;
+            margin-bottom: 20px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 5px;
+        }
+    }
 }
 
-div.coaches-view {
+div.coaches-view,
+div.techniques-coach {
     display: flex;
     padding: 25px;
 
