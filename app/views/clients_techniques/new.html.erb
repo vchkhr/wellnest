@@ -1,17 +1,26 @@
-<h1>Recommend to your users</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
-<%= form_for @clients_technique do |f| %>
-  <div class='field'>
-    <%= f.label :technique_id %>
-    <%= f.text_field :technique_id, value: params[:technique_id] %>
-  </div>
+<p id="alert"><%= alert %></p>
+<p id="notice"><%= notice %></p>
 
-  <div class='field'>
-    <%= f.label :client_id %>
-    <%= collection_check_boxes('clients_technique', 'client_id', @clients, :id, :name) %>
-  </div>
+<div class="login">
+  <h1 class="text-center">Recommend to your clients</h1>
 
-  <div class='actions'>
-    <%= f.submit 'SAVE CHANGES' %>
-  </div>
-<% end %>
+  <%= form_for @clients_technique do |f| %>
+    <div class='field mb-3 hidden'>
+      <%= f.label :technique_id, class: 'form-label' %>
+      <%= f.text_field :technique_id, value: params[:technique_id], class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :client_id, class: 'form-label' %>
+      <%= collection_check_boxes('clients_technique', 'client_id', @clients, :id, :name) %>
+    </div>
+
+    <div class='actions'>
+      <%= f.submit 'SAVE CHANGES', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'layouts/footer/footer' %>

@@ -430,6 +430,11 @@ div.coach-card {
         text-decoration: none;
     }
 
+    div.link {
+        text-align: center;
+        margin-top: 30px;
+    }
+
     div.links {
         display: flex;
         text-align: center;
@@ -487,6 +492,18 @@ div.technique {
         height: 160px;
         object-position: center;
         object-fit: none;
+    }
+
+    div.link {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .btn-primary {
+        background-color: rgb(36, 36, 36);
+        border-color: rgb(36, 36, 36);
+        color: white;
+        width: 100%;
     }
 }
 

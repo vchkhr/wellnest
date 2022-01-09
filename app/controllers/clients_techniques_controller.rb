@@ -14,7 +14,7 @@ class ClientsTechniquesController < InheritedResources::Base
       ClientsTechnique.create!(client: client, technique: technique)
     end
     
-    redirect_to dashboard_path, notice: "You invited users to the technique"
+    redirect_to dashboard_path, notice: "You invited clients to the technique"
   end
 
   private

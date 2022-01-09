@@ -1,5 +1,14 @@
-<h1>New Invitation</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
-<p>Do you really want to ask <%= @coach_name %> to become your coach?</p>
+<p id="alert"><%= alert %></p>
+<p id="notice"><%= notice %></p>
 
-<p><%= link_to 'CONFIRM', new_invitation_path(coach_id: params['coach_id'], status: 0) %></p>
+<div class="login text-center">
+  <h1>New Invitation</h1>
+
+  <p>Do you really want to ask <strong><%= @coach_name %></strong> to become your coach?<br>All other invitations will be canceled automatically.</p>
+
+  <p><%= link_to 'CONFIRM', new_invitation_path(coach_id: params['coach_id'], status: 0), class: 'btn btn-primary' %></p>
+</div>
+
+<%= render 'layouts/footer/footer' %>
