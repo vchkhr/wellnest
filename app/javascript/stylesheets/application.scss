@@ -21,6 +21,10 @@ p#notice {
     font-size: 12px;
 }
 
+.text-right {
+    text-align: right;
+}
+
 header.navigation {
     height: 80px;
     background-color: #495057 !important;
@@ -569,4 +573,59 @@ div.coaches-view {
     border: 1px solid gray;
     border-radius: 5px;
     padding: 10px;
+}
+
+div.technique-view {
+    display: flex;
+    padding: 25px;
+
+    div.step {
+        width: 100%;
+        margin-right: 15px;
+
+        div.buttons {
+            display: flex;
+
+            div.button {
+                width: 33.3%;
+                color: black;
+                font-weight: 700;
+
+                a {
+                    color: black;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    div.technique {
+        width: 500px;
+    }
+}
+
+div.like-view {
+    width: 1000px;
+    margin: 50px auto;
+
+    a {
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    a.success {
+        color: green;
+    }
+
+    a.unsuccess {
+        color: red;
+    }
+
+    div.buttons {
+        display: flex;
+
+        p {
+            width: 50%;
+        }
+    }
 }
