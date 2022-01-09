@@ -423,6 +423,18 @@ div.coach-card {
             padding: 0px;
         }
     }
+
+    a {
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    div.links {
+        display: flex;
+        text-align: center;
+        margin-top: 30px;
+    }
 }
 
 div.problems {
@@ -628,6 +640,39 @@ div.like-view {
 
         p {
             width: 50%;
+        }
+    }
+}
+
+div.my-clients {
+    padding: 25px;
+
+    a {
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+    }
+    
+    div.links {
+        display: flex;
+
+        p {
+            width: 50%;
+            text-align: center;
+        }
+    }
+
+    div.clients {
+        display: flex;
+        flex-wrap: wrap;
+
+        div.client-card {
+            width: calc(50% - 20px);
+            margin-right: 20px;
+            margin-bottom: 20px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 5px;
         }
     }
 }

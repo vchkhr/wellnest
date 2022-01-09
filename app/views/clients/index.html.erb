@@ -1,10 +1,21 @@
-<h1>My Clients</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
+<p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
 
-<p>My Clients</p>
-<p><%= link_to "Waiting for confirmation (#{CoachManager::InvitationsCount.call(current_user.coach)})", invitations_path %>
+<div class="my-clients">
+  <div class="links">
+    <p>My Clients</p>
+    <p><%= link_to "Waiting for confirmation (#{CoachManager::InvitationsCount.call(current_user.coach)})", invitations_path %></p>
+  </div>
+  <hr />
 
-<% @clients.each do |client| %>
-  <%= render 'layouts/clients/client', user: client.user %>
-<% end %>
+  <div class="clients">
+    <% @clients.each do |client| %>
+      <%= render 'layouts/clients/client', user: client.user %>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'layouts/footer/footer' %>
+
