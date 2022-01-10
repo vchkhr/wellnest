@@ -13,7 +13,7 @@ module CoachManager
     def techniques_liked
       count = 0
       @coach.invitations.where(status: 1).each do |invitation|
-        invitation.client.techniques.each do |technique|
+        invitation.client.techniques.uniq.each do |technique|
           count += technique.likes.where(is_like: true).count
         end
       end
