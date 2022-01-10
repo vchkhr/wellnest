@@ -2,7 +2,33 @@ class CoachesController < ApplicationController
   before_action :set_coach, only: %i[ show edit update destroy ]
 
   def index
-    @coaches = Coach.all
+    filters = params[:filters]
+    filters = filters.slice!(:problem_ids, :gender_ids)
+    
+    if filters[:problem_ids].count == 1 and filters[:gender_ids].count == 1
+      @coaches = Coach.all
+    else
+      @coaches = []
+
+      if filters[:problem_ids].count > 1
+        problems = filters[:problem_ids].split(',')
+
+        problems.each do |problem|
+          @coaches += Coach.joins(:coaches_problems).where('coaches_problems.problem_id' => problem)
+        end
+
+      end
+
+      if filters[:gender_ids].count > 1
+        genders = filters[:gender_ids].split(',')
+        
+        genders.each do |gender|
+          @coaches += Coach.where('gender_id' => gender)
+        end
+      end
+
+      @coaches.uniq!
+    end
   end
 
   def show
