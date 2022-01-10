@@ -68,7 +68,7 @@
     <h3 class="mt-3">My Techniques</h3>
     
     <div class="techniques">
-      <% current_user.profile.techniques.each do |technique| %>
+      <% TechniqueManager::ClientTechniques.call(current_user.client).each do |technique| %>
         <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
       <% end %>
     </div>

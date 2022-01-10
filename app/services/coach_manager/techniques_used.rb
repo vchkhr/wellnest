@@ -12,7 +12,7 @@ module CoachManager
   
     def techniques_used
       count = 0
-      @coach.invitations.where(status: 1).each { |invitation| count += invitation.client.techniques.count }
+      @coach.invitations.where(status: 1).each { |invitation| count += invitation.client.techniques.uniq.count }
       count
     end
   end

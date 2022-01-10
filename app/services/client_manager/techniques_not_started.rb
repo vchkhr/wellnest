@@ -12,7 +12,7 @@ module ClientManager
     
       def techniques_not_started
         techniques = []
-        @client.techniques.each do |technique|
+        TechniqueManager::ClientTechniques.call(@client).each do |technique|
             techniques << technique if ClientManager::CompletedStepsCount.call(technique) == 0
         end
         techniques

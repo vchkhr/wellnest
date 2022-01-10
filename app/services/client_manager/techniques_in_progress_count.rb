@@ -12,7 +12,7 @@ module ClientManager
   
     def techniques_in_progress_count
       count = 0
-      @client.techniques.each { |technique| count += 1 if ClientManager::CompletedStepsCount.call(technique) > 0 and ClientManager::CompletedStepsCount.call(technique) < technique.steps.count }
+      TechniqueManager::ClientTechniques.call(@client).each { |technique| count += 1 if ClientManager::CompletedStepsCount.call(technique) > 0 and ClientManager::CompletedStepsCount.call(technique) < technique.steps.count }
       count
     end
   end
