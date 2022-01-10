@@ -2,12 +2,10 @@ class CoachesController < ApplicationController
   before_action :set_coach, only: %i[ show edit update destroy ]
 
   def index
-    filters = params[:filters]
-    filters = filters.slice!(:problem_ids, :gender_ids)
-    
-    if filters[:problem_ids].count == 1 and filters[:gender_ids].count == 1
+    if !params.key?(:filters) or (params[:filters][:problem_ids].count == 1 and params[:filters][:gender_ids].count == 1)
       @coaches = Coach.all
     else
+      filters = params[:filters].slice!(:problem_ids, :gender_ids)
       @coaches = []
 
       if filters[:problem_ids].count > 1
