@@ -18,14 +18,14 @@ Use `DATABASE_HOST=localhost` to use without Docker, or\
 
 ### 2a. Use without Docker
 1. Run `rails db:setup` in the console.
-3. Run `rails webpacker:compile; rails s`.
+2. Run `rails webpacker:compile; rails s`.
 
 ### 2b. Use with Docker
 1. Run `docker-compose up -d` in the console.
 2. Run `docker-compose exec app bundle exec rake db:setup db:migrate`.
 
 ### 3. Open the Application
-1. Open the `http://localhost:3000` page in the browser.\
+Open the `http://localhost:3000` page in the browser.\
 You will see the application's front page.
 
 
@@ -35,19 +35,19 @@ You will see the application's front page.
 ### Open the Application
 
 #### 1a. Use without Docker
-1. Run `rails webpacker:compile; rails s` in the console.
+Run `rails webpacker:compile; rails s` in the console.
 
 #### 1b. Use with Docker
-1. Run `docker-compose up -d; docker-compose exec app bundle exec rails console` in the console.
+Run `docker-compose up -d; docker-compose exec app bundle exec rails console` in the console.
 
 #### 2. Open the Application
-1. Open the `http://localhost:3000` page in the browser.\
+Open the `http://localhost:3000` page in the browser.\
 You will see the application's front page.
 
 ### Shut down the Application
 
 #### 1a. Use without Docker
-1. Press `cmd+C` in the console.
+Press `cmd+C` in the console.
 
 #### 1b. Use with Docker
 1. Type `exit` into the console.
