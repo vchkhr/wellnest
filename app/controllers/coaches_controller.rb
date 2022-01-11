@@ -6,9 +6,12 @@ class CoachesController < ApplicationController
       @coaches = Coach.all
     else
       filters = params[:filters].slice!(:problem_ids, :gender_ids)
+      filters[:problem_ids].shift(1)
+      filters[:gender_ids].shift(1)
+      
       @coaches = []
 
-      if filters[:problem_ids].count > 1
+      unless filters[:problem_ids].empty?
         problems = filters[:problem_ids].split(',')
 
         problems.each do |problem|
@@ -17,7 +20,7 @@ class CoachesController < ApplicationController
 
       end
 
-      if filters[:gender_ids].count > 1
+      unless filters[:gender_ids].empty?
         genders = filters[:gender_ids].split(',')
         
         genders.each do |gender|
