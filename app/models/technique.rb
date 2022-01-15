@@ -4,6 +4,8 @@ class Technique < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
+  enum gender: Gender::GENDERS
+
   validates :age_start, numericality: { only_integer: true, in: 18..99 }
   validates :age_end, numericality: { only_integer: true, in: 18..99 }
 
@@ -17,6 +19,9 @@ class Technique < ApplicationRecord
   has_many :users, through: :likes
 
   has_and_belongs_to_many :problems
-  has_and_belongs_to_many :genders
   has_and_belongs_to_many :steps
+
+  def gender
+    @gender ||= Genders.new(read_attribute(:gender))
+  end
 end

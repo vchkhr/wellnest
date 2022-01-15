@@ -8,8 +8,6 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.boolean :send_email_notifications
       t.integer :age
 
-      t.belongs_to :gender, null: false, foreign_key: true
-
       t.string :bio
       t.string :image
 
@@ -22,5 +20,8 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     end
     
     add_index :users, :email, unique: true
+
+    add_column :users, :gender, :gender
+    add_index :users, :gender
   end
 end

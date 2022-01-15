@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :age, numericality: { only_integer: true, in: 18..99 }
 
-  belongs_to :gender
+  enum gender: Gender::GENDERS
 
   has_one_attached :image
 
@@ -45,5 +45,9 @@ class User < ApplicationRecord
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+
+  def gender
+    @gender ||= Gender.new(read_attribute(:gender))
   end
 end

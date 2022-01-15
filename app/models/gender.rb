@@ -1,10 +1,19 @@
-class Gender < ApplicationRecord
-  self.primary_key = "id"
+class Gender
+  GENDERS = %w(male female).freeze
 
-  validates :name, presence: true, uniqueness: true
+  def initialize(gender)
+    @gender = gender
+  end
 
-  has_many :users, dependent: :delete_all
-  has_many :coaches, dependent: :delete_all
-  
-  has_and_belongs_to_many :techniques
+  def male?
+    to_s.eql?('male')
+  end
+
+  def female?
+    to_s.eql?('female')
+  end
+
+  def to_s
+    @gender.to_s
+  end
 end

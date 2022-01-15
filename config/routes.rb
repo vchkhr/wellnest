@@ -49,5 +49,4 @@ Rails.application.routes.draw do
   # resources :coaches_problems
   # resources :users_problems
   # resources :problems
-  # resources :genders
 end
