@@ -11,5 +11,8 @@ class CreateTechniques < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+
+    add_column :techniques, :gender, :gender
+    add_index :techniques, :gender
   end
 end

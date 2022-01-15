@@ -14,7 +14,7 @@ Problem.create!(name: 'Stress')
 # Testing the models
 
 user1 = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345', age: 30, problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
-user1.gender = 'female'
+user1.gender = 'both'
 
 user2 = User.create!(name: 'Olivia Moore', email: 'olivia@moore.com', password: 'abc12345', age: 26, problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Anxiety')])
 user2.gender = 'female'
@@ -50,12 +50,12 @@ InvitationManager::AcceptInvitation.call(user1, coach2)
 Invitation.create!(user: user2, coach: coach1)
 InvitationManager::AcceptInvitation.call(user2, coach1)
 
-# technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, image: 'behaviour-therapy.jpg')
-# technique1.problems << Problem.find_by_name('Depression')
-# technique1.genders << Gender.find_by_name('Male')
-# technique1.genders << Gender.find_by_name('Female')
+technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, image: 'behaviour-therapy.jpg')
+technique1.problems << Problem.find_by_name('Depression')
+technique1.gender = 'both'
 
-# user2.techniques << technique1
+user2.techniques << technique1
+# puts user2.techniques.inspect
 
 # technique2 = Technique.create!(title: 'Lifestyle changes', description: 'Eliminating the lack of control that makes people feel worse.', age_start: 30, age_end: 45, duration_start: 6, duration_end: 7, image: 'lifestyle-changes.jpg')
 # technique2.problems << Problem.find_by_name('Depression')

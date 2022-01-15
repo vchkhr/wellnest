@@ -45,7 +45,6 @@ Rails.application.routes.draw do
   # resources :notifications
   # resources :problems_techniques
   # resources :steps
-  # resources :genders_techniques
   # resources :coaches_problems
   # resources :users_problems
   # resources :problems

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220115019) do
+ActiveRecord::Schema.define(version: 20220115018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,17 +168,8 @@ ActiveRecord::Schema.define(version: 20220115019) do
     t.index ["technique_id"], name: "index_steps_techniques_on_technique_id"
   end
 
-  create_table "techniques", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.string "image"
-    t.integer "age_start"
-    t.integer "age_end"
-    t.integer "duration_start"
-    t.integer "duration_end"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+# Could not dump table "techniques" because of following StandardError
+#   Unknown type 'gender' for column 'gender'
 
   create_table "techniques_users", force: :cascade do |t|
     t.bigint "technique_id", null: false
