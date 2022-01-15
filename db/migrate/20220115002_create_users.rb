@@ -6,9 +6,19 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :password_digest
       t.boolean :is_verified
       t.boolean :send_email_notifications
+      t.integer :age
+
+      t.belongs_to :gender, null: false, foreign_key: true
+
+      t.string :bio
+      t.string :image
+
+      t.string :password_reset_token
+      t.datetime :password_reset_sent_at
 
       t.timestamps
     end
+    
     add_index :users, :email, unique: true
   end
 end

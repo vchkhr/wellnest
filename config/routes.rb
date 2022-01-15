@@ -27,10 +27,8 @@ Rails.application.routes.draw do
   resources :techniques
   resources :likes
 
-  # Clients
-  resources :clients
+  # Users
   resources :completed_steps
-  get 'update-client-info', to: 'clients#edit', as: 'update_client_info'
   get 'my-techniques', to: 'techniques#my', as: 'my_techniques'
   get 'recommended-techniques', to: 'techniques#recommended', as: 'recommended_techniques'
   get 'in-progress-techniques', to: 'techniques#in_progress', as: 'in_progress_techniques'
@@ -40,7 +38,7 @@ Rails.application.routes.draw do
   resources :coaches
   get 'update-coach-info', to: 'coaches#edit', as: 'update_coach_info'
   get 'all-techniques', to: 'techniques#all', as: 'all_techniques'
-  resources :clients_techniques
+  resources :users_techniques
 
   # All others
   # resources :steps_techniques
@@ -50,7 +48,7 @@ Rails.application.routes.draw do
   # resources :steps
   # resources :genders_techniques
   # resources :coaches_problems
-  # resources :clients_problems
+  # resources :users_problems
   # resources :problems
   # resources :genders
 end
