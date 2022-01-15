@@ -13,6 +13,8 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :bio
       t.string :image
 
+      t.belongs_to :coach, null: true, foreign_key: true
+
       t.string :password_reset_token
       t.datetime :password_reset_sent_at
 

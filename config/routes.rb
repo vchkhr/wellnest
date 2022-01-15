@@ -42,7 +42,6 @@ Rails.application.routes.draw do
 
   # All others
   # resources :steps_techniques
-  # resources :messages
   # resources :notifications
   # resources :problems_techniques
   # resources :steps

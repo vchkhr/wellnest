@@ -13,6 +13,11 @@ class CreateCoaches < ActiveRecord::Migration[6.1]
       t.string :bio
       t.string :image
 
+      t.string :education
+      t.string :work
+      t.string :licenses
+      t.string :links
+
       t.string :password_reset_token
       t.datetime :password_reset_sent_at
       

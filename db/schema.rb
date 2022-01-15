@@ -87,6 +87,10 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.bigint "gender_id", null: false
     t.string "bio"
     t.string "image"
+    t.string "education"
+    t.string "work"
+    t.string "licenses"
+    t.string "links"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.datetime "created_at", precision: 6, null: false
@@ -210,6 +214,15 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "techniques_users", force: :cascade do |t|
+    t.bigint "technique_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["technique_id"], name: "index_techniques_users_on_technique_id"
+    t.index ["user_id"], name: "index_techniques_users_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -220,21 +233,14 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.bigint "gender_id", null: false
     t.string "bio"
     t.string "image"
+    t.bigint "coach_id"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["coach_id"], name: "index_users_on_coach_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"
-  end
-
-  create_table "users_techniques", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "technique_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["technique_id"], name: "index_users_techniques_on_technique_id"
-    t.index ["user_id"], name: "index_users_techniques_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -258,7 +264,8 @@ ActiveRecord::Schema.define(version: 20220115999) do
   add_foreign_key "problems_users", "users"
   add_foreign_key "steps_techniques", "steps"
   add_foreign_key "steps_techniques", "techniques"
+  add_foreign_key "techniques_users", "techniques"
+  add_foreign_key "techniques_users", "users"
+  add_foreign_key "users", "coaches"
   add_foreign_key "users", "genders"
-  add_foreign_key "users_techniques", "techniques"
-  add_foreign_key "users_techniques", "users"
 end
