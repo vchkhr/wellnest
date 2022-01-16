@@ -4,6 +4,8 @@ class Technique < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
+  as_enum :gender, both: 2, female: 1, male: 0
+
   validates :age_start, numericality: { only_integer: true, in: 18..99 }
   validates :age_end, numericality: { only_integer: true, in: 18..99 }
 

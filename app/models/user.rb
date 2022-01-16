@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :age, numericality: { only_integer: true, in: 18..99 }
 
-  belongs_to :gender
+  as_enum :gender, female: 1, male: 0
 
   has_one_attached :image
 

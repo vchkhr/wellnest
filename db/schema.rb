@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220115999) do
+ActiveRecord::Schema.define(version: 20220115018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.boolean "is_verified"
     t.boolean "send_email_notifications"
     t.integer "age"
-    t.bigint "gender_id", null: false
     t.string "bio"
     t.string "image"
     t.string "education"
@@ -95,8 +94,8 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.datetime "password_reset_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gender_cd"
     t.index ["email"], name: "index_coaches_on_email", unique: true
-    t.index ["gender_id"], name: "index_coaches_on_gender_id"
   end
 
   create_table "coaches_problems", force: :cascade do |t|
@@ -115,21 +114,6 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["step_id"], name: "index_completed_steps_on_step_id"
     t.index ["user_id"], name: "index_completed_steps_on_user_id"
-  end
-
-  create_table "genders", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "genders_techniques", force: :cascade do |t|
-    t.bigint "gender_id", null: false
-    t.bigint "technique_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["gender_id"], name: "index_genders_techniques_on_gender_id"
-    t.index ["technique_id"], name: "index_genders_techniques_on_technique_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -212,6 +196,7 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.integer "duration_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gender_cd"
   end
 
   create_table "techniques_users", force: :cascade do |t|
@@ -230,7 +215,6 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.boolean "is_verified"
     t.boolean "send_email_notifications"
     t.integer "age"
-    t.bigint "gender_id", null: false
     t.string "bio"
     t.string "image"
     t.bigint "coach_id"
@@ -238,21 +222,18 @@ ActiveRecord::Schema.define(version: 20220115999) do
     t.datetime "password_reset_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gender_cd"
     t.index ["coach_id"], name: "index_users_on_coach_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["gender_id"], name: "index_users_on_gender_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "coach_notifications", "coaches"
-  add_foreign_key "coaches", "genders"
   add_foreign_key "coaches_problems", "coaches"
   add_foreign_key "coaches_problems", "problems"
   add_foreign_key "completed_steps", "steps"
   add_foreign_key "completed_steps", "users"
-  add_foreign_key "genders_techniques", "genders"
-  add_foreign_key "genders_techniques", "techniques"
   add_foreign_key "invitations", "coaches"
   add_foreign_key "invitations", "users"
   add_foreign_key "likes", "techniques"
@@ -267,5 +248,4 @@ ActiveRecord::Schema.define(version: 20220115999) do
   add_foreign_key "techniques_users", "techniques"
   add_foreign_key "techniques_users", "users"
   add_foreign_key "users", "coaches"
-  add_foreign_key "users", "genders"
 end
