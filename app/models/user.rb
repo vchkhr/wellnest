@@ -18,8 +18,6 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
-  belongs_to :coach, required: false
-
   has_many :invitations, dependent: :delete_all
   has_many :coaches, through: :invitations
   

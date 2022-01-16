@@ -13,7 +13,7 @@ module InvitationManager
   
     def accept_invitation
       InvitationManager::DeclineInvitation.call(@user, @coach)
-      @user.coach = @coach
+      Invitation.create!(user: @user, coach: @coach, status: 1)
     end
   end
 end

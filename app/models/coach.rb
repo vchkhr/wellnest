@@ -24,8 +24,6 @@ class Coach < ApplicationRecord
   validates :links, presence: true
   validates :problems, presence: true
 
-  has_many :users
-
   has_many :invitations, dependent: :delete_all
   has_many :users, through: :invitations
   
