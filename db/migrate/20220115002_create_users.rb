@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.boolean :is_verified
       t.boolean :send_email_notifications
       t.integer :age
+      t.belongs_to :coach, null: true, foreign_key: true
 
       t.string :bio
       t.string :image

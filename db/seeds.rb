@@ -13,13 +13,15 @@ Problem.create!(name: 'Stress')
 
 # Testing the models
 
-user1 = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345', age: 30, gender: 'female', problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
+user1 = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345')
+user1.update!(age: 30, gender: 'female', problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
 
 user2 = User.create!(name: 'Olivia Moore', email: 'olivia@moore.com', password: 'abc12345', age: 26, gender: 'female', problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Anxiety')])
 
 user3 = User.create!(name: 'Jessica Aldridge', email: 'jessica@aldridge.com', password: 'abc12345', age: 23, gender: 'female', problems: [Problem.find_by_name('Depression')])
 
-coach1 = Coach.create!(name: 'James Brown', email: 'james@brown.com', password: 'abc12345', age: 36, gender: 'male', education: 'New York University, PhD in Psychology', work: 'Psychologist, ABC company, 12 years', licenses: 'New York / 081109, New York University, 2009', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+coach1 = Coach.create!(name: 'James Brown', email: 'james@brown.com', password: 'abc12345')
+coach1.update!(age: 36, gender: 'male', education: 'New York University, PhD in Psychology', work: 'Psychologist, ABC company, 12 years', licenses: 'New York / 081109, New York University, 2009', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 coach2 = Coach.create!(name: 'Amelia Adamson', email: 'amelia@adamson.com', password: 'abc12345', age: 25, gender: 'female', education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
@@ -40,8 +42,6 @@ InvitationManager::AcceptInvitation.call(user1, coach2)
 
 Invitation.create!(user: user2, coach: coach1, status: 0)
 InvitationManager::AcceptInvitation.call(user2, coach1)
-
-puts Invitation.all.inspect
 
 technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, image: 'behaviour-therapy.jpg', gender: 'male')
 technique1.problems << Problem.find_by_name('Depression')

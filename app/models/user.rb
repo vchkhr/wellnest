@@ -12,7 +12,6 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, email: true, uniqueness: true
   has_secure_password
-  validates :age, numericality: { only_integer: true, in: 18..99 }
 
   as_enum :gender, female: 1, male: 0
 
@@ -20,6 +19,8 @@ class User < ApplicationRecord
 
   has_many :invitations, dependent: :delete_all
   has_many :coaches, through: :invitations
+
+  belongs_to :coach, required: false
   
   has_many :completed_steps, dependent: :delete_all
   has_many :steps, through: :completed_steps

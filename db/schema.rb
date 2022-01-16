@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(version: 20220115018) do
     t.boolean "is_verified"
     t.boolean "send_email_notifications"
     t.integer "age"
+    t.bigint "coach_id"
     t.string "bio"
     t.string "image"
     t.string "password_reset_token"
@@ -223,6 +224,7 @@ ActiveRecord::Schema.define(version: 20220115018) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "gender_cd"
+    t.index ["coach_id"], name: "index_users_on_coach_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -246,4 +248,5 @@ ActiveRecord::Schema.define(version: 20220115018) do
   add_foreign_key "steps_techniques", "techniques"
   add_foreign_key "techniques_users", "techniques"
   add_foreign_key "techniques_users", "users"
+  add_foreign_key "users", "coaches"
 end

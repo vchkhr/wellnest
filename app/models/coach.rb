@@ -12,20 +12,14 @@ class Coach < ApplicationRecord
   validates :name, presence: true
   validates :email, email: true, uniqueness: true
   has_secure_password
-  validates :age, numericality: { only_integer: true, in: 18..99 }
-
   as_enum :gender, female: 1, male: 0
 
   has_one_attached :image
 
-  validates :education, presence: true
-  validates :work, presence: true
-  validates :licenses, presence: true
-  validates :links, presence: true
-  validates :problems, presence: true
-
   has_many :invitations, dependent: :delete_all
   has_many :users, through: :invitations
+
+  has_many :users
   
   has_many :coach_notifications, dependent: :delete_all
 

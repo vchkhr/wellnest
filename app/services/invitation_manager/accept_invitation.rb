@@ -14,6 +14,7 @@ module InvitationManager
     def accept_invitation
       InvitationManager::DeclineInvitation.call(@user, @coach)
       Invitation.create!(user: @user, coach: @coach, status: 1)
+      @user.coach = @coach
     end
   end
 end
