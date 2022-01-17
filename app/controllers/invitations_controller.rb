@@ -27,22 +27,22 @@ class InvitationsController < InheritedResources::Base
     
     if params['is_confirmed'] == 'true'
       @invitation.status = 1
-      coach.total_clients_count += 1
+      @invitation.save
+
+      coach.increment!(:total_clients_count, 1)
     else
       @invitation.destroy
     end
 
     respond_to do |format|
-      if @invitation.save
-        action = params['is_confirmed'] == 'true' ? 'confirmed' : 'refused'
+      action = params['is_confirmed'] == 'true' ? 'confirmed' : 'refused'
 
-        text = "You #{action} invitation from #{client.user.name}"
-        Notification.create!(client: client, text: "Coach #{current_user.name} #{action} your invitation")
-        CoachNotification.create!(coach: coach, text: text)
+      text = "You #{action} invitation from #{client.user.name}"
+      Notification.create!(client: client, text: "Coach #{current_user.name} #{action} your invitation")
+      CoachNotification.create!(coach: coach, text: text)
 
-        format.html { redirect_to invitations_path, notice: text }
-        format.json { render :show, status: :created, location: @invitation }
-      end
+      format.html { redirect_to invitations_path, notice: text }
+      format.json { render :show, status: :created, location: @invitation }
     end
   end
 
