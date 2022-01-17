@@ -3,4 +3,8 @@ class Invitation < ApplicationRecord
 
   belongs_to :client
   belongs_to :coach
+
+  counter_culture :coach, column_name: proc {|model| model.status == 1 ? 'active_clients_count' : nil }
+
+  counter_culture :coach, column_name: proc {|model| model.status == 0 ? 'invitations_count' : nil }
 end

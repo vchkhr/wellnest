@@ -6,7 +6,7 @@
 <div class="my-clients">
   <div class="links">
     <p>My Clients</p>
-    <p><%= link_to "Waiting for confirmation (#{CoachManager::InvitationsCount.call(current_user.coach)})", invitations_path %></p>
+    <p><%= link_to "Waiting for confirmation (#{current_user.coach.invitations_count})", invitations_path %></p>
   </div>
   <hr />
 

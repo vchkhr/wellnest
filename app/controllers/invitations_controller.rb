@@ -10,9 +10,9 @@ class InvitationsController < InheritedResources::Base
     @coach_name = coach.user.name
 
     if params.key?(:status)
-      Invitation.where(client: current_user.client).each { |invitation| invitation.destroy }
+      Invitation.where(client: current_user.client).destroy_all
 
-      Invitation.create!(client: current_user.client, coach: coach, status: params['status'])
+      Invitation.create!(client: current_user.client, coach: coach, status: 0)
 
       text = "You asked #{@coach_name} to become your coach"
       Notification.create!(client: current_user.client, text: text)
@@ -21,20 +21,24 @@ class InvitationsController < InheritedResources::Base
   end
 
   def edit
-    Invitation.where(client: Client.find(params['client_id']), coach: current_user.coach, status: 0).each { |invitation| invitation.destroy }
     client = Client.find(params['client_id'])
-
-    if params['is_confirmed'] == 'true'
-      @invitation = Invitation.new(client: client, coach: current_user.coach, status: 1)
-    end
+    coach = current_user.coach
+    @invitation = Invitation.where(client: client, coach: coach).last
     
+    if params['is_confirmed'] == 'true'
+      @invitation.status = 1
+      coach.total_clients_count += 1
+    else
+      @invitation.destroy
+    end
+
     respond_to do |format|
       if @invitation.save
-        action = params['is_confirmed'] == 'true' ? "confirmed" : "refused"
+        action = params['is_confirmed'] == 'true' ? 'confirmed' : 'refused'
 
-        text = "You #{action} invitation from the client"
+        text = "You #{action} invitation from #{client.user.name}"
         Notification.create!(client: client, text: "Coach #{current_user.name} #{action} your invitation")
-        CoachNotification.create!(coach: current_user.coach, text: text)
+        CoachNotification.create!(coach: coach, text: text)
 
         format.html { redirect_to invitations_path, notice: text }
         format.json { render :show, status: :created, location: @invitation }

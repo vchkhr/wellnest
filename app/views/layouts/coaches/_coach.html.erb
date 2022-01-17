@@ -10,7 +10,7 @@
       </p>
 
       <p><%= user.coach.bio %></p>
-      <p><%= user.profile.age %> years | <%= user.profile.gender %> | <%= CoachManager::ActiveClientsCount.call(user.coach) %> clients</p>
+      <p><%= user.profile.age %> years | <%= user.profile.gender %> | <%= user.coach.active_clients_count %> clients</p>
     </div>
   </div>
 

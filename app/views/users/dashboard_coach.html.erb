@@ -12,7 +12,7 @@
         <p class="title">Total number of<br>clients</p>
 
         <div class="number">
-          <p><strong><%= CoachManager::ActiveClientsCount.call(current_user.coach) %></strong></p>
+          <p><strong><%= current_user.coach.active_clients_count %></strong></p>
         </div>
       </div>
 
@@ -20,7 +20,7 @@
         <p class="title">Current number of<br>users</p>
 
         <div class="number">
-          <p><strong><%= CoachManager::ActiveClientsCount.call(current_user.coach) %></strong></p>
+          <p><strong><%= current_user.coach.active_clients_count %></strong></p>
         </div>
       </div>
 

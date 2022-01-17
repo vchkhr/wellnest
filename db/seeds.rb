@@ -1,3 +1,8 @@
+
+
+# Dafault data is needed
+
+
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 Problem.create!(name: 'Anxiety')
@@ -32,22 +37,8 @@ coach5 = Coach.create!(age: 32, user: user8, gender: 'male', education: 'educati
 user9 = User.create!(name: 'Scarlett Davies', email: 'scarlett@davies.com', password: 'abc12345')
 coach6 = Coach.create!(age: 31, user: user9, gender: 'female', education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
-Invitation.create!(client: client1, coach: coach1, status: 0)
-client1.invitations.find_by_coach_id(coach1).destroy
-
-Invitation.create!(client: client1, coach: coach2, status: 0)
-client1.invitations.find_by_coach_id(coach2).update!(status: 1)
-
-Invitation.create!(client: client2, coach: coach1, status: 0)
-client2.invitations.find_by_coach_id(coach1).update!(status: 1)
-
-client1.invitations.find_by_coach_id(coach2).destroy
-Invitation.create!(client: client1, coach: coach1, status: 1)
-
 technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, image: 'behaviour-therapy.jpg', gender: 'both')
 technique1.problems << Problem.find_by_name('Depression')
-
-client2.techniques << technique1
 
 technique2 = Technique.create!(title: 'Lifestyle changes', description: 'Eliminating the lack of control that makes people feel worse.', age_start: 30, age_end: 45, duration_start: 6, duration_end: 7, image: 'lifestyle-changes.jpg', gender: 'both')
 technique2.problems << Problem.find_by_name('Depression')
@@ -64,42 +55,67 @@ technique4.problems << Problem.find_by_name('Depression')
   technique.steps << Step.create!(title: 'What should you do?', description: 'Look at this picture and do something. And when you do something, don\'t forget to do something.', image: 'https://domf5oio6qrcr.cloudfront.net/medialibrary/7813/a83db567-4c93-4ad0-af6f-72b57af7675d.jpg')
   technique.steps << Step.create!(title: 'What should you do?', description: 'Look at this picture and do something. And when you do something, don\'t forget to do something.', video: 'https://player.vimeo.com/external/415158674.sd.mp4?s=a05be1360154cec9520a51ed5750496b52419205&profile_id=139&oauth2_token_id=57447761')
   technique.steps << Step.create!(title: 'What should you do?', description: 'Look at this picture and do something. And when you do something, don\'t forget to do something.', audio: 'https://www.uclahealth.org/marc/mpeg/01_Breathing_Meditation.mp3')
-
-  client1.techniques << technique
-
-  if technique.id > 1
-    if technique.id == 2
-      CompletedStep.create!(step: technique.steps[0], client: client1)
-      CompletedStep.create!(step: technique.steps[1], client: client1)
-    else
-      technique.steps.each do |step|
-        CompletedStep.create!(step: step, client: client1)
-      end
-    end
-  end
 end
 
-Like.create!(is_like: true, client: client1, technique: technique1)
-Like.create!(is_like: true, client: client2, technique: technique1)
-Like.create!(is_like: false, client: client3, technique: technique1)
 
-Notification.create!(text: 'You changed your profile settings', client: client1)
-Notification.create!(text: 'You have sent an invitation to coach Emily Smith', client: client1)
-Notification.create!(text: 'Coach Emily Smith refused to become your coach', client: client1)
-Notification.create!(text: 'You have sent an invitation to coach James Brown', client: client1)
-Notification.create!(text: 'Coach James Brown agreed to become your coach', client: client1)
-Notification.create!(text: 'Coach James Brown replied to the message', client: client1)
 
-CoachNotification.create!(text: 'Your profile has been verified by the admin', coach: coach1)
-CoachNotification.create!(text: 'You have received an invitation to become a coach from a user Ann Albertson', coach: coach1)
-CoachNotification.create!(text: 'You agreed to become a coach for a user Ann Albertson', coach: coach1)
-CoachNotification.create!(text: 'You have recommended a Technique to a user Ann Albertson', coach: coach1)
-CoachNotification.create!(text: 'Your user Olivia Moore replied to the message', coach: coach1)
-CoachNotification.create!(text: 'Your user Olivia Moore has rated the Technique', coach: coach1)
-CoachNotification.create!(text: 'The system has a new Technique', coach: coach1)
+# Everything else is needed only for testing
 
-client1.update!(bio: 'I feel depressed all the time. I do not want to do anything, I have no strength. I am afraid to communicate with people.')
-coach1.update!(bio: 'I know how to help you overcome Depression and Anxiety. I know modern techniques that work.')
+
+
+# [technique1, technique2, technique3, technique4].each do |technique|
+#   client1.techniques << technique
+
+#   if technique.id > 1
+#     if technique.id == 2
+#       CompletedStep.create!(step: technique.steps[0], client: client1)
+#       CompletedStep.create!(step: technique.steps[1], client: client1)
+#     else
+#       technique.steps.each do |step|
+#         CompletedStep.create!(step: step, client: client1)
+#       end
+#     end
+#   end
+# end
+
+# Invitation.create!(client: client1, coach: coach1, status: 0)
+# client1.invitations.find_by_coach_id(coach1).destroy
+
+# Invitation.create!(client: client1, coach: coach2, status: 0)
+# client1.invitations.find_by_coach_id(coach2).update!(status: 1)
+
+# Invitation.create!(client: client2, coach: coach1, status: 0)
+# client2.invitations.find_by_coach_id(coach1).update!(status: 1)
+
+# client1.invitations.find_by_coach_id(coach2).destroy
+# Invitation.create!(client: client1, coach: coach1, status: 1)
+
+
+# client2.techniques << technique1
+
+
+# Like.create!(is_like: true, client: client1, technique: technique1)
+# Like.create!(is_like: true, client: client2, technique: technique1)
+# Like.create!(is_like: false, client: client3, technique: technique1)
+
+# Notification.create!(text: 'You changed your profile settings', client: client1)
+# Notification.create!(text: 'You have sent an invitation to coach Emily Smith', client: client1)
+# Notification.create!(text: 'Coach Emily Smith refused to become your coach', client: client1)
+# Notification.create!(text: 'You have sent an invitation to coach James Brown', client: client1)
+# Notification.create!(text: 'Coach James Brown agreed to become your coach', client: client1)
+# Notification.create!(text: 'Coach James Brown replied to the message', client: client1)
+
+# CoachNotification.create!(text: 'Your profile has been verified by the admin', coach: coach1)
+# CoachNotification.create!(text: 'You have received an invitation to become a coach from a user Ann Albertson', coach: coach1)
+# CoachNotification.create!(text: 'You agreed to become a coach for a user Ann Albertson', coach: coach1)
+# CoachNotification.create!(text: 'You have recommended a Technique to a user Ann Albertson', coach: coach1)
+# CoachNotification.create!(text: 'Your user Olivia Moore replied to the message', coach: coach1)
+# CoachNotification.create!(text: 'Your user Olivia Moore has rated the Technique', coach: coach1)
+# CoachNotification.create!(text: 'The system has a new Technique', coach: coach1)
+
+# client1.update!(bio: 'I feel depressed all the time. I do not want to do anything, I have no strength. I am afraid to communicate with people.')
+# coach1.update!(bio: 'I know how to help you overcome Depression and Anxiety. I know modern techniques that work.')
+
 
 # Message.create!(client: client1, coach: coach1, from_client: false, text: 'How do you feel?')
 # Message.create!(client: client1, coach: coach1, from_client: true, text: 'Better now. I began to sleep better at night.')
