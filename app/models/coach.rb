@@ -27,7 +27,7 @@ class Coach < ApplicationRecord
     self.user.name
   end
 
-  scope :for_client, ->(client) { find_by_sql(["SELECT coaches.id, coaches.user_id, coaches.bio, coaches.age, coaches.education, coaches.work, coaches.links, coaches.licenses, coaches.gender_cd, coaches.likes_count FROM (SELECT * FROM invitations WHERE client_id=? AND status=1 ORDER BY ID DESC LIMIT 1) AS a INNER JOIN coaches ON a.coach_id = coaches.id ORDER BY ID DESC LIMIT 1", client.id]) }
+  scope :for_client, ->(client) { find_by_sql(["SELECT coaches.id, coaches.user_id, coaches.bio, coaches.age, coaches.education, coaches.work, coaches.links, coaches.licenses, coaches.gender_cd, coaches.likes_count, coaches.active_clients_count FROM (SELECT * FROM invitations WHERE client_id=? AND status=1 ORDER BY ID DESC LIMIT 1) AS a INNER JOIN coaches ON a.coach_id = coaches.id ORDER BY ID DESC LIMIT 1", client.id]) }
 
   scope :unconfirmed, ->(client) { find_by_sql(["SELECT coaches.id, coaches.user_id, coaches.bio, coaches.age, coaches.education, coaches.work, coaches.links, coaches.licenses, coaches.gender_cd FROM (SELECT * FROM invitations WHERE client_id=? AND status=0 ORDER BY ID DESC LIMIT 1) AS a INNER JOIN coaches ON a.coach_id = coaches.id ORDER BY ID DESC LIMIT 1", client.id]) }
 end

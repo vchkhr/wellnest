@@ -55,7 +55,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::HoursInProgress.call(current_user.client).round(1) %></strong></p>
+            <p><strong><%= current_user.client.current_time.round(1) %></strong></p>
           </div>
 
           <div class="description">
