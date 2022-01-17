@@ -1,5 +1,5 @@
 <div class="technique">
-  <div class="tag badge rounded-pill bg-secondary"><%= ClientManager::CompletedStepsCount.call(technique) %>/<%= technique.steps.count %> steps passed</div>
+  <div class="tag badge rounded-pill bg-secondary"><%= ClientManager::CompletedStepsInTechnique.call(technique) %>/<%= technique.steps.count %> steps passed</div>
   
   <div class="symptoms d-flex">
     <% technique.problems.each do |problem| %>
@@ -54,9 +54,9 @@
     <div class="link">
       <% if show_continue == true %>
         <p>
-          <% if ClientManager::CompletedStepsCount.call(technique) == 0 %>
+          <% if ClientManager::CompletedStepsInTechnique.call(technique) == 0 %>
             <%= link_to "GET STARTED", technique_path(technique) %>
-          <% elsif ClientManager::CompletedStepsCount.call(technique) < technique.steps.count %>
+          <% elsif ClientManager::CompletedStepsInTechnique.call(technique) < technique.steps.count %>
             <%= link_to "CONTINUE", technique_path(technique) %>
           <% else %>
             <%= link_to "RESTART", technique_path(technique) %>

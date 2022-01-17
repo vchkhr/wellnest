@@ -12,7 +12,7 @@ module ClientManager
   
     def hours_in_progress
       count = 0
-      Technique.where_client(@client).each { |technique| count += (technique.duration_start + technique.duration_end) / 2.0 / technique.steps.count * ClientManager::CompletedStepsCount.call(technique) if ClientManager::CompletedStepsCount.call(technique) > 0 and ClientManager::CompletedStepsCount.call(technique) < technique.steps.count }
+      Technique.where_client(@client).each { |technique| count += (technique.duration_start + technique.duration_end) / 2.0 / technique.steps.count * ClientManager::CompletedStepsInTechnique.call(technique) if ClientManager::CompletedStepsInTechnique.call(technique) > 0 and ClientManager::CompletedStepsInTechnique.call(technique) < technique.steps.count }
       count.round(1)
     end
   end

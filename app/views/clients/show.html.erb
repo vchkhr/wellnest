@@ -40,7 +40,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::HoursCompleted.call(@client) %></strong></p>
+            <p><strong><%= @client.total_time.round(1) %></strong></p>
           </div>
 
           <div class="description">
@@ -54,7 +54,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::HoursInProgress.call(@client) %></strong></p>
+            <p><strong><%= ClientManager::HoursInProgress.call(@client).round(1) %></strong></p>
           </div>
 
           <div class="description">

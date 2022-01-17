@@ -1,5 +1,5 @@
 module ClientManager
-  class CompletedStepsCount < ApplicationService
+  class CompletedStepsInTechnique < ApplicationService
     def initialize(technique)
       @technique = technique
     end
