@@ -15,7 +15,7 @@
   <div class="techniques-coach">
     <div class="left-column">
       <div class="techniques">
-        <% TechniqueManager::ClientTechniques.call(current_user.client).each do |technique| %>
+        <% Technique.where_client(current_user.client).each do |technique| %>
           <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
         <% end %>
       </div>

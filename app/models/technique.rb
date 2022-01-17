@@ -20,4 +20,6 @@ class Technique < ApplicationRecord
   has_and_belongs_to_many :problems
   has_and_belongs_to_many :genders
   has_and_belongs_to_many :steps
+
+  scope :where_client, ->(client) { client.techniques.uniq }
 end

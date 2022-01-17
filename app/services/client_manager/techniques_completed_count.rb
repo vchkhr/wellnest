@@ -12,7 +12,7 @@ module ClientManager
   
     def techniques_completed_count
       count = 0
-      TechniqueManager::ClientTechniques.call(@client).each { |technique| count += 1 if ClientManager::CompletedStepsCount.call(technique) == technique.steps.count }
+      Technique.where_client(@client).each { |technique| count += 1 if ClientManager::CompletedStepsCount.call(technique) == technique.steps.count }
       count
     end
   end

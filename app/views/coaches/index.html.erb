@@ -7,11 +7,11 @@
   <div class="left-column">
     <div class="coach-card">
       <% if Coach.for_client(current_user.client).empty? %>
-        <% if ClientManager::UnconfirmedInvitation.call(current_user.client).nil? %>
+        <% if Coach.unconfirmed(current_user.client).empty? %>
           <p><%= link_to "You don't have a coach yet", coaches_path %></p>
         <% else %>
           <p>Waiting for confirmation</p>
-          <p><strong><%= ClientManager::UnconfirmedInvitation.call(current_user.client).user.name %></strong></p>
+          <p><strong><%= Coach.unconfirmed(current_user.client).first.user.name %></strong></p>
           <p><%= link_to 'CANCEL', current_user.client.invitations.where(status: 0).last %></p>
         <% end %>
       <% else %>
