@@ -1,17 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 Problem.create!(name: 'Anxiety')
 Problem.create!(name: 'Depression')
 Problem.create!(name: 'Irritability')
 Problem.create!(name: 'Stress')
-
-# Testing the models
 
 user1 = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345')
 client1 = Client.create!(age: 30, user: user1, gender: 'female', problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
@@ -109,8 +101,7 @@ CoachNotification.create!(text: 'The system has a new Technique', coach: coach1)
 client1.update!(bio: 'I feel depressed all the time. I do not want to do anything, I have no strength. I am afraid to communicate with people.')
 coach1.update!(bio: 'I know how to help you overcome Depression and Anxiety. I know modern techniques that work.')
 
-Message.create!(client: client1, coach: coach1, from_client: false, text: 'How do you feel?')
-Message.create!(client: client1, coach: coach1, from_client: true, text: 'Better now. I began to sleep better at night.')
-Message.create!(client: client1, coach: coach1, from_client: false, text: 'Excellent! Here is a link to a new technique for you: coachingplatform.com/technique/123 Begin to pass it tomorrow.')
-Message.create!(client: client1, coach: coach1, from_client: true, text: 'Ok. Thanks')
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# Message.create!(client: client1, coach: coach1, from_client: false, text: 'How do you feel?')
+# Message.create!(client: client1, coach: coach1, from_client: true, text: 'Better now. I began to sleep better at night.')
+# Message.create!(client: client1, coach: coach1, from_client: false, text: 'Excellent! Here is a link to a new technique for you: coachingplatform.com/technique/123 Begin to pass it tomorrow.')
+# Message.create!(client: client1, coach: coach1, from_client: true, text: 'Ok. Thanks')

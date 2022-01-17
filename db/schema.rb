@@ -159,17 +159,6 @@ ActiveRecord::Schema.define(version: 2022_01_06_101516) do
     t.index ["technique_id"], name: "index_likes_on_technique_id"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.string "text"
-    t.boolean "from_client"
-    t.bigint "client_id", null: false
-    t.bigint "coach_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_messages_on_client_id"
-    t.index ["coach_id"], name: "index_messages_on_coach_id"
-  end
-
   create_table "notifications", force: :cascade do |t|
     t.string "text"
     t.bigint "client_id", null: false
@@ -255,8 +244,6 @@ ActiveRecord::Schema.define(version: 2022_01_06_101516) do
   add_foreign_key "invitations", "coaches"
   add_foreign_key "likes", "clients"
   add_foreign_key "likes", "techniques"
-  add_foreign_key "messages", "clients"
-  add_foreign_key "messages", "coaches"
   add_foreign_key "notifications", "clients"
   add_foreign_key "problems_techniques", "problems"
   add_foreign_key "problems_techniques", "techniques"
