@@ -22,4 +22,10 @@ class Coach < ApplicationRecord
   belongs_to :user
 
   has_and_belongs_to_many :problems
+
+  def name
+    self.user.name
+  end
+
+  scope :for_client, ->(client) { find_by_sql(["SELECT coaches.id, coaches.user_id, coaches.bio, coaches.age, coaches.education, coaches.work, coaches.links, coaches.licenses, coaches.gender_cd FROM (SELECT * FROM invitations WHERE client_id=? AND status=1 ORDER BY ID DESC LIMIT 1) AS a INNER JOIN coaches ON a.coach_id = coaches.id ORDER BY ID DESC LIMIT 1", client.id]) }
 end

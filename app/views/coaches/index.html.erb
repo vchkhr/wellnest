@@ -6,7 +6,7 @@
 <div class="coaches-view">
   <div class="left-column">
     <div class="coach-card">
-      <% if ClientManager::CoachUser.call(current_user.client).nil? %>
+      <% if Coach.for_client(current_user.client).empty? %>
         <% if ClientManager::UnconfirmedInvitation.call(current_user.client).nil? %>
           <p><%= link_to "You don't have a coach yet", coaches_path %></p>
         <% else %>
@@ -18,13 +18,13 @@
 
         <div class="image-info">
           <div class="image">
-            <%= image_tag(UserManager::ProfileImage.call(ClientManager::CoachUser.call(current_user.client)), size: "50x50", alt: ClientManager::CoachUser.call(current_user.client).name) %>
+            <%= image_tag(UserManager::ProfileImage.call(Coach.for_client(current_user.client).first.user), size: "50x50", alt: Coach.for_client(current_user.client).first.user.name) %>
           </div>
 
           <div class="info">
             <p>
               Current coach:<br>
-              <strong><%= ClientManager::CoachUser.call(current_user.client).name %></strong><br>
+              <strong><%= Coach.for_client(current_user.client).first.user.name %></strong><br>
               <%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %>
             </p>
           </div>
@@ -58,7 +58,7 @@
   <div class="right-column">
     <div class="coaches">
       <% @coaches.each do |coach| %>
-        <% if !ClientManager::Coach.call(current_user.client).nil? and ClientManager::Coach.call(current_user.client).id == coach.id %>
+        <% if !Coach.for_client(current_user.client).empty? and Coach.for_client(current_user.client).first.id == coach.id %>
         <% else %>
           <%= render 'layouts/coaches/small', user: coach.user %>
         <% end %>

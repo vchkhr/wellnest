@@ -1,7 +1,7 @@
 class ClientsTechniquesController < InheritedResources::Base
   def new
     @clients_technique = ClientsTechnique.new
-    @clients = CoachManager::ActiveClients.call(current_user.coach)
+    @clients = Client.where_coach(current_user.coach)
   end
 
   def create
