@@ -13,7 +13,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::TechniquesCompletedCount.call(current_user.client) %></strong></p>
+            <p><strong><%= current_user.client.total_progress %></strong></p>
           </div>
 
           <div class="description">
@@ -27,7 +27,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::TechniquesInProgressCount.call(current_user.client) %></strong></p>
+            <p><strong><%= current_user.client.current_progress %></strong></p>
           </div>
 
           <div class="description">

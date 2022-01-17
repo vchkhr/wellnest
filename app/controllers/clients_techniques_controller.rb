@@ -13,6 +13,8 @@ class ClientsTechniquesController < InheritedResources::Base
 
       ClientsTechnique.create!(client: client, technique: technique)
 
+      client.increment!(:current_progress, 1)
+
       Notification.create!(client: client, text: "Coach recommended a new technique to you: #{technique.title}")
 
       CoachNotification.create!(coach: current_user.coach, text: "You have recommended a new technique to the client #{client.user.name}: #{technique.title}")

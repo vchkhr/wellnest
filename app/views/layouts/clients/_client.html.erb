@@ -22,7 +22,7 @@
   </div>
 
   <p>Techniques in process</p>
-  <% if ClientManager::TechniquesInProgressCount.call(user.profile) == 0 %>
+  <% if user.profile.current_progress == 0 %>
     <p>All techniques completed</p>
   <% else %>
     <% ClientManager::TechniquesInProgress.call(user.profile).each do |technique| %>

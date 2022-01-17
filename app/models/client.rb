@@ -30,5 +30,5 @@ class Client < ApplicationRecord
     self.user.name
   end
 
-  scope :where_coach, ->(coach) { find_by_sql(["SELECT clients.id, clients.user_id, clients.age, clients.gender_cd FROM (SELECT * FROM invitations WHERE status=1 AND coach_id=?) AS a INNER JOIN clients ON a.client_id = clients.id", coach.id]) }
+  scope :where_coach, ->(coach) { find_by_sql(["SELECT clients.id, clients.user_id, clients.age, clients.gender_cd, clients.current_progress FROM (SELECT * FROM invitations WHERE status=1 AND coach_id=?) AS a INNER JOIN clients ON a.client_id = clients.id", coach.id]) }
 end
