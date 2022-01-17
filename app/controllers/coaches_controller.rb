@@ -72,6 +72,12 @@ class CoachesController < ApplicationController
   def update
     respond_to do |format|
       if @coach.update(coach_params)
+        @coach.problems.destroy_all
+        params[:coach][:problem_ids].each do |pr|
+          problem = Problem.find_by_id(pr)
+          @coach.problems << problem unless problem.nil?
+        end
+
         text = 'You have updated your personal information'
         CoachNotification.create!(coach: @coach, text: text)
 

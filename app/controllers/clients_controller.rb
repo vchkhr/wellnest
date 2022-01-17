@@ -18,7 +18,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     @client.user = current_user
-
+  
     params[:client][:problem_ids].each do |pr|
       problem = Problem.find_by_id(pr)
       @client.problems << problem unless problem.nil?
@@ -41,6 +41,12 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update(client_params)
+        @client.problems.destroy_all
+        params[:client][:problem_ids].each do |pr|
+          problem = Problem.find_by_id(pr)
+          @client.problems << problem unless problem.nil?
+        end
+        
         text = 'You have updated your personal information'
 
         Notification.create!(client: @client, text: text)
