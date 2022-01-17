@@ -15,7 +15,7 @@
   <div class="techniques-coach">
     <div class="left-column">
       <div class="techniques">
-        <% ClientManager::TechniquesInProgress.call(current_user.client).each do |technique| %>
+        <% techniques_in_progress(current_user.client).each do |technique| %>
           <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
         <% end %>
       </div>

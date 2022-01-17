@@ -53,7 +53,7 @@
 
     <div class="techniques">
       <% Client.where_coach(current_user.coach).each do |client| %>
-        <% ClientManager::TechniquesInProgress.call(client).each do |technique| %>
+        <% techniques_in_progress(client).each do |technique| %>
           <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
         <% end %>
       <% end %>
