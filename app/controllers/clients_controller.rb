@@ -1,7 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[ show edit update destroy ]
-  helper UserHelpers
-
+  
   def index
     @clients = Client.where_coach(current_user.coach)
   end

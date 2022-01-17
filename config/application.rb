@@ -30,5 +30,7 @@ module Mhc
       :port => ENV['EMAIL_PORT'],
       :authentication => :cram_md5
     }
+
+    config.action_controller.include_all_helpers = true
   end
 end

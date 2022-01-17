@@ -1,6 +1,5 @@
 class TechniquesController < InheritedResources::Base
-  helper UserHelpers
-  
+    
   def show
     @technique = Technique.find_by_id(params[:id])
 
