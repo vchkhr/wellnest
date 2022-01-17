@@ -23,7 +23,7 @@
         </ul>
 
         <div class="text-end">
-          <%= image_tag(UserManager::ProfileImage.call(user), size: "30x30", alt: user.name) %> &nbsp;
+          <%= image_tag(profile_image(user), size: "30x30", alt: user.name) %> &nbsp;
           <%= link_to "LOG OUT", "logout", class: "btn btn-primary me-2" %>
         </div>
       <% end %>

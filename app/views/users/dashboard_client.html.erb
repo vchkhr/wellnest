@@ -80,7 +80,7 @@
     <div class="client-card">
       <div class="image-info">
         <div class="image">
-          <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+          <%= image_tag(profile_image(current_user), size: "50x50", alt: current_user.name) %>
         </div>
 
         <div class="info">
@@ -116,7 +116,7 @@
 
         <div class="image-info">
           <div class="image">
-            <%= image_tag(UserManager::ProfileImage.call(Coach.for_client(current_user.client).first.user), size: "50x50", alt: Coach.for_client(current_user.client).first.user.name) %>
+            <%= image_tag(profile_image(Coach.for_client(current_user.client).first.user), size: "50x50", alt: Coach.for_client(current_user.client).first.user.name) %>
           </div>
 
           <div class="info">
@@ -134,7 +134,7 @@
         <div class="client-card">
           <div class="image-info">
             <div class="image">
-              <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+              <%= image_tag(profile_image(current_user), size: "50x50", alt: current_user.name) %>
             </div>
 
             <div class="info">

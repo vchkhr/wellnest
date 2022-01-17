@@ -65,7 +65,7 @@
     <div class="client-card">
       <div class="image-info">
         <div class="image">
-          <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+          <%= image_tag(profile_image(current_user), size: "50x50", alt: current_user.name) %>
         </div>
 
         <div class="info">
@@ -94,7 +94,7 @@
         <div class="client-card">
           <div class="image-info">
             <div class="image">
-              <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+              <%= image_tag(profile_image(current_user), size: "50x50", alt: current_user.name) %>
             </div>
 
             <div class="info">

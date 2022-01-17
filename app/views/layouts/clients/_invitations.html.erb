@@ -1,7 +1,7 @@
 <div class="client-card">
   <div class="image-info">
     <div class="image">
-      <%= image_tag(UserManager::ProfileImage.call(user), size: "50x50", alt: user.name) %>
+      <%= image_tag(profile_image(user), size: "50x50", alt: user.name) %>
     </div>
 
     <div class="info">

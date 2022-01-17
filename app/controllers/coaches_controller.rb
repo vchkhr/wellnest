@@ -1,5 +1,6 @@
 class CoachesController < ApplicationController
   before_action :set_coach, only: %i[ show edit update destroy ]
+  helper UserHelpers
 
   def index
     if !params.key?(:filters) or (params[:filters][:problem_ids].count == 1 and params[:filters][:genders].count == 1)
