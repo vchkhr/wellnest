@@ -25,10 +25,12 @@
         <span>years</span><br />
 
         <span class="text-muted">Gender:</span>
-        <% technique.genders.each do |gender| %>
-          <span><%= gender.name %></span>
+        <% if technique.gender.eql?(:both) %>
+          male, female
+        <% else %>
+          <%= technique.gender %>
         <% end %>
-        <br />
+        </span><br />
 
         <br />
         <span class="text-muted">Steps:</span> <%= technique.steps.count %><br />

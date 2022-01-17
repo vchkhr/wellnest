@@ -34,13 +34,14 @@ class TechniquesController < InheritedResources::Base
 
       end
 
-      if filters[:gender_ids].count > 1
-        genders = filters[:gender_ids].split(',')
+      # TODO
+      # if filters[:gender_ids].count > 1
+      #   genders = filters[:gender_ids].split(',')
         
-        genders.each do |gender|
-          @techniques += Technique.joins(:genders_techniques).where('genders_techniques.gender_id' => gender)
-        end
-      end
+      #   genders.each do |gender|
+      #     @techniques += Technique.joins(:genders_techniques).where('genders_techniques.gender_id' => gender)
+      #   end
+      # end
 
       @techniques.uniq!
     end

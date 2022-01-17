@@ -74,10 +74,9 @@ ActiveRecord::Schema.define(version: 2022_01_06_101516) do
     t.integer "age"
     t.string "bio"
     t.bigint "user_id", null: false
-    t.bigint "gender_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["gender_id"], name: "index_clients_on_gender_id"
+    t.integer "gender_cd"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
@@ -116,10 +115,9 @@ ActiveRecord::Schema.define(version: 2022_01_06_101516) do
     t.string "links"
     t.string "bio"
     t.bigint "user_id", null: false
-    t.bigint "gender_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["gender_id"], name: "index_coaches_on_gender_id"
+    t.integer "gender_cd"
     t.index ["user_id"], name: "index_coaches_on_user_id"
   end
 
@@ -139,21 +137,6 @@ ActiveRecord::Schema.define(version: 2022_01_06_101516) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_completed_steps_on_client_id"
     t.index ["step_id"], name: "index_completed_steps_on_step_id"
-  end
-
-  create_table "genders", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "genders_techniques", force: :cascade do |t|
-    t.bigint "gender_id", null: false
-    t.bigint "technique_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["gender_id"], name: "index_genders_techniques_on_gender_id"
-    t.index ["technique_id"], name: "index_genders_techniques_on_technique_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -239,6 +222,7 @@ ActiveRecord::Schema.define(version: 2022_01_06_101516) do
     t.integer "duration_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gender_cd"
   end
 
   create_table "users", force: :cascade do |t|
@@ -256,21 +240,17 @@ ActiveRecord::Schema.define(version: 2022_01_06_101516) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "clients", "genders"
   add_foreign_key "clients", "users"
   add_foreign_key "clients_problems", "clients"
   add_foreign_key "clients_problems", "problems"
   add_foreign_key "clients_techniques", "clients"
   add_foreign_key "clients_techniques", "techniques"
   add_foreign_key "coach_notifications", "coaches"
-  add_foreign_key "coaches", "genders"
   add_foreign_key "coaches", "users"
   add_foreign_key "coaches_problems", "coaches"
   add_foreign_key "coaches_problems", "problems"
   add_foreign_key "completed_steps", "clients"
   add_foreign_key "completed_steps", "steps"
-  add_foreign_key "genders_techniques", "genders"
-  add_foreign_key "genders_techniques", "techniques"
   add_foreign_key "invitations", "clients"
   add_foreign_key "invitations", "coaches"
   add_foreign_key "likes", "clients"

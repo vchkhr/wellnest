@@ -3,6 +3,7 @@ class Client < ApplicationRecord
 
   validates :age, numericality: { only_integer: true, in: 18..99 }
   validates :problems, presence: true
+  as_enum :gender, female: 1, male: 0
 
   has_one_attached :image
   
@@ -21,7 +22,6 @@ class Client < ApplicationRecord
   has_many :notifications, dependent: :delete_all
   
   belongs_to :user
-  belongs_to :gender
 
   has_and_belongs_to_many :problems
   has_and_belongs_to_many :techniques

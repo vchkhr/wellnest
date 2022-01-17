@@ -6,9 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Gender.create!(name: 'Male')
-Gender.create!(name: 'Female')
-
 Problem.create!(name: 'Anxiety')
 Problem.create!(name: 'Depression')
 Problem.create!(name: 'Irritability')
@@ -17,31 +14,31 @@ Problem.create!(name: 'Stress')
 # Testing the models
 
 user1 = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345')
-client1 = Client.create!(age: 30, user: user1, gender: Gender.find_by_name('Female'), problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
+client1 = Client.create!(age: 30, user: user1, gender: 'female', problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
 
 user2 = User.create!(name: 'James Brown', email: 'james@brown.com', password: 'abc12345')
-coach1 = Coach.create!(age: 36, user: user2, gender: Gender.find_by_name('Male'), education: 'New York University, PhD in Psychology', work: 'Psychologist, ABC company, 12 years', licenses: 'New York / 081109, New York University, 2009', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+coach1 = Coach.create!(age: 36, user: user2, gender: 'male', education: 'New York University, PhD in Psychology', work: 'Psychologist, ABC company, 12 years', licenses: 'New York / 081109, New York University, 2009', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 user3 = User.create!(name: 'Amelia Adamson', email: 'amelia@adamson.com', password: 'abc12345')
-coach2 = Coach.create!(age: 25, user: user3, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+coach2 = Coach.create!(age: 25, user: user3, gender: 'female', education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 user4 = User.create!(name: 'Olivia Moore', email: 'olivia@moore.com', password: 'abc12345')
-client2 = Client.create!(age: 26, user: user4, gender: Gender.find_by_name('Female'), problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Anxiety')])
+client2 = Client.create!(age: 26, user: user4, gender: 'female', problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Anxiety')])
 
 user5 = User.create!(name: 'Jessica Aldridge', email: 'jessica@aldridge.com', password: 'abc12345')
-client3 = Client.create!(age: 23, user: user5, gender: Gender.find_by_name('Female'), problems: [Problem.find_by_name('Depression')])
+client3 = Client.create!(age: 23, user: user5, gender: 'female', problems: [Problem.find_by_name('Depression')])
 
 user6 = User.create!(name: 'Gabriel Wilson', email: 'gabriel@wilson.com', password: 'abc12345')
-coach3 = Coach.create!(age: 32, user: user6, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
+coach3 = Coach.create!(age: 32, user: user6, gender: 'female', education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
 
 user7 = User.create!(name: 'Leo Ellington', email: 'leo@ellington.com', password: 'abc12345')
-coach4 = Coach.create!(age: 31, user: user7, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+coach4 = Coach.create!(age: 31, user: user7, gender: 'male', education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 user8 = User.create!(name: 'Tom Young', email: 'tom@young.com', password: 'abc12345')
-coach5 = Coach.create!(age: 32, user: user8, gender: Gender.find_by_name('Male'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
+coach5 = Coach.create!(age: 32, user: user8, gender: 'male', education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Depression')])
 
 user9 = User.create!(name: 'Scarlett Davies', email: 'scarlett@davies.com', password: 'abc12345')
-coach6 = Coach.create!(age: 31, user: user9, gender: Gender.find_by_name('Female'), education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+coach6 = Coach.create!(age: 31, user: user9, gender: 'female', education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
 Invitation.create!(client: client1, coach: coach1, status: 0)
 client1.invitations.find_by_coach_id(coach1).destroy
@@ -55,28 +52,20 @@ client2.invitations.find_by_coach_id(coach1).update!(status: 1)
 client1.invitations.find_by_coach_id(coach2).destroy
 Invitation.create!(client: client1, coach: coach1, status: 1)
 
-technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, image: 'behaviour-therapy.jpg')
+technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, image: 'behaviour-therapy.jpg', gender: 'both')
 technique1.problems << Problem.find_by_name('Depression')
-technique1.genders << Gender.find_by_name('Male')
-technique1.genders << Gender.find_by_name('Female')
 
 client2.techniques << technique1
 
-technique2 = Technique.create!(title: 'Lifestyle changes', description: 'Eliminating the lack of control that makes people feel worse.', age_start: 30, age_end: 45, duration_start: 6, duration_end: 7, image: 'lifestyle-changes.jpg')
+technique2 = Technique.create!(title: 'Lifestyle changes', description: 'Eliminating the lack of control that makes people feel worse.', age_start: 30, age_end: 45, duration_start: 6, duration_end: 7, image: 'lifestyle-changes.jpg', gender: 'both')
 technique2.problems << Problem.find_by_name('Depression')
 technique2.problems << Problem.find_by_name('Anxiety')
-technique2.genders << Gender.find_by_name('Male')
-technique2.genders << Gender.find_by_name('Female')
 
-technique3 = Technique.create!(title: 'Inflammation and mood', description: 'Does a dysfunctional immune system cause inflammation in the body, leading to mood swings?', age_start: 30, age_end: 45, duration_start: 5, duration_end: 5, image: 'inflamation-and-mood.jpg')
+technique3 = Technique.create!(title: 'Inflammation and mood', description: 'Does a dysfunctional immune system cause inflammation in the body, leading to mood swings?', age_start: 30, age_end: 45, duration_start: 5, duration_end: 5, image: 'inflamation-and-mood.jpg', gender: 'both')
 technique3.problems << Problem.find_by_name('Depression')
-technique3.genders << Gender.find_by_name('Male')
-technique3.genders << Gender.find_by_name('Female')
 
-technique4 = Technique.create!(title: 'Cognitive elaboration of the predicted future', description: 'It is necessary to complete the unfinished in the past and live in the present.', age_start: 20, age_end: 40, duration_start: 10, duration_end: 10)
+technique4 = Technique.create!(title: 'Cognitive elaboration of the predicted future', description: 'It is necessary to complete the unfinished in the past and live in the present.', age_start: 20, age_end: 40, duration_start: 10, duration_end: 10, gender: 'both')
 technique4.problems << Problem.find_by_name('Depression')
-technique4.genders << Gender.find_by_name('Male')
-technique4.genders << Gender.find_by_name('Female')
 
 [technique1, technique2, technique3, technique4].each do |technique|
   technique.steps << Step.create!(title: 'What is cognitive behavior therapy?', description: 'Cognitive behavioral therapy (CBT) is a type of psychotherapy. This form of therapy modifies thought patterns in order to change moods and behaviors. It\'s based on the idea that negative actions or feelings are the result of current distorted beliefs or thoughts, not unconscious forces from the past. CBT is a blend of cognitive therapy and behavioral therapy. Cognitive therapy focuses on your moods and thoughts. Behavioral therapy specifically targets actions and behaviors. A therapist practicing the combined approach of CBT works with you in a to identify specific negative thought patterns and behavioral responses to challenging or stressful situations. Treatment involves developing more balanced and constructive ways to respond to stressors. Ideally these new responses will help minimize or eliminate the troubling behavior or disorder. The principles of CBT can also be applied outside of the therapist\'s office. Online cognitive behavioral therapy is one example. It uses the principles of CBT to help you track and manage your depression and anxiety symptoms online.')

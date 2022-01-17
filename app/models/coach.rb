@@ -7,6 +7,7 @@ class Coach < ApplicationRecord
   validates :licenses, presence: true
   validates :links, presence: true
   validates :problems, presence: true
+  as_enum :gender, female: 1, male: 0
   
   has_one_attached :image
 
@@ -19,7 +20,6 @@ class Coach < ApplicationRecord
   has_many :coach_notifications, dependent: :delete_all
 
   belongs_to :user
-  belongs_to :gender
 
   has_and_belongs_to_many :problems
 end
