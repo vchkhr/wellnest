@@ -19,10 +19,10 @@ class TechniquesController < InheritedResources::Base
   end
 
   def all
-    if !params.key?(:filters) or (params[:filters][:problem_ids].count == 1 and params[:filters][:gender_ids].count == 1)
+    if !params.key?(:filters) or (params[:filters][:problem_ids].count == 1 and params[:filters][:genders].count == 1)
       @techniques = Technique.all
     else
-      filters = params[:filters].slice!(:problem_ids, :gender_ids)
+      filters = params[:filters].slice!(:problem_ids, :genders)
       @techniques = []
 
       if filters[:problem_ids].count > 1
@@ -34,14 +34,17 @@ class TechniquesController < InheritedResources::Base
 
       end
 
-      # TODO
-      # if filters[:gender_ids].count > 1
-      #   genders = filters[:gender_ids].split(',')
+      if filters[:genders].count > 1
+        genders = filters[:genders].join(',')
         
-      #   genders.each do |gender|
-      #     @techniques += Technique.joins(:genders_techniques).where('genders_techniques.gender_id' => gender)
-      #   end
-      # end
+        if genders == 'female,male'
+          @techniques += Technique.both
+        elsif genders == 'male'
+          @techniques += Technique.males
+        elsif genders == 'female'
+          @techniques += Technique.females
+        end
+      end
 
       @techniques.uniq!
     end

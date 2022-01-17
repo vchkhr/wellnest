@@ -70,6 +70,6 @@ class ClientsController < ApplicationController
     end
 
     def client_params
-      params.require(:client).permit(:image, :age, :bio, :user_id, :gender_id, :problem_ids)
+      params.require(:client).permit(:image, :age, :bio, :user_id, :gender, :problem_ids)
     end
 end

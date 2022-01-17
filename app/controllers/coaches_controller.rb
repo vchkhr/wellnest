@@ -2,12 +2,12 @@ class CoachesController < ApplicationController
   before_action :set_coach, only: %i[ show edit update destroy ]
 
   def index
-    if !params.key?(:filters) or (params[:filters][:problem_ids].count == 1 and params[:filters][:gender_ids].count == 1)
+    if !params.key?(:filters) or (params[:filters][:problem_ids].count == 1 and params[:filters][:genders].count == 1)
       @coaches = Coach.all
     else
-      filters = params[:filters].slice!(:problem_ids, :gender_ids)
+      filters = params[:filters].slice!(:problem_ids, :genders)
       filters[:problem_ids].shift(1)
-      filters[:gender_ids].shift(1)
+      filters[:genders].shift(1)
       
       @coaches = []
 
@@ -20,11 +20,15 @@ class CoachesController < ApplicationController
 
       end
 
-      unless filters[:gender_ids].empty?
-        genders = filters[:gender_ids].split(',')
+      unless filters[:genders].empty?
+        genders = filters[:genders].join(',')
         
-        genders.each do |gender|
-          @coaches += Coach.where('gender_id' => gender)
+        if genders == 'female,male'
+          @coaches += Coach.all
+        elsif genders == 'male'
+          @coaches += Coach.males
+        elsif genders == 'female'
+          @coaches += Coach.females
         end
       end
 
@@ -96,6 +100,6 @@ class CoachesController < ApplicationController
     end
 
     def coach_params
-      params.require(:coach).permit(:image, :age, :education, :work, :licenses, :links, :user_id, :gender_id, :problem_ids)
+      params.require(:coach).permit(:image, :age, :education, :work, :licenses, :links, :user_id, :gender, :problem_ids)
     end
 end

@@ -30,7 +30,7 @@
 
     <div class='field mb-3'>
       <%= f.label :gender_id, class: 'form-label' %>
-      <%= collection_radio_buttons('client', 'gender_id', Gender.all, :id, :name) %>
+      <%= collection_radio_buttons('client', 'gender', Client.genders.hash, :first, :first) %>
     </div>
 
     <div class='field mb-3'>

@@ -17,7 +17,7 @@
 
         <div class="gender field mb-3">
           <p>Gender<br>
-            <%= collection_check_boxes('filters', 'gender_ids', Gender.all, :id, :name) %>
+            <%= collection_check_boxes('filters', 'genders', Client.genders.hash, :first, :first) %>
           </p>
         </div>
 

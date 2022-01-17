@@ -15,9 +15,8 @@ class HoursCompletedTest < ActiveSupport::TestCase
 
     technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7)
     technique1.problems << Problem.find_by_name('Depression')
-    # TODO
-    # technique1.genders << Gender.find_by_name('Male')
-    # technique1.genders << Gender.find_by_name('Female')
+    technique1.genders << Gender.find_by_name('Male')
+    technique1.genders << Gender.find_by_name('Female')
 
     client1.techniques << technique1
 
