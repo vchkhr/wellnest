@@ -1,5 +1,4 @@
 class TechniquesController < InheritedResources::Base
-    
   def show
     @technique = Technique.find_by_id(params[:id])
 
@@ -24,13 +23,13 @@ class TechniquesController < InheritedResources::Base
       @techniques = Technique.all
     else
       filters = params[:filters].slice!(:problem_ids, :genders)
-      @techniques = []
+      @techniques = Technique.all
 
       if filters[:problem_ids].count > 1
         problems = filters[:problem_ids].split(',')
 
         problems.each do |problem|
-          @techniques += Technique.joins(:problems_techniques).where('problems_techniques.problem_id' => problem)
+          @techniques = @techniques.joins(:problems_techniques).where('problems_techniques.problem_id' => problem)
         end
 
       end
@@ -38,16 +37,12 @@ class TechniquesController < InheritedResources::Base
       if filters[:genders].count > 1
         genders = filters[:genders].join(',')
         
-        if genders == 'female,male'
-          @techniques += Technique.both
-        elsif genders == 'male'
-          @techniques += Technique.males
+        if genders == 'male'
+          @techniques = @techniques.males
         elsif genders == 'female'
-          @techniques += Technique.females
+          @techniques = @techniques.females
         end
       end
-
-      @techniques.uniq!
     end
   end
 
