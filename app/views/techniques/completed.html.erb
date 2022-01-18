@@ -16,7 +16,7 @@
     <div class="left-column">
       <div class="techniques">
         <% techniques_completed(current_user.client).each do |technique| %>
-          <%= render 'layouts/technique', technique: technique, show_continue: true, show_details: false, for_coach: false %>
+          <%= render 'layouts/technique', technique: technique, show_continue: true, show_details: false, for_view: "client" %>
         <% end %>
       </div>
     </div>

@@ -37,6 +37,9 @@ coach5 = Coach.create!(age: 32, user: user8, gender: 'male', education: 'educati
 user9 = User.create!(name: 'Scarlett Davies', email: 'scarlett@davies.com', password: 'abc12345')
 coach6 = Coach.create!(age: 31, user: user9, gender: 'female', education: 'education', work: 'work', licenses: 'licenses', links: 'http://example.org', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
 
+user10 = User.create!(name: 'Vickie Poole', email: 'vickie@poole.com', password: 'abc12345')
+coach7 = Coach.create!(age: 61, user: user10, gender: 'female', education: 'Soldering worker', work: 'Century House', licenses: '9320473327', links: 'https://jourrapide.com', problems: [Problem.find_by_name('Anxiety'), Problem.find_by_name('Depression')])
+
 technique1 = Technique.create!(title: 'Cognitive - Behavioral Therapy', description: 'Elimination of the dependence of emotions and human behavior on his thoughts.', age_start: 25, age_end: 35, duration_start: 6, duration_end: 7, image: 'behaviour-therapy.jpg', gender: 'both')
 technique1.problems << Problem.find_by_name('Depression')
 

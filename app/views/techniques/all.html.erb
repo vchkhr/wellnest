@@ -31,7 +31,7 @@
   <div class="right-column">
     <div class="techniques">
       <% @techniques.each do |technique| %>
-        <%= render 'layouts/technique', technique: technique, show_details: true, for_coach: true %>
+        <%= render 'layouts/technique', technique: technique, show_details: true, for_view: "coach" %>
       <% end %>
     </div>
   </div>

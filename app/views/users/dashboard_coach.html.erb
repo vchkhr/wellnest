@@ -54,7 +54,7 @@
     <div class="techniques">
       <% Client.where_coach(current_user.coach).each do |client| %>
         <% techniques_in_progress(client).each do |technique| %>
-          <%= render 'layouts/technique', technique: technique, show_details: true, for_coach: true %>
+          <%= render 'layouts/technique', technique: technique, show_details: true, for_view: "coach" %>
         <% end %>
       <% end %>
     </div>

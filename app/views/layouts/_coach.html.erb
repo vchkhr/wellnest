@@ -39,7 +39,9 @@
     <% end %>
 
     <div class="link">
-      <% if Coach.for_client(current_user.client).empty? %>
+      <% if current_user.nil? %>
+        <p><%= link_to 'SEND AN INVITATION', login_path %></p>
+      <% elsif Coach.for_client(current_user.client).empty? %>
         <p><%= link_to 'SEND AN INVITATION', new_invitation_path(coach_id: user.coach.id) %></p>
       <% elsif Coach.for_client(current_user.client).first.id == user.coach.id %>
         <p><%= link_to 'END COOPERATION', user.coach.invitations.where(client: current_user.client, status: 1).last %></p>
@@ -48,7 +50,7 @@
       <% end %>
     </div>
   
-  <% else %>
+  <% elsif !current_user.nil? %>
     <div class="link">
       <p><%= link_to 'SEE DETAILS', coach_path(user.coach) %></p>
     </div>

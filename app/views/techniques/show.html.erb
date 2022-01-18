@@ -50,7 +50,7 @@
     </div>
 
     <div class="technique">
-      <%= render 'layouts/technique', technique: @technique, show_continue: false, for_coach: false %>
+      <%= render 'layouts/technique', technique: @technique, show_continue: false, for_view: "client" %>
     </div>
   </div>
 
@@ -82,7 +82,7 @@
     </div>
 
     <div class="technique">
-      <%= render 'layouts/technique', technique: @technique, show_details: false, for_coach: true %>
+      <%= render 'layouts/technique', technique: @technique, show_details: false, for_view: "coach" %>
       
       <div class="link">
         <p><%= link_to 'RECOMMEND TO CLIENTS', new_clients_technique_path(technique_id: @technique.id), class: 'btn btn-primary' %></p>

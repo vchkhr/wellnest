@@ -1,5 +1,5 @@
 <div class="technique">
-  <% unless for_coach %>
+  <% if for_view == 'client' %>
     <div class="tag badge rounded-pill bg-secondary"><%= completed_steps_in_technique(technique) %>/<%= technique.steps.count %> steps passed</div>
   <% end %>
   
@@ -54,12 +54,12 @@
     </p>
 
     <div class="link">
-      <% if for_coach %>
+      <% if for_view == 'coach' %>
         <% if show_details == true %>
           <p><%= link_to "DETAILS", technique_path(technique) %><p>
         <% end %>
 
-      <% else %>
+      <% elsif for_view == 'client' %>
         <% if show_continue == true %>
           <p>
             <% if completed_steps_in_technique(technique) == 0 %>
