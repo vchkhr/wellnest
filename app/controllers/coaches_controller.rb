@@ -9,13 +9,13 @@ class CoachesController < ApplicationController
       filters[:problem_ids].shift(1)
       filters[:genders].shift(1)
       
-      @coaches = []
+      @coaches = Coach.all
 
       unless filters[:problem_ids].empty?
         problems = filters[:problem_ids].split(',')
 
         problems.each do |problem|
-          @coaches += Coach.joins(:coaches_problems).where('coaches_problems.problem_id' => problem)
+          @coaches = @coaches.joins(:coaches_problems).where('coaches_problems.problem_id' => problem)
         end
 
       end
@@ -23,16 +23,12 @@ class CoachesController < ApplicationController
       unless filters[:genders].empty?
         genders = filters[:genders].join(',')
         
-        if genders == 'female,male'
-          @coaches += Coach.all
-        elsif genders == 'male'
-          @coaches += Coach.males
+        if genders == 'male'
+          @coaches = @coaches.males
         elsif genders == 'female'
-          @coaches += Coach.females
+          @coaches = @coaches.females
         end
       end
-
-      @coaches.uniq!
     end
   end
 
