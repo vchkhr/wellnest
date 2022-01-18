@@ -10,7 +10,9 @@ class CompletedStepsController < InheritedResources::Base
     current_user.client.increment!(:current_time, time_change)
 
     if params[:last_step] == "true"
-      current_user.client.increment!(:current_time, (technique.duration_end + technique.duration_start) / 2.0)
+      current_user.client.increment!(:current_time, (technique.duration_end + technique.duration_start) / 2.0 * (-1))
+      current_user.client.update(current_time: 0) if current_user.client.current_time < 0
+      
       current_user.client.increment!(:total_progress, 1)
 
       current_user.client.increment!(:current_progress, -1)
