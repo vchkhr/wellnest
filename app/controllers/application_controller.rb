@@ -26,8 +26,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :cover_image
 
-  def completed_steps_in_technique(technique)
-    ClientManager::CompletedStepsInTechnique.call(technique)
+  def completed_steps_in_technique(client, technique)
+    ClientManager::CompletedStepsInTechnique.call(client, technique)
   end
   helper_method :completed_steps_in_technique
 

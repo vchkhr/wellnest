@@ -23,6 +23,6 @@ class CompletedStepsInTechniqueTest < ActiveSupport::TestCase
     CompletedStep.create!(step: technique1.steps[0], client: client1)
     CompletedStep.create!(step: technique1.steps[1], client: client1)
 
-    assert_equal 2, ClientManager::CompletedStepsInTechnique.call(technique1)
+    assert_equal 2, ClientManager::CompletedStepsInTechnique.call(client1, technique1)
   end
 end

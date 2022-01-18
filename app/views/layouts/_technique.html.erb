@@ -1,6 +1,6 @@
 <div class="technique">
   <% if for_view == 'client' %>
-    <div class="tag badge rounded-pill bg-secondary"><%= completed_steps_in_technique(technique) %>/<%= technique.steps.count %> steps passed</div>
+    <div class="tag badge rounded-pill bg-secondary"><%= completed_steps_in_technique(current_user.client, technique) %>/<%= technique.steps.count %> steps passed</div>
   <% end %>
   
   <div class="symptoms d-flex">
@@ -62,9 +62,9 @@
       <% elsif for_view == 'client' %>
         <% if show_continue == true %>
           <p>
-            <% if completed_steps_in_technique(technique) == 0 %>
+            <% if completed_steps_in_technique(current_user.client, technique) == 0 %>
               <%= link_to "GET STARTED", technique_path(technique) %>
-            <% elsif completed_steps_in_technique(technique) < technique.steps.count %>
+            <% elsif completed_steps_in_technique(current_user.client, technique) < technique.steps.count %>
               <%= link_to "CONTINUE", technique_path(technique) %>
             <% else %>
               <%= link_to "RESTART", technique_path(technique) %>

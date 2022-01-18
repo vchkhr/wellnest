@@ -13,7 +13,7 @@ module ClientManager
     def techniques_completed
       techniques = []
       Technique.where_client(@client).each do |technique|
-          techniques << technique if ClientManager::CompletedStepsInTechnique.call(technique) == technique.steps.count
+          techniques << technique if ClientManager::CompletedStepsInTechnique.call(@client, technique) == technique.steps.count
       end
       techniques
     end

@@ -1,6 +1,7 @@
 module ClientManager
   class CompletedStepsInTechnique < ApplicationService
-    def initialize(technique)
+    def initialize(client, technique)
+      @client = client
       @technique = technique
     end
   
@@ -12,7 +13,7 @@ module ClientManager
   
     def completed_steps_count
       count = 0
-      @technique.steps.each { |step| count += 1 unless CompletedStep.find_by_step_id(step.id).nil? }
+      @technique.steps.each { |step| count += 1 unless CompletedStep.where(client: @client, step: step).empty? }
       count
     end
   end
