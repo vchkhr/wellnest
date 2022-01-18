@@ -22,8 +22,8 @@
     </div>
 
     <div class="right-column">
-      <% unless Coach.for_client(current_user.client).empty? %>
-        <%= render 'layouts/coach', user: Coach.for_client(current_user.client).first.user, full_info: true %>
+      <% unless Coach.where_client(current_user.client).empty? %>
+        <%= render 'layouts/coach', user: Coach.where_client(current_user.client).first.user, full_info: true %>
       <% end %>
     </div>
   </div>

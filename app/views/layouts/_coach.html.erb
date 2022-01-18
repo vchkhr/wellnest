@@ -41,9 +41,9 @@
     <div class="link">
       <% if current_user.nil? %>
         <p><%= link_to 'SEND AN INVITATION', login_path %></p>
-      <% elsif Coach.for_client(current_user.client).empty? %>
+      <% elsif Coach.where_client(current_user.client).empty? %>
         <p><%= link_to 'SEND AN INVITATION', new_invitation_path(coach_id: user.coach.id) %></p>
-      <% elsif Coach.for_client(current_user.client).first.id == user.coach.id %>
+      <% elsif Coach.where_client(current_user.client).first.id == user.coach.id %>
         <p><%= link_to 'END COOPERATION', user.coach.invitations.where(client: current_user.client, status: 1).last %></p>
       <% else %>
         <p>You cannot invite a coach. First, complete the cooperation with your current coach.</p>

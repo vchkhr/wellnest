@@ -8,7 +8,7 @@ class LikesController < InheritedResources::Base
       @like = Like.new(is_like: params['is_like'], client: current_user.client, technique: technique)
 
       if params['is_like'] == 'true'
-        Coach.for_client(current_user.client).first.increment!(:likes_count, 1)
+        Coach.where_client(current_user.client).first.increment!(:likes_count, 1)
       end
       
       respond_to do |format|

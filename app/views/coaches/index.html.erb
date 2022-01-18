@@ -6,7 +6,7 @@
 <div class="coaches-view">
   <div class="left-column">
     <div class="coach-card">
-      <% if Coach.for_client(current_user.client).empty? %>
+      <% if Coach.where_client(current_user.client).empty? %>
         <% if Coach.unconfirmed(current_user.client).empty? %>
           <p><%= link_to "You don't have a coach yet", coaches_path %></p>
         <% else %>
@@ -18,13 +18,13 @@
 
         <div class="image-info">
           <div class="image">
-            <%= image_tag(profile_image(Coach.for_client(current_user.client).first.user), size: "50x50", alt: Coach.for_client(current_user.client).first.name) %>
+            <%= image_tag(profile_image(Coach.where_client(current_user.client).first.user), size: "50x50", alt: Coach.where_client(current_user.client).first.name) %>
           </div>
 
           <div class="info">
             <p>
               Current coach:<br>
-              <strong><%= Coach.for_client(current_user.client).first.name %></strong><br>
+              <strong><%= Coach.where_client(current_user.client).first.name %></strong><br>
               <%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %>
             </p>
           </div>
@@ -58,7 +58,7 @@
   <div class="right-column">
     <div class="coaches">
       <% @coaches.each do |coach| %>
-        <% if !Coach.for_client(current_user.client).empty? and Coach.for_client(current_user.client).first.id == coach.id %>
+        <% if !Coach.where_client(current_user.client).empty? and Coach.where_client(current_user.client).first.id == coach.id %>
         <% else %>
           <%= render 'layouts/coach', user: coach.user, full_info: false %>
         <% end %>

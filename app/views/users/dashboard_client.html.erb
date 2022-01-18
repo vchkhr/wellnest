@@ -103,7 +103,7 @@
     </div>
 
     <div class="coach-card">
-      <% if Coach.for_client(current_user.client).empty? %>
+      <% if Coach.where_client(current_user.client).empty? %>
         <% if Coach.unconfirmed(current_user.client).empty? %>
           <p><%= link_to "You don't have a coach yet", coaches_path %></p>
         <% else %>
@@ -116,11 +116,11 @@
 
         <div class="image-info">
           <div class="image">
-            <%= image_tag(profile_image(Coach.for_client(current_user.client).first.user), size: "50x50", alt: Coach.for_client(current_user.client).first.name) %>
+            <%= image_tag(profile_image(Coach.where_client(current_user.client).first.user), size: "50x50", alt: Coach.where_client(current_user.client).first.name) %>
           </div>
 
           <div class="info">
-            <p><strong><%= Coach.for_client(current_user.client).first.name %></strong></p>
+            <p><strong><%= Coach.where_client(current_user.client).first.name %></strong></p>
             <p><%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %></p>
           </div>
         </div>
