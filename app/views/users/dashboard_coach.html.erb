@@ -45,7 +45,7 @@
 
     <div class="clients">
       <% Client.where_coach(current_user.coach).each do |client| %>
-        <%= render 'layouts/clients/client', user: client.user %>
+        <%= render 'layouts/client', user: client.user, invitation: nil %>
       <% end %>
     </div>
 
@@ -54,7 +54,7 @@
     <div class="techniques">
       <% Client.where_coach(current_user.coach).each do |client| %>
         <% techniques_in_progress(client).each do |technique| %>
-          <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
+          <%= render 'layouts/technique', technique: technique, show_details: true, for_coach: true %>
         <% end %>
       <% end %>
     </div>
@@ -109,4 +109,4 @@
 
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

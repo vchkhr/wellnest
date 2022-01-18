@@ -16,17 +16,17 @@
     <div class="left-column">
       <div class="techniques">
         <% techniques_in_progress(current_user.client).each do |technique| %>
-          <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
+          <%= render 'layouts/technique', technique: technique, show_continue: true, for_coach: false %>
         <% end %>
       </div>
     </div>
 
     <div class="right-column">
       <% unless Coach.for_client(current_user.client).empty? %>
-        <%= render 'layouts/coaches/coach', user: Coach.for_client(current_user.client).first.user %>
+        <%= render 'layouts/coach', user: Coach.for_client(current_user.client).first.user, full_info: true %>
       <% end %>
     </div>
   </div>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

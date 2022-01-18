@@ -12,10 +12,10 @@
 
   <div class="clients">
     <% @invitations.each do |invitation| %>
-      <%= render 'layouts/clients/invitations', user: invitation.client.user, invitation: invitation %>
+      <%= render 'layouts/client', user: invitation.client.user, invitation: invitation %>
     <% end %>
   </div>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>
 

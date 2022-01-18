@@ -1,4 +1,8 @@
 <div class="technique">
+  <% unless for_coach %>
+    <div class="tag badge rounded-pill bg-secondary"><%= completed_steps_in_technique(technique) %>/<%= technique.steps.count %> steps passed</div>
+  <% end %>
+  
   <div class="symptoms d-flex">
     <% technique.problems.each do |problem| %>
       <div class="symptom"><%= problem.name %></div>
@@ -30,6 +34,7 @@
         <% end %>
         </span><br />
 
+        <br />
         <span class="text-muted">Steps:</span> <%= technique.steps.count %><br />
 
         <span class="text-muted">Duration:</span>
@@ -40,7 +45,6 @@
         <% end %>
         <span>hours</span><br />
 
-        <br />
         <span class="text-muted">
           Participants: <%= technique.clients.count %> &emsp;
           Likes: <%= technique.likes.where(is_like: true).count %> &emsp;
@@ -48,11 +52,28 @@
         </span>
       </small>
     </p>
-  
+
     <div class="link">
-      <% if show_details == true %>
-        <p><%= link_to "DETAILS", technique_path(technique) %><p>
+      <% if for_coach %>
+        <% if show_details == true %>
+          <p><%= link_to "DETAILS", technique_path(technique) %><p>
+        <% end %>
+
+      <% else %>
+        <% if show_continue == true %>
+          <p>
+            <% if completed_steps_in_technique(technique) == 0 %>
+              <%= link_to "GET STARTED", technique_path(technique) %>
+            <% elsif completed_steps_in_technique(technique) < technique.steps.count %>
+              <%= link_to "CONTINUE", technique_path(technique) %>
+            <% else %>
+              <%= link_to "RESTART", technique_path(technique) %>
+            <% end %>
+          </p>
+        <% end %>
+      
       <% end %>
     </div>
   </div>
+
 </div>

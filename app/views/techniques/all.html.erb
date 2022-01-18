@@ -31,11 +31,11 @@
   <div class="right-column">
     <div class="techniques">
       <% @techniques.each do |technique| %>
-        <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
+        <%= render 'layouts/technique', technique: technique, show_details: true, for_coach: true %>
       <% end %>
     </div>
   </div>
 
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

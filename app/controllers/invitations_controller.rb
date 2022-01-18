@@ -1,6 +1,5 @@
 class InvitationsController < InheritedResources::Base
   before_action :set_invitation, only: %i[ show edit update destroy ]
-  helper UserHelpers
 
   def index
     @invitations = Invitation.where(status: 0, coach: current_user.coach)

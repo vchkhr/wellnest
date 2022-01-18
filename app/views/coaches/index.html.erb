@@ -60,7 +60,7 @@
       <% @coaches.each do |coach| %>
         <% if !Coach.for_client(current_user.client).empty? and Coach.for_client(current_user.client).first.id == coach.id %>
         <% else %>
-          <%= render 'layouts/coaches/small', user: coach.user %>
+          <%= render 'layouts/coach', user: coach.user, full_info: false %>
         <% end %>
       <% end %>
     </div>
@@ -68,4 +68,4 @@
 
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

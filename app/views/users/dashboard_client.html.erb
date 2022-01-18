@@ -69,7 +69,7 @@
     
     <div class="techniques">
       <% Technique.where_client(current_user.client).each do |technique| %>
-        <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
+        <%= render 'layouts/technique', technique: technique, show_continue: true, for_coach: false %>
       <% end %>
     </div>
 
@@ -149,4 +149,4 @@
 
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>
