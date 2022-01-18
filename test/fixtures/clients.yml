@@ -4,10 +4,10 @@ one:
   age: 20
   bio: MyString
   user: one
-  gender: one
+  gender_cd: 'male'
 
 two:
   age: 21
   bio: MyString
   user: two
-  gender: two
+  gender_cd: 'female'

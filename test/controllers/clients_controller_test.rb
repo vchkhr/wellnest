@@ -2,24 +2,17 @@ require "test_helper"
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    Gender.create(name: 'Male')
-    Gender.create(name: 'Female')
+    Problem.create!(name: 'Anxiety')
+    Problem.create!(name: 'Depression')
+    Problem.create!(name: 'Irritability')
+    Problem.create!(name: 'Stress')
 
-    Problem.create(name: 'Anxiety')
-    Problem.create(name: 'Depression')
-    Problem.create(name: 'Irritability')
-    Problem.create(name: 'Stress')
-
-    @user = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345')
-    @client = Client.create!(age: 30, user: @user, gender: Gender.find_by_name('Female'), problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
+    user = User.create!(name: 'Ann Albertson', email: 'ann@albertson.com', password: 'abc12345')
+    @client = Client.create!(age: 30, user: user, gender: 'female', problems: [Problem.find_by_name('Depression'), Problem.find_by_name('Irritability'), Problem.find_by_name('Stress')])
   end
 
   test "should create client" do
-    if @client.valid?
-      assert true
-    else
-      assert false
-    end
+    assert @client.valid?
   end
 
   test "should show client" do
@@ -33,7 +26,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update client" do
-    patch client_url(@client), params: { client: { age: 31, bio: 'Test bio' } }
+    patch client_url(@client), params: { client: { age: 31, bio: 'Test bio', problem_ids: ['1'] } }
     assert_redirected_to dashboard_url
   end
 

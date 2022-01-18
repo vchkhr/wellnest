@@ -51,8 +51,10 @@ class InvitationsController < InheritedResources::Base
     @invitation.destroy
 
     respond_to do |format|
-      text = "You have ended cooperation with #{coach_name}"
-      Notification.create!(client: current_user.client, text: text)
+      unless current_user.nil?
+        text = "You have ended cooperation with #{coach_name}"
+        Notification.create!(client: current_user.client, text: text)
+      end
 
       format.html { redirect_to dashboard_path, notice: text }
       format.json { head :no_content }
