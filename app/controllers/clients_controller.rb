@@ -26,7 +26,7 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
-        text = "#{@client.user.name}, you have completed the registration"
+        text = "#{@client.name}, you have completed the registration"
 
         Notification.create!(client: @client, text: text)
         format.html { redirect_to dashboard_path, notice: text }

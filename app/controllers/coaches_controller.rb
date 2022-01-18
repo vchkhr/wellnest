@@ -57,7 +57,7 @@ class CoachesController < ApplicationController
 
     respond_to do |format|
       if @coach.save
-        text = "#{@coach.user.name}, you have completed the registration"
+        text = "#{@coach.name}, you have completed the registration"
 
         CoachNotification.create!(coach: @coach, text: text)
         format.html { redirect_to dashboard_path, notice: text }

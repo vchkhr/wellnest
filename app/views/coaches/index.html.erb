@@ -11,20 +11,20 @@
           <p><%= link_to "You don't have a coach yet", coaches_path %></p>
         <% else %>
           <p>Waiting for confirmation</p>
-          <p><strong><%= Coach.unconfirmed(current_user.client).first.user.name %></strong></p>
+          <p><strong><%= Coach.unconfirmed(current_user.client).first.name %></strong></p>
           <p><%= link_to 'CANCEL', current_user.client.invitations.where(status: 0).last %></p>
         <% end %>
       <% else %>
 
         <div class="image-info">
           <div class="image">
-            <%= image_tag(profile_image(Coach.for_client(current_user.client).first.user), size: "50x50", alt: Coach.for_client(current_user.client).first.user.name) %>
+            <%= image_tag(profile_image(Coach.for_client(current_user.client).first.user), size: "50x50", alt: Coach.for_client(current_user.client).first.name) %>
           </div>
 
           <div class="info">
             <p>
               Current coach:<br>
-              <strong><%= Coach.for_client(current_user.client).first.user.name %></strong><br>
+              <strong><%= Coach.for_client(current_user.client).first.name %></strong><br>
               <%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %>
             </p>
           </div>

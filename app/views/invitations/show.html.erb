@@ -7,9 +7,9 @@
   <h1>Cancel Invitation</h1>
 
   <% if @invitation.status == 0 %>
-    <p>Are you sure you want to cancel your invitation to cooperation with <strong><%= @invitation.coach.user.name %></strong>?</p>
+    <p>Are you sure you want to cancel your invitation to cooperation with <strong><%= @invitation.coach.name %></strong>?</p>
   <% elsif @invitation.status == 1 %>
-    <p>Are you sure you want to end cooperation with <strong><%= @invitation.coach.user.name %></strong>?</p>
+    <p>Are you sure you want to end cooperation with <strong><%= @invitation.coach.name %></strong>?</p>
   <% end %>
 
   <%= link_to 'CANCEL', dashboard_path, class: 'btn btn-primary mb-3' %>

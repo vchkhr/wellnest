@@ -79,12 +79,12 @@
     <div class="client-card">
       <div class="image-info">
         <div class="image">
-          <%= image_tag(profile_image(@client.user), size: "50x50", alt: @client.user.name) %>
+          <%= image_tag(profile_image(@client.user), size: "50x50", alt: @client.name) %>
         </div>
 
         <div class="info">
           <p>
-            <strong><%= @client.user.name %></strong>
+            <strong><%= @client.name %></strong>
           </p>
           
           <p><%= @client.user.email %></p>

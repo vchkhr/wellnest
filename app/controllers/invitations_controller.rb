@@ -7,7 +7,7 @@ class InvitationsController < InheritedResources::Base
 
   def new
     coach = Coach.find(params['coach_id'])
-    @coach_name = coach.user.name
+    @coach_name = coach.name
 
     if params.key?(:status)
       Invitation.where(client: current_user.client).destroy_all
@@ -37,7 +37,7 @@ class InvitationsController < InheritedResources::Base
     respond_to do |format|
       action = params['is_confirmed'] == 'true' ? 'confirmed' : 'refused'
 
-      text = "You #{action} invitation from #{client.user.name}"
+      text = "You #{action} invitation from #{client.name}"
       Notification.create!(client: client, text: "Coach #{current_user.name} #{action} your invitation")
       CoachNotification.create!(coach: coach, text: text)
 
@@ -47,7 +47,7 @@ class InvitationsController < InheritedResources::Base
   end
 
   def destroy
-    coach_name = @invitation.coach.user.name
+    coach_name = @invitation.coach.name
     @invitation.destroy
 
     respond_to do |format|
