@@ -62,7 +62,7 @@ Press `Enter` and now you can use the ActiveAdmin Panel.
 
 ### Testing the Application
 
-You are able to test 5 controllers and 5 Service Objects.
+You are able to test 5 controllers and 4 Service Objects.
 
 1. Run `rails db:environment:set RAILS_ENV=test` in the console.
 2. Run `rails db:test:prepare RAILS_ENV=test`.\
