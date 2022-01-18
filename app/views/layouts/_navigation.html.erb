@@ -1,0 +1,53 @@
+<header class="p-3 navigation">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start nav p-2">
+
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none logo">MHC</a>
+      
+      <% if nav_for == 'home' %>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#how-does-it-work" class="nav-link px-2">How does it work?</a></li>
+          <li><a href="#techniques" class="nav-link px-2">Techniques</a></li>
+          <li><a href="#coaches" class="nav-link px-2">Coaches</a></li>
+        </ul>
+
+        <div class="text-end">
+          <%= link_to "SIGN IN", "login", class: "btn btn-primary me-2" %>
+        </div>
+
+      <% elsif nav_for == 'login' %>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="/login" class="nav-link px-2">Sign in</a></li>
+          <li><a href="/signup" class="nav-link px-2">Sign up</a></li>
+          <li><a href="/reset-password" class="nav-link px-2">Reset Password</a></li>
+        </ul>
+
+      <% elsif nav_for == 'app' %>
+        <% unless user.nil? %>
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/dashboard" class="nav-link px-2">Dashboard</a></li>
+
+            <% if user.coach.nil? %>
+              <li><a href="/my-techniques" class="nav-link px-2">My Techniques</a></li>
+              <li><a href="/coaches" class="nav-link px-2">Coaches</a></li>
+            <% else %>
+              <li><a href="/clients" class="nav-link px-2">My Clients
+                <% if current_user.coach.invitations_count > 0 %>
+                  (<%= current_user.coach.invitations_count %>)</a></li>
+                <% end %>
+              </a></li>
+              
+              <li><a href="/all-techniques" class="nav-link px-2">All Techniques</a></li>
+            <% end %>
+          </ul>
+
+          <div class="text-end">
+            <%= image_tag(profile_image(user), size: "30x30", alt: user.name) %> &nbsp;
+            <a href="/logout" class="btn btn-primary me-2">LOG OUT</a>
+          </div>
+        <% end %>
+
+      <% end %>
+    </div>
+  </div>
+</header>

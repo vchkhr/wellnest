@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/home' %>
+<%= render 'layouts/navigation', nav_for: 'home' %>
 
 <div class="index">
   <div class="banner banner-welcome">
@@ -35,7 +35,7 @@
   </div>
 
   <div class="banner banner-work">
-    <h1>How does it work?</h1>
+    <h1><a name="how-does-it-work"></a>How does it work?</h1>
 
     <div class="steps d-flex">
       <div class="flex-fill">
@@ -87,7 +87,7 @@
   </div>
 
   <div class="banner banner-techniques">
-    <h1>Techniques</h1>
+    <h1><a name="techniques"></a>Techniques</h1>
 
     <p class="description text-center">Our service offers the best techniques for our users</p>
 
@@ -214,7 +214,7 @@
   </div>
 
   <div class="banner banner-coaches">
-    <h1>Coaches</h1>
+    <h1><a name="coaches"></a>Coaches</h1>
 
     <p class="description text-center">Ability to choose the coach, who will select each user technique individually</p>
 

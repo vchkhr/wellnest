@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/login' %>
+<%= render 'layouts/navigation', nav_for: 'login' %>
 
 <div class="login">
   <p id="alert"><%= alert %></p>
@@ -6,7 +6,7 @@
 
   <h1 class="text-center">Create account</h1>
 
-  <p class="text-center">Already have an account? &nbsp; <strong><%= link_to "Sign in", login_path %></strong></p>
+  <p class="description text-center">Already have an account? &nbsp; <strong><%= link_to "Sign in", login_path %></strong></p>
 
   <%= form_for @user do |f| %>
     <% if @user.errors.any? %>
