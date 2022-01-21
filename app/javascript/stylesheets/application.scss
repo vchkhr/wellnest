@@ -356,23 +356,25 @@ div.dashboard {
                 div.number-description {
                     display: flex;
 
-                    div.number {
-                        font-size: 40px;
-                        margin-right: 10px;
-                    }
-
                     div.description {
                         margin-top: 13px;
                     }
                 }
+
+                div.number {
+                    font-size: 40px;
+                    margin-right: 10px;
+                }
             }
         }
 
-        div.techniques {
+        div.techniques,
+        div.clients {
             display: flex;
             flex-wrap: wrap;
 
-            div.technique {
+            div.technique,
+            div.client-card {
                 width: calc(50% - 20px);
                 margin-right: 20px;
                 margin-bottom: 20px;
