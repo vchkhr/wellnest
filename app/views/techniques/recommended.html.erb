@@ -1,15 +1,32 @@
-<h1>My Techniques</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
-<p><%= link_to "Dashboard", dashboard_path %></p>
-<p><%= link_to "My", my_techniques_path %></p>
-<p>Recommended</p>
-<p><%= link_to "In progress", in_progress_techniques_path %></p>
-<p><%= link_to "Completed", completed_techniques_path %></p>
+<p id="alert"><%= alert %></p>
+<p id="notice"><%= notice %></p>
 
-<% unless ClientManager::CoachUser.call(current_user.client).nil? %>
-  <%= render 'layouts/coaches/coach', user: ClientManager::CoachUser.call(current_user.client) %>
-<% end %>
+<div class="all-techniques">
+  <div class="links">
+    <p><%= link_to "My Techniques", my_techniques_path %></p>
+    <p>Recommended</p>
+    <p><%= link_to "In progress", in_progress_techniques_path %></p>
+    <p><%= link_to "Completed", completed_techniques_path %></p>
+  </div>
+  <hr />
 
-<% ClientManager::TechniquesNotStarted.call(current_user.client).each do |technique| %>
-  <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
-<% end %>
+  <div class="techniques-coach">
+    <div class="left-column">
+      <div class="techniques">
+        <% ClientManager::TechniquesNotStarted.call(current_user.client).each do |technique| %>
+          <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <% unless ClientManager::CoachUser.call(current_user.client).nil? %>
+        <%= render 'layouts/coaches/coach', user: ClientManager::CoachUser.call(current_user.client) %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render 'layouts/footer/footer' %>
