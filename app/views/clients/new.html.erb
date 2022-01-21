@@ -1,43 +1,49 @@
-<h1>Hello, <%= current_user.name %></h1>
+<%= render 'layouts/navigation/login' %>
 
-<p><strong>CLIENT &nbsp; <%= link_to "COACH", new_coach_path %></strong></p>
+<div class="login">
+  <p id="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
 
-<p>You are registering as a Client in our system. Please, share some personal information about you so that we can personalize your onboarding experience</p>
+  <h1 class="text-center">Hello, <%= current_user.name %></h1>
 
-<%= form_for @client do |f| %>
-  <% if @client.errors.any? %>
-    <div class='error_messages'>
-      <h2>Form is invalid</h2>
-      <ul>
+  <p class="text-center"><strong>CLIENT &nbsp; <%= link_to "COACH", new_coach_path %></strong></p>
+
+  <p class="text-center">You are registering as a Client in our system. Please, share some personal information about you so that we can personalize your onboarding experience</p>
+
+  <%= form_for @client do |f| %>
+    <% if @client.errors.any? %>
+      <div class='error_messages'>
         <% for message in @client.errors.full_messages %>
-          <li><%= message %></li>
+          <p class='color-red'><%= message %></p>
         <% end %>
-      </ul>
+      </div>
+    <% end %>
+
+    <div class='field mb-3'>
+      <%= f.label :image, class: 'form-label' %>
+      <%= f.file_field :image, class: 'form-control' %>
+      <p>Image format should be png, jpg no more than 5 Mb</p>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :age, class: 'form-label' %>
+      <%= f.number_field :age, in: 18..99, class: 'form-control' %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :gender_id, class: 'form-label' %>
+      <%= collection_radio_buttons('client', 'gender_id', Gender.all, :id, :name) %>
+    </div>
+
+    <div class='field mb-3'>
+      <%= f.label :problem_ids, class: 'form-label' %>
+      <%= collection_check_boxes('client', 'problem_ids', Problem.all, :id, :name) %>
+    </div>
+
+    <div class='actions'>
+      <%= f.submit 'SAVE', class: 'btn btn-primary' %>
     </div>
   <% end %>
+</div>
 
-  <div class='field'>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-    <p>Image format should be png, jpg no more than 5 Mb</p>
-  </div>
-
-  <div class='field'>
-    <%= f.label :age %>
-    <%= f.number_field :age, in: 18..99 %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :gender_id %>
-    <%= collection_radio_buttons('client', 'gender_id', Gender.all, :id, :name) %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :problem_ids %>
-    <%= collection_check_boxes('client', 'problem_ids', Problem.all, :id, :name) %>
-  </div>
-
-  <div class='actions'>
-    <%= f.submit 'SAVE' %>
-  </div>
-<% end %>
+<%= render 'layouts/footer/footer' %>

@@ -1,27 +1,36 @@
-<h1>Create new password</h1>
+<%= render 'layouts/navigation/login' %>
 
-<p>Your new password must contain at least 8 characters, include a number and lowercase letter</p>
+<div class="login">
+  <p id="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
 
-<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
-  <% if @user.errors.any? %>
-    <div class='error_messages'>
-      <h2>Form is invalid</h2>
-      <ul>
+  <h1 class="text-center">Create new password</h1>
+
+  <p class="text-center">Your new password must contain at least 8 characters, include a number and lowercase letter</p>
+
+  <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+    <% if @user.errors.any? %>
+      <div class='error_messages'>
         <% for message in @user.errors.full_messages %>
-          <li><%= message %></li>
+          <p class='color-red'><%= message %></p>
         <% end %>
-      </ul>
+      </div>
+    <% end %>
+
+    <div class='field mb-3'>
+      <%= f.label :password, class: 'form-label' %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+    <div class='field mb-3'>
+      <%= f.label :password_confirmation, class: 'form-label' %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+
+    <div class='actions mb-3'>
+      <%= f.submit 'SAVE CHANGES', class: 'btn btn-primary' %>
     </div>
   <% end %>
+</div>
 
-  <div class='field'>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div class='field'>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
+<%= render 'layouts/footer/footer' %>
 
-  <div class='actions'><%= f.submit 'SAVE CHANGES' %></div>
-<% end %>

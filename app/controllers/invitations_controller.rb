@@ -29,7 +29,7 @@ class InvitationsController < InheritedResources::Base
       if @invitation.save
         action = params['is_confirmed'] == 'true' ? "confirmed" : "refused"
 
-        format.html { redirect_to dashboard_path, notice: "You #{action} invitation from client." }
+        format.html { redirect_to dashboard_path, notice: "You #{action} invitation from the client" }
         format.json { render :show, status: :created, location: @invitation }
       end
     end

@@ -26,7 +26,7 @@ class CoachesController < ApplicationController
 
     respond_to do |format|
       if @coach.save
-        format.html { redirect_to dashboard_path, notice: "Coach was successfully created." }
+        format.html { redirect_to dashboard_path, notice: "You have completed the registration as Coach" }
         format.json { render :show, status: :created, location: @coach }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class CoachesController < ApplicationController
   def update
     respond_to do |format|
       if @coach.update(coach_params)
-        format.html { redirect_to dashboard_path, notice: "Personal information was successfully updated." }
+        format.html { redirect_to dashboard_path, notice: "Personal information was successfully updated" }
         format.json { render :show, status: :ok, location: @coach }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class CoachesController < ApplicationController
     @coach.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_url, notice: "Coach was successfully destroyed." }
+      format.html { redirect_to root_url, notice: "Coach was successfully destroyed" }
       format.json { head :no_content }
     end
   end

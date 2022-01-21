@@ -10,7 +10,7 @@ class User < ApplicationRecord
   self.primary_key = "id"
   
   validates :name, presence: true
-  validates :email, presence: true, email: true, uniqueness: true
+  validates :email, email: true, uniqueness: true
   
   has_secure_password
 
