@@ -41,33 +41,27 @@
         <% end %>
         <span>hours</span><br />
 
-        <br />
-      </small>
-    </p>
-  </div>
-
-  <div class="likes">
-    <p class="card-text">
-      <small>
         <span class="text-muted">
           Participants: <%= technique.clients.count %> &emsp;
           Likes: <%= technique.likes.where(is_like: true).count %> &emsp;
           Dislikes: <%= technique.likes.where(is_like: false).count %>
         </span>
       </small>
-      
-      <% if show_continue == true %>
-        <span>
-        <% if ClientManager::CompletedStepsCount.call(technique) == 0 %>
-          <%= link_to "GET STARTED", technique_path(technique) %>
-        <% elsif ClientManager::CompletedStepsCount.call(technique) < technique.steps.count %>
-          <%= link_to "CONTINUE", technique_path(technique) %>
-        <% else %>
-          <%= link_to "RESTART", technique_path(technique) %>
-        <% end %>
-      <br></span>
-      <% end %>
     </p>
+
+    <div class="link">
+      <% if show_continue == true %>
+        <p>
+          <% if ClientManager::CompletedStepsCount.call(technique) == 0 %>
+            <%= link_to "GET STARTED", technique_path(technique) %>
+          <% elsif ClientManager::CompletedStepsCount.call(technique) < technique.steps.count %>
+            <%= link_to "CONTINUE", technique_path(technique) %>
+          <% else %>
+            <%= link_to "RESTART", technique_path(technique) %>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
   </div>
 
 </div>

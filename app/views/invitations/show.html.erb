@@ -1,12 +1,20 @@
+<%= render 'layouts/navigation/app', user: current_user %>
+
+<p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
 
-<p><%= @invitation.coach.user.name %></p>
+<div class="login text-center">
+  <h1>Cancel Invitation</h1>
 
-<% if @invitation.status == 0 %>
-  <p>Are you sure you want to cancel your invitation to cooperation with this coach?</p>
-<% elsif @invitation.status == 1 %>
-  <p>Are you sure you want to end cooperation with this coach?</p>
-<% end %>
+  <% if @invitation.status == 0 %>
+    <p>Are you sure you want to cancel your invitation to cooperation with <strong><%= @invitation.coach.user.name %></strong>?</p>
+  <% elsif @invitation.status == 1 %>
+    <p>Are you sure you want to end cooperation with <strong><%= @invitation.coach.user.name %></strong>?</p>
+  <% end %>
 
-<%= link_to 'CANCEL', dashboard_path %>
-<%= link_to 'YES, I WANT', @invitation, method: :delete, data: { notice: 'Are you sure?' } %>
+  <%= link_to 'CANCEL', dashboard_path, class: 'btn btn-primary mb-3' %>
+  <%= link_to 'YES, I WANT', @invitation, method: :delete, class: 'btn btn-primary' %>
+
+</div>
+
+<%= render 'layouts/footer/footer' %>

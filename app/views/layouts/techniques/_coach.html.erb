@@ -40,24 +40,18 @@
         <span>hours</span><br />
 
         <br />
-      </small>
-    </p>
-  </div>
-
-  <div class="likes">
-    <p class="card-text">
-      <small>
         <span class="text-muted">
           Participants: <%= technique.clients.count %> &emsp;
           Likes: <%= technique.likes.where(is_like: true).count %> &emsp;
           Dislikes: <%= technique.likes.where(is_like: false).count %>
         </span>
       </small>
-      
-      <% if show_details == true %>
-        <span><%= link_to "DETAILS", technique_path(technique) %><br><span>
-      <% end %>
     </p>
+  
+    <div class="link">
+      <% if show_details == true %>
+        <p><%= link_to "DETAILS", technique_path(technique) %><p>
+      <% end %>
+    </div>
   </div>
-
 </div>

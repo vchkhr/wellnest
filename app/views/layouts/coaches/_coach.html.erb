@@ -26,12 +26,13 @@
   <p>Licenses and Certificates: <%= user.coach.licenses %></p>
   <p>Link: <%= link_to user.coach.links.split("://")[1].split("/")[0], user.coach.links %></p>
 
-  <% if ClientManager::Coach.call(current_user.client).nil? %>
-    <p class="text-center"><%= link_to 'SEND AN INVITATION', new_invitation_path(coach_id: user.coach.id) %></p>
-  <% elsif ClientManager::Coach.call(current_user.client).id == user.coach.id %>
-    <p class="text-center"><%= link_to 'END COOPERATION', user.coach.invitations.where(client: current_user.client, status: 1).last %></p>
-  <% else %>
-    <p class="text-center">You cannot invite a coach. First, complete the cooperation with your current coach.</p>
-  <% end %>
-
+  <div class="link">
+    <% if ClientManager::Coach.call(current_user.client).nil? %>
+      <p><%= link_to 'SEND AN INVITATION', new_invitation_path(coach_id: user.coach.id) %></p>
+    <% elsif ClientManager::Coach.call(current_user.client).id == user.coach.id %>
+      <p><%= link_to 'END COOPERATION', user.coach.invitations.where(client: current_user.client, status: 1).last %></p>
+    <% else %>
+      <p>You cannot invite a coach. First, complete the cooperation with your current coach.</p>
+    <% end %>
+  </div>
 </div>

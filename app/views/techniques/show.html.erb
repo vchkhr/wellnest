@@ -55,30 +55,41 @@
   </div>
 
 <% else %>
-  <%= render 'layouts/techniques/coach', technique: @technique, show_details: false %>
+  <div class="technique-view">
+    <div class="step">
+      <% step_count = 0 %>
+      <% @steps.each do |step| %>
+        <% step_count += 1%>
 
-  <p><%= link_to 'RECOMMEND TO CLIENTS', new_clients_technique_path(technique_id: @technique.id) %>
+        <h1><%= step_count %>/<%= @step_all %> <%= step.title %></h1>
 
-  <% step_count = 0 %>
-  <% @steps.each do |step| %>
-    <% step_count += 1%>
+        <p><%= step.description %></p>
 
-    <h1><%= step_count %>/<%= @step_all %> <%= step.title %></h1>
+        <% unless step.image.nil? %>
+          <%= image_tag step.image, :alt => step.title %>
+        <% end %>
 
-    <p><%= step.description %></p>
+        <% unless step.video.nil? %>
+          <%= video_tag step.video, :controls => true %>
+        <% end %>
 
-    <% unless step.image.nil? %>
-      <%= image_tag step.image, :alt => step.title %>
-    <% end %>
+        <% unless step.audio.nil? %>
+          <%= audio_tag step.audio, :controls => true %>
+        <% end %>
 
-    <% unless step.video.nil? %>
-      <%= video_tag step.video, :controls => true %>
-    <% end %>
+        <hr class="mb-5">
+      <% end %>
+    </div>
 
-    <% unless step.audio.nil? %>
-      <%= audio_tag step.audio, :controls => true %>
-    <% end %>
-  <% end %>
+    <div class="technique">
+      <%= render 'layouts/techniques/coach', technique: @technique, show_details: false %>
+      
+      <div class="link">
+        <p><%= link_to 'RECOMMEND TO CLIENTS', new_clients_technique_path(technique_id: @technique.id), class: 'btn btn-primary' %></p>
+      </div>
+    </div>
+  </div>
+
 <% end %>
 
 <%= render 'layouts/footer/footer' %>
