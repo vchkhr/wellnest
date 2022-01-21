@@ -86,7 +86,7 @@
         <div class="info">
           <p>
             <strong><%= current_user.name %></strong>
-            <%= link_to "[Edit]", update_client_info_path %>
+            <%= link_to "Edit", update_client_info_path %>
           </p>
           
           <p><%= current_user.email %></p>
@@ -121,7 +121,7 @@
 
           <div class="info">
             <p><strong><%= ClientManager::CoachUser.call(current_user.client).name %></strong></p>
-            <p><%= link_to '[End Cooperation]', current_user.client.invitations.where(status: 1).last %></p>
+            <p><%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %></p>
           </div>
         </div>
       <% end %>
