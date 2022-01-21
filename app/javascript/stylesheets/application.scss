@@ -10,7 +10,11 @@ p#notice {
 }
 
 .color-red {
-    color: #B00020;
+    color: #B00020 !important;
+}
+
+.color-black {
+    color: black !important;
 }
 
 header.navigation {
