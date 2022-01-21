@@ -1,4 +1,4 @@
-# [mobidev-rubyInternship-mhc](http://mental.vchkhr.com/)
+# [Wellnest](http://wellnest.vchkhr.com/)
 
 Platform where coaches help users to deal with anxiety and depression.\
 [DB Diagram](https://dbdiagram.io/d/6173d5cc6239e146477ecd2b)
@@ -9,12 +9,11 @@ Platform where coaches help users to deal with anxiety and depression.\
 
 ### 1. Clone the Repository and setup Environment
 
-1. Select the last `challenge-x` branch.
-2. Clone the repository and open their folder in the Terminal.
-3. Fill in the `.env` file. Create it using the `.env.example`.\
+1. Clone the repository and open their folder in the Terminal.
+2. Fill in the `.env` file. Create it using the `.env.example`.\
 Use `DATABASE_HOST=localhost` to use without Docker, or\
 `DATABASE_HOST=database` to use with Docker.
-4. Run `npm install` in the console.
+3. Run `npm install` in the console.
 
 ### 2a. Use without Docker
 1. Run `rails db:setup` in the console.
@@ -62,7 +61,7 @@ Press `Enter` and now you can use the ActiveAdmin Panel.
 
 ### Testing the Application
 
-You are able to test 5 controllers and 4 Service Objects.
+You are able to test 5 controllers and 4 service objects.
 
 1. Run `rails db:environment:set RAILS_ENV=test` in the console.
 2. Run `rails db:test:prepare RAILS_ENV=test`.\
