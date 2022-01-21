@@ -1,19 +1,30 @@
-<p>
-  <%= image_tag(UserManager::ProfileImage.call(user), size: "50x50", alt: user.name) %>
-  <%= user.name %>
-</p>
+<div class="client-card">
+  <div class="image-info">
+    <div class="image">
+      <%= image_tag(UserManager::ProfileImage.call(user), size: "50x50", alt: user.name) %>
+    </div>
 
-<p>Client</p>
-<p><%= user.profile.age %> years | <%= user.profile.gender.name %></p>
-<p><%= user.profile.bio %></p>
+    <div class="info">
+      <p>
+        <strong><%= user.name %> <%= user.is_verified %></strong>
+      </p>
 
-<p>
-  Problems
-  <% user.profile.problems.each do |problem| %>
-    <%= problem.name %>
+      <p>Client</p>
+      <p><%= user.profile.age %> years | <%= user.profile.gender.name %></p>
+      <p><%= user.profile.bio %></p>
+    </div>
+  </div>
+
+  <p class="mb-0">Problems</p>
+  <div class="problems">
+    <% user.profile.problems.each do |problem| %>
+      <div class="problem"><%= problem.name %></div>
   <% end %>
-</p>
+  </div>
 
-<p><%= link_to 'REFUSE', edit_invitation_path(invitation, client_id: user.client.id, is_confirmed: false) %></p>
+  <div class="links">
+    <p><%= link_to 'REFUSE', edit_invitation_path(invitation, client_id: user.client.id, is_confirmed: false) %></p>
 
-<p><%= link_to 'CONFIRM', edit_invitation_path(invitation, client_id: user.client.id, is_confirmed: true) %></p>
+    <p><%= link_to 'CONFIRM', edit_invitation_path(invitation, client_id: user.client.id, is_confirmed: true) %></p>
+  </div>
+</div>
