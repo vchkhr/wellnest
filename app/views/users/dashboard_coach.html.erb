@@ -1,0 +1,44 @@
+<h1>Dashboard Coach</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p><%= link_to "My Clients", clients_path %></p>
+<p><%= link_to "All Techniques", all_techniques_path %></p>
+<p><%= link_to "Edit Personal Information", update_coach_info_path %></p>
+
+<p>
+  <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+  <strong><%= current_user.name %></strong>
+</p>
+<p><strong><%= current_user.email %></strong></p>
+<p><strong><%= current_user.profile.age %> years | <%= current_user.profile.gender.name %></strong></p>
+
+<p>Areas of Expertise: <strong>
+  <% current_user.profile.problems.each do |problem| %>
+    <%= problem.name %>
+  <% end %>
+</strong></p>
+
+<p>Total number of clients <strong><%= CoachManager::ActiveClientsCount.call(current_user.coach) %></strong></p>
+<p>Current number of users <strong><%= CoachManager::ActiveClientsCount.call(current_user.coach) %></strong></p>
+<p>Total number of techniques used <strong><%= CoachManager::TechniquesUsed.call(current_user.coach) %></strong></p>
+<p>Total number of likes <strong><%= CoachManager::TechniquesLiked.call(current_user.coach) %></strong></p>
+
+<p>Notifications:</p>
+<p>
+  <% current_user.profile.coach_notifications.each do |notification| %>
+    <span><%= notification.text %><br></span>
+  <% end %>
+</p>
+
+<p>My clients</p>
+<% CoachManager::ActiveClients.call(current_user.coach).each do |client| %>
+<%= render 'layouts/clients/client', user: client.user %>
+<% end %>
+
+<p>Techniques</p>
+<% CoachManager::ActiveClients.call(current_user.coach).each do |client| %>
+  <% ClientManager::TechniquesInProgress.call(client).each do |technique| %>
+    <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
+  <% end %>
+<% end %>

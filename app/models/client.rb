@@ -1,30 +1,32 @@
 class Client < ApplicationRecord
   self.primary_key = "id"
 
-  validate :image_url
   validates :age, numericality: { only_integer: true, in: 18..99 }
-  validate :bio
+  validates :problems, presence: true
+
+  has_one_attached :image
+  
+  has_many :invitations, dependent: :delete_all
+  has_many :coaches, through: :invitations
+  
+  has_many :messages, dependent: :delete_all
+  has_many :coaches, through: :messages
+
+  has_many :completed_steps, dependent: :delete_all
+  has_many :steps, through: :completed_steps
+
+  has_many :likes, dependent: :delete_all
+  has_many :techniques, through: :likes
+
+  has_many :notifications, dependent: :delete_all
   
   belongs_to :user
   belongs_to :gender
-  
-  has_many :invitations
-  has_many :coaches, through: :invitations
-
-  has_many :notifications
-  
-  has_many :messages
-  has_many :coaches, through: :messages
 
   has_and_belongs_to_many :problems
   has_and_belongs_to_many :techniques
-  has_and_belongs_to_many :steps
 
-  def invitation
-    return self.invitations.where(status: 1).last
-  end
-
-  def coach
-    return self.invitation.coach
+  def name
+    self.user.name
   end
 end

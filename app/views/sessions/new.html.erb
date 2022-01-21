@@ -1,19 +1,34 @@
-<p id="alert"><%= alert %></p>
+<%= render 'layouts/navigation/login' %>
 
-<h1>Login</h1>
+<div class="login">
+  <p id="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
 
-<%= form_tag sessions_path do |form| %>
-  <div class="field">
-    <%= label_tag :email %>
-    <%= text_field_tag :email %>
-  </div>
+  <h1 class="text-center">Sign into your account</h1>
 
-  <div class="field">
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
+  <p class="description text-center">Don't have an account? &nbsp; <strong><%= link_to 'Sign up', signup_path %></strong></p>
 
-  <div class="actions">
-    <%= submit_tag "Login" %>
-  </div>
-<% end %>
+  <%= form_tag sessions_path do |form| %>
+    <div class="field mb-3">
+      <%= label_tag :email, nil, class: "form-label" %>
+      <%= text_field_tag :email, nil, class: "form-control" %>
+    </div>
+
+    <div class="field mb-3">
+      <%= label_tag :password, nil, class: "form-label" %>
+      <%= password_field_tag :password, nil, class: "form-control" %>
+    </div>
+
+    <div class="actions text-center">
+      <%= submit_tag "Login", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <p class="text-center reset-password">
+    <strong>
+      <%= link_to 'Forgot password?', reset_password_path %>
+    </strong>
+  </p>
+</div>
+
+<%= render 'layouts/footer/footer' %>

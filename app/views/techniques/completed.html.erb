@@ -1,0 +1,15 @@
+<h1>My Techniques</h1>
+
+<p><%= link_to "Dashboard", dashboard_path %></p>
+<p><%= link_to "My", my_techniques_path %></p>
+<p><%= link_to "Recommended", recommended_techniques_path %></p>
+<p><%= link_to "In progress", in_progress_techniques_path %></p>
+<p>Completed</p>
+
+<% unless ClientManager::CoachUser.call(current_user.client).nil? %>
+  <%= render 'layouts/coaches/coach', user: ClientManager::CoachUser.call(current_user.client) %>
+<% end %>
+
+<% ClientManager::TechniquesCompleted.call(current_user.client).each do |technique| %>
+  <%= render 'layouts/techniques/technique', technique: technique, show_continue: true, show_details: false %>
+<% end %>

@@ -1,0 +1,28 @@
+<h1>Client</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= image_tag(UserManager::ProfileImage.call(@client.user), size: "50x50", alt: @client.user.name) %>
+  <strong><%= @client.user.name %></strong>
+</p>
+<p><strong><%= @client.user.email %></strong></p>
+<p><strong><%= @client.age %> years | <%= @client.gender.name %></strong></p>
+
+<p>Problems: <strong>
+  <% @client.problems.each do |problem| %>
+    <%= problem.name %>
+  <% end %>
+</strong></p>
+
+<p>Total progress: <strong><%= ClientManager::TechniquesCompletedCount.call(@client) %></strong> techniques completed</p>
+<p>Current progress: <strong><%= ClientManager::TechniquesInProgressCount.call(@client) %></strong> techniques in process</p>
+<p>Total time: <strong><%= ClientManager::HoursCompleted.call(@client) %></strong> hours for techniques</p>
+<p>Current time: <strong><%= ClientManager::HoursInProgress.call(@client) %></strong> hours for techniques</p>
+
+<p>Techniques:</p>
+<p>
+  <% @client.techniques.each do |technique| %>
+    <%= render 'layouts/techniques/technique', technique: technique, show_continue: false %>
+  <% end %>
+</p>

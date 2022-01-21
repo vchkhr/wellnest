@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @genders_technique.gender_id %>
+</p>
+
+<p>
+  <strong>Technique:</strong>
+  <%= @genders_technique.technique_id %>
+</p>
+
+<%= link_to 'Edit', edit_genders_technique_path(@genders_technique) %> |
+<%= link_to 'Back', genders_techniques_path %>

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  is_like: false
+  technique: one
+  client: one
+
+two:
+  is_like: false
+  technique: two
+  client: two

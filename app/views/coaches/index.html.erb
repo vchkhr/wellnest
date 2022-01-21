@@ -1,0 +1,18 @@
+<h1>Find Coach</h1>
+
+<p id="notice"><%= notice %></p>
+
+<% if !ClientManager::Coach.call(current_user.client).nil? %>
+  <h3>Your Coach:</h3>
+  <%= render 'layouts/coaches/small', user: ClientManager::CoachUser.call(current_user.client) %>
+<% else %>
+  <h3>You don't have a coach yet</h3>
+<% end %>
+
+<h3>All Coaches:</h3>
+<% @coaches.each do |coach| %>
+  <% if !ClientManager::Coach.call(current_user.client).nil? and ClientManager::Coach.call(current_user.client).id == coach.id %>
+  <% else %>
+    <%= render 'layouts/coaches/small', user: coach.user %>
+  <% end %>
+<% end %>

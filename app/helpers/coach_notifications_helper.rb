@@ -1,0 +1,2 @@
+module CoachNotificationsHelper
+end

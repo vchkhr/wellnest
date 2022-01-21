@@ -1,0 +1,55 @@
+<h1>Dashboard</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p><%= link_to "My Techniques", my_techniques_path %></p>
+
+<p><%= link_to "Edit Personal Information", update_client_info_path %></p>
+<p>
+  <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+  <strong><%= current_user.name %></strong>
+</p>
+<p><strong><%= current_user.email %></strong></p>
+<p><strong><%= current_user.profile.age %> years | <%= current_user.profile.gender.name %></strong></p>
+
+<p>Problems: <strong>
+  <% current_user.profile.problems.each do |problem| %>
+    <%= problem.name %>
+  <% end %>
+</strong></p>
+
+<p>Total progress: <strong><%= ClientManager::TechniquesCompletedCount.call(current_user.client) %></strong> techniques completed</p>
+<p>Current progress: <strong><%= ClientManager::TechniquesInProgressCount.call(current_user.client) %></strong> techniques in process</p>
+<p>Total time: <strong><%= ClientManager::HoursCompleted.call(current_user.client) %></strong> hours for techniques</p>
+<p>Current time: <strong><%= ClientManager::HoursInProgress.call(current_user.client) %></strong> hours for techniques</p>
+
+<% if ClientManager::CoachUser.call(current_user.client).nil? %>
+  <% if ClientManager::UnconfirmedInvitation.call(current_user.client).nil? %>
+    <p><%= link_to "You don't have a coach yet", coaches_path %></p>
+  <% else %>
+    <p>Waiting for confirmation</p>
+    <p><strong><%= ClientManager::UnconfirmedInvitation.call(current_user.client).user.name %></strong></p>
+    <p><%= link_to 'CANCEL', current_user.client.invitations.where(status: 0).last %></p>
+  <% end %>
+<% else %>
+  <p>
+    Current coach:
+    <%= image_tag(UserManager::ProfileImage.call(ClientManager::CoachUser.call(current_user.client)), size: "50x50", alt: ClientManager::CoachUser.call(current_user.client).name) %>
+    <strong><%= ClientManager::CoachUser.call(current_user.client).name %></strong>
+  </p>
+  <p><%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %></p>
+<% end %>
+
+<p>Notifications:</p>
+<p>
+  <% current_user.profile.notifications.each do |notification| %>
+    <span><%= notification.text %><br></span>
+  <% end %>
+</p>
+
+<p>Techniques:</p>
+<p>
+  <% current_user.profile.techniques.each do |technique| %>
+    <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
+  <% end %>
+</p>

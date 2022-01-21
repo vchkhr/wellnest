@@ -1,22 +1,25 @@
 class Coach < ApplicationRecord
   self.primary_key = "id"
 
-  validate :image_url
   validates :age, numericality: { only_integer: true, in: 18..99 }
-  validates :gender_id, presence: true
-  validates :edu, presence: true
+  validates :education, presence: true
   validates :work, presence: true
   validates :licenses, presence: true
   validates :links, presence: true
-  validate :is_verified
+  validates :problems, presence: true
   
-  has_many :invitations
+  has_one_attached :image
+
+  has_many :invitations, dependent: :delete_all
   has_many :clients, through: :invitations
   
-  has_many :messages
+  has_many :messages, dependent: :delete_all
   has_many :clients, through: :messages
+
+  has_many :coach_notifications, dependent: :delete_all
 
   belongs_to :user
   belongs_to :gender
+
   has_and_belongs_to_many :problems
 end

@@ -1,0 +1,10 @@
+<h1>My Clients</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>My Clients</p>
+<p><%= link_to "Waiting for confirmation (#{CoachManager::InvitationsCount.call(current_user.coach)})", invitations_path %>
+
+<% @clients.each do |client| %>
+  <%= render 'layouts/clients/client', user: client.user %>
+<% end %>

@@ -5,8 +5,13 @@
 <table>
   <thead>
     <tr>
-      <th>Email</th>
+      <th>ID</th>
       <th>Name</th>
+      <th>Email</th>
+      <th>Logged in</th>
+      <th>Client</th>
+      <th>Coach</th>
+      <th>Profile</th>
       <th>Is verified</th>
       <th>Send email notifications</th>
       <th colspan="3"></th>
@@ -16,8 +21,13 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.email %></td>
+        <td><%= user.id %></td>
         <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= session['user_id'] == user.id ? "true" : "" %></td>
+        <td><%= link_to user.client.nil? ? "" : "clients/#{user.client.id}", user.client %></td>
+        <td><%= link_to user.coach.nil? ? "" : "coaches/#{user.coach.id}", user.coach %></td>
+        <td><%= user.profile %></td>
         <td><%= user.is_verified %></td>
         <td><%= user.send_email_notifications %></td>
         <td><%= link_to 'Show', user %></td>

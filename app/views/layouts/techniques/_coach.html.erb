@@ -1,0 +1,43 @@
+<span>Title: <strong><%= technique.title %></strong><br></span>
+<span>Description: <strong><%= technique.description %></strong><br></span>
+
+<span>Age: <strong>
+  <% if technique.age_start == technique.age_end %>
+    <%= technique.age_start %>
+  <% else %>
+    <%= technique.age_start %>-<%= technique.age_end %>
+  <% end %>
+years</strong><br></span>
+
+<span>Problems: <strong>
+<% technique.problems.each do |problem| %>
+  <span><%= problem.name %></span>
+<% end %>
+</strong><br></span>
+
+<span>Gender: <strong>
+<% technique.genders.each do |gender| %>
+  <span><%= gender.name %></span>
+<% end %>
+</strong><br></span>
+
+<span>Steps: <strong><%= technique.steps.count %></strong><br></span>
+
+<span>Duration: <strong>
+<% if technique.duration_start == technique.duration_end %>
+  <%= technique.duration_start %>
+<% else %>
+  <%= technique.duration_start %>-<%= technique.duration_end %>
+<% end %>
+hours</strong><br></span>
+
+
+<span>Participants: <strong><%= technique.clients.count %></strong><br></span>
+<span>Likes: <strong><%= technique.likes.where(is_like: true).count %></strong><br></span>
+<span>Dislikes: <strong><%= technique.likes.where(is_like: false).count %></strong><br></span>
+
+<% if show_details == true %>
+  <span><%= link_to "DETAILS", technique_path(technique) %><br><span>
+<% end %>
+
+<br>

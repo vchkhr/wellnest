@@ -1,0 +1,8 @@
+<h1>Congratulations!</h1>
+
+<p>You have finished completing the technique! Share with us your impressions and whether you like the technique.</p>
+<p>Do you like this technique?</p>
+
+<p><%= link_to 'I DON\'T LIKE IT', new_like_path(is_like: false, technique_id: params['technique_id']) %></p>
+
+<p><%= link_to 'I LIKE IT', new_like_path(is_like: true, technique_id: params['technique_id']) %></p>

@@ -1,0 +1,43 @@
+<h1>Hello, <%= current_user.name %></h1>
+
+<p><strong>CLIENT &nbsp; <%= link_to "COACH", new_coach_path %></strong></p>
+
+<p>You are registering as a Client in our system. Please, share some personal information about you so that we can personalize your onboarding experience</p>
+
+<%= form_for @client do |f| %>
+  <% if @client.errors.any? %>
+    <div class='error_messages'>
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @client.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='field'>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <p>Image format should be png, jpg no more than 5 Mb</p>
+  </div>
+
+  <div class='field'>
+    <%= f.label :age %>
+    <%= f.number_field :age, in: 18..99 %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :gender_id %>
+    <%= collection_radio_buttons('client', 'gender_id', Gender.all, :id, :name) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :problem_ids %>
+    <%= collection_check_boxes('client', 'problem_ids', Problem.all, :id, :name) %>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit 'SAVE' %>
+  </div>
+<% end %>
