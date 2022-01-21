@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/app', user: current_user %>
+<%= render 'layouts/navigation', nav_for: 'app', user: current_user %>
 
 <p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
@@ -8,66 +8,34 @@
     <div class="filters">
       <h3>Filters</h3>
 
-      <div class="show">
-        <p>Show<br>
-          <input type="checkbox" id="all">
-          <label for="all">All</label><br>
-          <input type="checkbox" id="popular">
-          <label for="popular">Popular</label><br>
-          <input type="checkbox" id="new">
-          <label for="new">New</label><br>
-          <input type="checkbox" id="recommended-by-me">
-          <label for="recommended-by-me">Recommended by me</label>
-        </p>
-      </div>
+      <%= form_with url: '/all-techniques', method: :get do |f| %>
+        <div class="problem field mb-3">
+          <p>Problem<br>
+            <%= collection_check_boxes('filters', 'problem_ids', Problem.all, :id, :name) %>
+          </p>
+        </div>
 
-      <div class="expertise">
-        <p>Problems<br>
-          <input type="checkbox" id="anxiety">
-          <label for="anxiety">Anxiety</label><br>
-          <input type="checkbox" id="depression">
-          <label for="depression">Depression</label><br>
-          <input type="checkbox" id="irriability">
-          <label for="irriability">Irriability</label><br>
-          <input type="checkbox" id="stress">
-          <label for="stress">Stress</label>
-        </p>
-      </div>
+        <div class="gender field mb-3">
+          <p>Gender<br>
+            <%= collection_check_boxes('filters', 'genders', Client.genders.hash, :first, :first) %>
+          </p>
+        </div>
 
-      <div class="gender">
-        <p>Gender<br>
-          <input type="checkbox" id="all">
-          <label for="all">All</label><br>
-          <input type="checkbox" id="male">
-          <label for="male">Male</label><br>
-          <input type="checkbox" id="female">
-          <label for="female">Female</label>
-        </p>
-      </div>
-
-      <div class="age">
-        <p>Age<br>
-          <input type="checkbox" id="to-25-years">
-          <label for="to-25-years">To 25 years</label><br>
-          <input type="checkbox" id="25-35-years">
-          <label for="25-35-years">25-35 years</label><br>
-          <input type="checkbox" id="35-45-years">
-          <label for="35-45-years">35-45 years</label><br>
-          <input type="checkbox" id="over-45-years">
-          <label for="over-45-years">Over 45 years</label>
-        </p>
-      </div>
+        <div class='actions'>
+          <%= f.submit 'SEARCH', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
     </div>
   </div>
 
   <div class="right-column">
     <div class="techniques">
-      <% Technique.all.each do |technique| %>
-        <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
+      <% @techniques.each do |technique| %>
+        <%= render 'layouts/technique', technique: technique, show_details: true, for_view: "coach" %>
       <% end %>
     </div>
   </div>
 
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

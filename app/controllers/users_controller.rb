@@ -35,7 +35,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to dashboard_path, notice: "Credentials was successfully updated" }
+        text = "You have updated your credentials"
+        Notification.create!(client: @user.client, text: text) unless @user.client.nil?
+        CoachNotification.create!(coach: @user.coach, text: text) unless @user.coach.nil?
+
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }

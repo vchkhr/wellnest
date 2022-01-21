@@ -1,9 +1,8 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[ show edit update destroy ]
-
+  
   def index
-    @clients = []
-    Invitation.where(status: 1, coach: current_user.coach).each { |invitation| @clients << invitation.client }
+    @clients = Client.where_coach(current_user.coach)
   end
 
   def show
@@ -19,7 +18,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     @client.user = current_user
-
+  
     params[:client][:problem_ids].each do |pr|
       problem = Problem.find_by_id(pr)
       @client.problems << problem unless problem.nil?
@@ -27,7 +26,10 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
-        format.html { redirect_to dashboard_path, notice: "You have completed the registration" }
+        text = "#{@client.name}, you have completed the registration"
+
+        Notification.create!(client: @client, text: text)
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :created, location: @client }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +41,16 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update(client_params)
-        format.html { redirect_to dashboard_path, notice: "Personal information was successfully updated" }
+        @client.problems.destroy_all
+        params[:client][:problem_ids].each do |pr|
+          problem = Problem.find_by_id(pr)
+          @client.problems << problem unless problem.nil?
+        end
+        
+        text = 'You have updated your personal information'
+
+        Notification.create!(client: @client, text: text)
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :ok, location: @client }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -64,6 +75,6 @@ class ClientsController < ApplicationController
     end
 
     def client_params
-      params.require(:client).permit(:image, :age, :bio, :user_id, :gender_id, :problem_ids)
+      params.require(:client).permit(:image, :age, :bio, :user_id, :gender, :problem_ids)
     end
 end

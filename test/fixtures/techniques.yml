@@ -8,6 +8,7 @@ one:
   age_end: 1
   duration_start: 1
   duration_end: 1
+  gender_cd: 'both'
 
 two:
   title: MyString
@@ -17,3 +18,4 @@ two:
   age_end: 1
   duration_start: 1
   duration_end: 1
+  gender_cd: 'both'

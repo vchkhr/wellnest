@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/app', user: current_user %>
+<%= render 'layouts/navigation', nav_for: 'app', user: current_user %>
 
 <p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
@@ -23,4 +23,4 @@
   <% end %>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

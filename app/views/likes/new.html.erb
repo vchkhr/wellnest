@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/app', user: current_user %>
+<%= render 'layouts/navigation', nav_for: 'app', user: current_user %>
 
 <p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
@@ -10,10 +10,10 @@
   <p>Do you like this technique?</p>
 
   <div class="buttons">
-    <p><%= link_to 'I DON\'T LIKE IT', new_like_path(is_like: false, technique_id: params['technique_id']) , class: 'unsuccess'%></p>
+    <p><%= link_to 'I DON\'T LIKE IT', new_like_path(is_like: false, technique_id: params['technique_id'])%></p>
 
-    <p><%= link_to 'I LIKE IT', new_like_path(is_like: true, technique_id: params['technique_id']), class: 'success' %></p>
+    <p><%= link_to 'I LIKE IT', new_like_path(is_like: true, technique_id: params['technique_id']) %></p>
   </div>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/app', user: current_user %>
+<%= render 'layouts/navigation', nav_for: 'app', user: current_user %>
 
 <p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
@@ -15,19 +15,19 @@
   <div class="techniques-coach">
     <div class="left-column">
       <div class="techniques">
-        <% current_user.profile.techniques.each do |technique| %>
-          <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
+        <% Technique.where_client(current_user.client).each do |technique| %>
+          <%= render 'layouts/technique', technique: technique, show_continue: true, for_view: "client" %>
         <% end %>
       </div>
     </div>
 
     <div class="right-column">
-      <% unless ClientManager::CoachUser.call(current_user.client).nil? %>
-        <%= render 'layouts/coaches/coach', user: ClientManager::CoachUser.call(current_user.client) %>
+      <% unless Coach.where_client(current_user.client).empty? %>
+        <%= render 'layouts/coach', user: Coach.where_client(current_user.client).first.user, full_info: true %>
       <% end %>
     </div>
   </div>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>
 

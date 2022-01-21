@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/login' %>
+<%= render 'layouts/navigation', nav_for: 'login' %>
 
 <div class="login">
   <p id="alert"><%= alert %></p>
@@ -30,8 +30,8 @@
     </div>
 
     <div class='field mb-3'>
-      <%= f.label :gender_id, class: 'form-label' %>
-      <%= collection_radio_buttons('coach', 'gender_id', Gender.all, :id, :name) %>
+      <%= f.label :gender, class: 'form-label' %>
+      <%= collection_radio_buttons('coach', 'gender', Coach.genders.hash, :first, :first) %>
     </div>
 
     <div class='field mb-3'>

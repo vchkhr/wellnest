@@ -10,9 +10,10 @@ class CreateCoaches < ActiveRecord::Migration[6.1]
       t.string :bio
       
       t.belongs_to :user, null: false, foreign_key: true
-      t.belongs_to :gender, null: false, foreign_key: true
 
       t.timestamps
     end
+
+    add_column :coaches, :gender_cd, :integer
   end
 end

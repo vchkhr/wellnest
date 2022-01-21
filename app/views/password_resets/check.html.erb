@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/login' %>
+<%= render 'layouts/navigation', nav_for: 'login' %>
 
 <div class="login">
   <h1 class="text-center">Check your e-mail</h1>
@@ -14,4 +14,4 @@
   <p class="text-center"><%= link_to "Resend", reset_password_path %></p>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

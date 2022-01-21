@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/app', user: current_user %>
+<%= render 'layouts/navigation', nav_for: 'app', user: current_user %>
 
 <p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
@@ -12,7 +12,7 @@
         <p class="title">Total number of<br>clients</p>
 
         <div class="number">
-          <p><strong><%= CoachManager::ActiveClientsCount.call(current_user.coach) %></strong></p>
+          <p><strong><%= current_user.coach.total_clients_count %></strong></p>
         </div>
       </div>
 
@@ -20,7 +20,7 @@
         <p class="title">Current number of<br>users</p>
 
         <div class="number">
-          <p><strong><%= CoachManager::ActiveClientsCount.call(current_user.coach) %></strong></p>
+          <p><strong><%= current_user.coach.active_clients_count %></strong></p>
         </div>
       </div>
 
@@ -28,7 +28,7 @@
         <p class="title">Total number of<br>techniques used</p>
 
         <div class="number">
-          <p><strong><%= CoachManager::TechniquesUsed.call(current_user.coach) %></strong></p>
+          <p><strong><%= current_user.coach.techniques_count %></strong></p>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
         <p class="title">Total number of<br>likes</p>
 
         <div class="number">
-          <p><strong><%= CoachManager::TechniquesLiked.call(current_user.coach) %></strong></p>
+          <p><strong><%= current_user.coach.likes_count %></strong></p>
         </div>
       </div>
     </div>
@@ -44,17 +44,17 @@
     <h3 class="mt-3">My clients</h3>
 
     <div class="clients">
-      <% CoachManager::ActiveClients.call(current_user.coach).each do |client| %>
-        <%= render 'layouts/clients/client', user: client.user %>
+      <% Client.where_coach(current_user.coach).each do |client| %>
+        <%= render 'layouts/client', user: client.user, invitation: nil %>
       <% end %>
     </div>
 
     <h3 class="mt-3">Techniques</h3>
 
     <div class="techniques">
-      <% CoachManager::ActiveClients.call(current_user.coach).each do |client| %>
-        <% ClientManager::TechniquesInProgress.call(client).each do |technique| %>
-          <%= render 'layouts/techniques/coach', technique: technique, show_details: true %>
+      <% Client.where_coach(current_user.coach).each do |client| %>
+        <% techniques_in_progress(client).each do |technique| %>
+          <%= render 'layouts/technique', technique: technique, show_details: true, for_view: "coach" %>
         <% end %>
       <% end %>
     </div>
@@ -65,7 +65,7 @@
     <div class="client-card">
       <div class="image-info">
         <div class="image">
-          <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+          <%= image_tag(profile_image(current_user), size: "50x50", alt: current_user.name) %>
         </div>
 
         <div class="info">
@@ -75,7 +75,7 @@
           </p>
           
           <p><%= current_user.email %></p>
-          <p><%= current_user.profile.age %> years | <%= current_user.profile.gender.name %></p>
+          <p><%= current_user.profile.age %> years | <%= current_user.profile.gender %></p>
         </div>
       </div>
 
@@ -90,11 +90,11 @@
     <div class="notifications">
       <h3>Notifications</h3>
 
-      <% current_user.profile.coach_notifications.each do |notification| %>
+      <% current_user.profile.coach_notifications.last(10).reverse.each do |notification| %>
         <div class="client-card">
           <div class="image-info">
             <div class="image">
-              <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+              <%= image_tag(profile_image(current_user), size: "50x50", alt: current_user.name) %>
             </div>
 
             <div class="info">
@@ -109,4 +109,4 @@
 
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

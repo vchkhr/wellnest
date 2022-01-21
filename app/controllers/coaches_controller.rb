@@ -1,8 +1,35 @@
 class CoachesController < ApplicationController
   before_action :set_coach, only: %i[ show edit update destroy ]
-
+  
   def index
-    @coaches = Coach.all
+    if !params.key?(:filters) or (params[:filters][:problem_ids].count == 1 and params[:filters][:genders].count == 1)
+      @coaches = Coach.all
+    else
+      filters = params[:filters].slice!(:problem_ids, :genders)
+      filters[:problem_ids].shift(1)
+      filters[:genders].shift(1)
+      
+      @coaches = Coach.all
+
+      unless filters[:problem_ids].empty?
+        problems = filters[:problem_ids].split(',')
+
+        problems.each do |problem|
+          @coaches = @coaches.joins(:coaches_problems).where('coaches_problems.problem_id' => problem)
+        end
+
+      end
+
+      unless filters[:genders].empty?
+        genders = filters[:genders].join(',')
+        
+        if genders == 'male'
+          @coaches = @coaches.males
+        elsif genders == 'female'
+          @coaches = @coaches.females
+        end
+      end
+    end
   end
 
   def show
@@ -26,7 +53,10 @@ class CoachesController < ApplicationController
 
     respond_to do |format|
       if @coach.save
-        format.html { redirect_to dashboard_path, notice: "You have completed the registration as Coach" }
+        text = "#{@coach.name}, you have completed the registration"
+
+        CoachNotification.create!(coach: @coach, text: text)
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :created, location: @coach }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +68,16 @@ class CoachesController < ApplicationController
   def update
     respond_to do |format|
       if @coach.update(coach_params)
-        format.html { redirect_to dashboard_path, notice: "Personal information was successfully updated" }
+        @coach.problems.destroy_all
+        params[:coach][:problem_ids].each do |pr|
+          problem = Problem.find_by_id(pr)
+          @coach.problems << problem unless problem.nil?
+        end
+
+        text = 'You have updated your personal information'
+        CoachNotification.create!(coach: @coach, text: text)
+
+        format.html { redirect_to dashboard_path, notice: text }
         format.json { render :show, status: :ok, location: @coach }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,6 +102,6 @@ class CoachesController < ApplicationController
     end
 
     def coach_params
-      params.require(:coach).permit(:image, :age, :education, :work, :licenses, :links, :user_id, :gender_id, :problem_ids)
+      params.require(:coach).permit(:image, :age, :education, :work, :licenses, :links, :user_id, :gender, :problem_ids)
     end
 end

@@ -220,7 +220,7 @@ footer {
 
     .banner-coaches {
         background-color: #adb5bd;
-        height: 120vh;
+        height: 140vh;
 
         .gallery {
             display: flex;
@@ -244,25 +244,14 @@ footer {
                     font-size: 12px;
                     color: #000000de;
                 }
-
-                img {
-                    width: 100px;
-                    filter: grayscale(70%);
-                    border-radius: 50px;
-                }
             }
 
             .gallery-item-small {
-                height: 180px;
-
-                img {
-                    width: 50px;
-                    margin-right: 30px;
-                }
+                height: 200px;
             }
 
             .gallery-item-big {
-                height: calc(180px * 3 + 30px * 2);
+                height: calc(200px * 3 + 30px * 2);
             }
 
             .avatar-and-links {
@@ -291,6 +280,10 @@ footer {
                     }
                 }
             }
+        }
+
+        .block-links {
+            margin-top: 150px;
         }
     }
 }
@@ -599,6 +592,15 @@ div.techniques-coach {
     }
 }
 
+div.coaches-view,
+div.all-techniques {
+    .btn-primary {
+        color: #747475 !important;
+        border-color: #747475 !important;
+        background-color: transparent !important;
+    }
+}
+
 .card-view {
     width: 500px;
     margin: 25px auto;
@@ -642,15 +644,8 @@ div.like-view {
 
     a {
         font-weight: 700;
+        color: black;
         text-decoration: none;
-    }
-
-    a.success {
-        color: green;
-    }
-
-    a.unsuccess {
-        color: red;
     }
 
     div.buttons {

@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/app', user: current_user %>
+<%= render 'layouts/navigation', nav_for: 'app', user: current_user %>
 
 <p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
@@ -13,7 +13,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::TechniquesCompletedCount.call(current_user.client) %></strong></p>
+            <p><strong><%= current_user.client.total_progress %></strong></p>
           </div>
 
           <div class="description">
@@ -27,7 +27,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::TechniquesInProgressCount.call(current_user.client) %></strong></p>
+            <p><strong><%= current_user.client.current_progress %></strong></p>
           </div>
 
           <div class="description">
@@ -41,7 +41,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::HoursCompleted.call(current_user.client) %></strong></p>
+            <p><strong><%= current_user.client.total_time.round(1) %></strong></p>
           </div>
 
           <div class="description">
@@ -55,7 +55,7 @@
 
         <div class="number-description">
           <div class="number">
-            <p><strong><%= ClientManager::HoursInProgress.call(current_user.client) %></strong></p>
+            <p><strong><%= current_user.client.current_time.round(1) %></strong></p>
           </div>
 
           <div class="description">
@@ -68,8 +68,8 @@
     <h3 class="mt-3">My Techniques</h3>
     
     <div class="techniques">
-      <% current_user.profile.techniques.each do |technique| %>
-        <%= render 'layouts/techniques/technique', technique: technique, show_continue: true %>
+      <% Technique.where_client(current_user.client).each do |technique| %>
+        <%= render 'layouts/technique', technique: technique, show_continue: true, for_view: "client" %>
       <% end %>
     </div>
 
@@ -80,7 +80,7 @@
     <div class="client-card">
       <div class="image-info">
         <div class="image">
-          <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+          <%= image_tag(profile_image(current_user), size: "50x50", alt: current_user.name) %>
         </div>
 
         <div class="info">
@@ -90,7 +90,7 @@
           </p>
           
           <p><%= current_user.email %></p>
-          <p><%= current_user.profile.age %> years | <%= current_user.profile.gender.name %></p>
+          <p><%= current_user.profile.age %> years | <%= current_user.profile.gender %></p>
         </div>
       </div>
 
@@ -103,12 +103,12 @@
     </div>
 
     <div class="coach-card">
-      <% if ClientManager::CoachUser.call(current_user.client).nil? %>
-        <% if ClientManager::UnconfirmedInvitation.call(current_user.client).nil? %>
+      <% if Coach.where_client(current_user.client).empty? %>
+        <% if Coach.unconfirmed(current_user.client).empty? %>
           <p><%= link_to "You don't have a coach yet", coaches_path %></p>
         <% else %>
           <p>Waiting for confirmation</p>
-          <p><strong><%= ClientManager::UnconfirmedInvitation.call(current_user.client).user.name %></strong></p>
+          <p><strong><%= Coach.unconfirmed(current_user.client).first.name %></strong></p>
           <p><%= link_to 'CANCEL', current_user.client.invitations.where(status: 0).last %></p>
         <% end %>
       <% else %>
@@ -116,11 +116,11 @@
 
         <div class="image-info">
           <div class="image">
-            <%= image_tag(UserManager::ProfileImage.call(ClientManager::CoachUser.call(current_user.client)), size: "50x50", alt: ClientManager::CoachUser.call(current_user.client).name) %>
+            <%= image_tag(profile_image(Coach.where_client(current_user.client).first.user), size: "50x50", alt: Coach.where_client(current_user.client).first.name) %>
           </div>
 
           <div class="info">
-            <p><strong><%= ClientManager::CoachUser.call(current_user.client).name %></strong></p>
+            <p><strong><%= Coach.where_client(current_user.client).first.name %></strong></p>
             <p><%= link_to 'End Cooperation', current_user.client.invitations.where(status: 1).last %></p>
           </div>
         </div>
@@ -130,11 +130,11 @@
     <div class="notifications">
       <h3>Notifications</h3>
 
-      <% current_user.profile.notifications.each do |notification| %>
+      <% current_user.profile.notifications.last(10).reverse.each do |notification| %>
         <div class="client-card">
           <div class="image-info">
             <div class="image">
-              <%= image_tag(UserManager::ProfileImage.call(current_user), size: "50x50", alt: current_user.name) %>
+              <%= image_tag(profile_image(current_user), size: "50x50", alt: current_user.name) %>
             </div>
 
             <div class="info">
@@ -149,4 +149,4 @@
 
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

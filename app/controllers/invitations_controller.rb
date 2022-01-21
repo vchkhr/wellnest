@@ -7,40 +7,56 @@ class InvitationsController < InheritedResources::Base
 
   def new
     coach = Coach.find(params['coach_id'])
-    @coach_name = coach.user.name
+    @coach_name = coach.name
 
     if params.key?(:status)
-      Invitation.where(client: current_user.client).each { |invitation| invitation.destroy }
+      Invitation.where(client: current_user.client).destroy_all
 
-      Invitation.create!(client: current_user.client, coach: coach, status: params['status'])
+      Invitation.create!(client: current_user.client, coach: coach, status: 0)
 
-      redirect_to dashboard_path, notice: "You asked #{@coach_name} to become your coach"
+      text = "You asked #{@coach_name} to become your coach"
+      Notification.create!(client: current_user.client, text: text)
+      redirect_to dashboard_path, notice: text
     end
   end
 
   def edit
-    Invitation.where(client: Client.find(params['client_id']), coach: current_user.coach, status: 0).each { |invitation| invitation.destroy }
-
-    if params['is_confirmed'] == 'true'
-      @invitation = Invitation.new(client: Client.find(params['client_id']), coach: current_user.coach, status: 1)
-    end
+    client = Client.find(params['client_id'])
+    coach = current_user.coach
+    @invitation = Invitation.where(client: client, coach: coach).last
     
-    respond_to do |format|
-      if @invitation.save
-        action = params['is_confirmed'] == 'true' ? "confirmed" : "refused"
+    if params['is_confirmed'] == 'true'
+      @invitation.status = 1
+      @invitation.save
 
-        format.html { redirect_to invitations_path, notice: "You #{action} invitation from the client" }
-        format.json { render :show, status: :created, location: @invitation }
-      end
+      coach.increment!(:total_clients_count, 1)
+    else
+      @invitation.destroy
+    end
+
+    respond_to do |format|
+      action = params['is_confirmed'] == 'true' ? 'confirmed' : 'refused'
+
+      text = "You #{action} invitation from #{client.name}"
+      Notification.create!(client: client, text: "Coach #{current_user.name} #{action} your invitation")
+      CoachNotification.create!(coach: coach, text: text)
+
+      format.html { redirect_to invitations_path, notice: text }
+      format.json { render :show, status: :created, location: @invitation }
     end
   end
 
   def destroy
-    coach_name = @invitation.coach.user.name
+    coach_name = @invitation.coach.name
     @invitation.destroy
 
     respond_to do |format|
-      format.html { redirect_to dashboard_path, notice: "You have ended cooperation with #{coach_name}" }
+      unless current_user.nil?
+        text = "You have ended cooperation with #{coach_name}"
+        Notification.create!(client: current_user.client, text: text)
+      end
+
+      format.html { redirect_to dashboard_path, notice: text }
       format.json { head :no_content }
     end
   end

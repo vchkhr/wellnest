@@ -5,11 +5,6 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     @like = likes(:one)
   end
 
-  test "should get index" do
-    get likes_url
-    assert_response :success
-  end
-
   test "should get new" do
     get new_like_url
     assert_response :success
@@ -21,16 +16,6 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to like_url(Like.last)
-  end
-
-  test "should show like" do
-    get like_url(@like)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_like_url(@like)
-    assert_response :success
   end
 
   test "should update like" do

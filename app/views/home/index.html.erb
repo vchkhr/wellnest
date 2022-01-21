@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/home' %>
+<%= render 'layouts/navigation', nav_for: 'home' %>
 
 <div class="index">
   <div class="banner banner-welcome">
@@ -18,24 +18,24 @@
 
     <div class="d-flex rates">
       <div class="flex-fill">
-        <p class="lead">151</p>
+        <p class="lead"><%= Technique.count %></p>
         <p class="description">Effective techniques</p>
       </div>
 
       <div class="flex-fill">
-        <p class="lead">50</p>
+        <p class="lead"><%= Coach.count %></p>
         <p class="description">Qualified coaches</p>
       </div>
 
       <div class="flex-fill">
-        <p class="lead">356</p>
+        <p class="lead"><%= Client.count %></p>
         <p class="description">Satisfied users</p>
       </div>
     </div>
   </div>
 
   <div class="banner banner-work">
-    <h1>How does it work?</h1>
+    <h1><a name="how-does-it-work"></a>How does it work?</h1>
 
     <div class="steps d-flex">
       <div class="flex-fill">
@@ -87,125 +87,16 @@
   </div>
 
   <div class="banner banner-techniques">
-    <h1>Techniques</h1>
+    <h1><a name="techniques"></a>Techniques</h1>
 
     <p class="description text-center">Our service offers the best techniques for our users</p>
 
     <div class="card-group">
-      <div class="card">
-        <div class="tag badge rounded-pill bg-secondary">NEW</div>
-
-        <div class="symptoms d-flex">
-          <div class="symptom">Depression</div>
+      <% Technique.limit(3).each do |technique| %>
+        <div class="card">
+          <%= render 'layouts/technique', technique: technique, show_continue: false, for_view: "home" %>
         </div>
-
-        <%= image_tag("behaviour-therapy.jpg", :alt => "Behaviour Therapy", :class => "card-img-top") %>
-
-        <div class="card-body">
-          <h5 class="card-title">Cognitive - Behavioral Therapy</h5>
-          <p class="card-text">
-            <small>
-              <span class="text-muted">Elimination of the dependence of emotions and human behavior on his thoughts.</span><br />
-              <br />
-              <span class="text-muted">Age:</span> 25-35 years<br />
-              <span class="text-muted">Gender:</span> Male, Female<br />
-              <br />
-              <span class="text-muted">Steps:</span> 4<br />
-              <span class="text-muted">Duration:</span> 6-7 hours<br />
-              <br />
-            </small>
-          </p>
-        </div>
-
-        <div class="likes">
-          <p class="card-text">
-            <small>
-              <span class="text-muted">
-                Users: 235 &emsp;
-                Likes: 124 &emsp;
-                Dislikes: 12
-              </span>
-            </small>
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="tag badge rounded-pill bg-secondary">POPULAR</div>
-
-        <div class="symptoms d-flex">
-          <div class="symptom">Depression</div>
-          <div class="symptom">Anxiety</div>
-        </div>
-
-        <%= image_tag("lifestyle-changes.jpg", :alt => "Lifestyle Changes", :class => "card-img-top") %>
-
-        <div class="card-body">
-          <h5 class="card-title">Lifestyle changes</h5>
-          <p class="card-text">
-            <small>
-              <span class="text-muted">Eliminating the lack of control that makes people feel worse.</span><br />
-              <br />
-              <span class="text-muted">Age:</span> 30-45 years<br />
-              <span class="text-muted">Gender:</span> Male, Female<br />
-              <br />
-              <span class="text-muted">Steps:</span> 4<br />
-              <span class="text-muted">Duration:</span> 5 hours<br />
-              <br />
-            </small>
-          </p>
-        </div>
-
-        <div class="likes">
-          <p class="card-text">
-            <small>
-              <span class="text-muted">
-                Users: 311 &emsp;
-                Likes: 214 &emsp;
-                Dislikes: 34
-              </span>
-            </small>
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="tag badge rounded-pill bg-secondary">RECOMMENDED</div>
-
-        <div class="symptoms d-flex">
-          <div class="symptom">Depression</div>
-        </div>
-
-        <%= image_tag("inflamation-and-mood.jpg", :alt => "Inflammation and Mood", :class => "card-img-top") %>
-
-        <div class="card-body">
-          <h5 class="card-title">Inflammation and mood</h5>
-          <p class="card-text">
-            <small>
-              <span class="text-muted">Does a dysfunctional immune system cause inflammation in the body, leading to mood swings?</span><br />
-              <br />
-              <span class="text-muted">Age:</span> 30-45 years<br />
-              <span class="text-muted">Gender:</span> Male, Female<br />
-              <br />
-              <span class="text-muted">Steps:</span> 4<br />
-              <span class="text-muted">Duration:</span> 5 hours<br />
-              <br />
-            </small>
-          </p>
-        </div>
-
-        <div class="likes">
-          <p class="card-text">
-            <small>
-              <span class="text-muted">
-                Users: 311 &emsp;
-                Likes: 214 &emsp;
-                Dislikes: 34
-              </span>
-            </small>
-          </p>
-        </div>
-      </div>
+      <% end %>
     </div>
 
     <p class="description text-center mt-5 mb-0">Do you want to let go of your worries and fears?</p>
@@ -214,225 +105,41 @@
   </div>
 
   <div class="banner banner-coaches">
-    <h1>Coaches</h1>
+    <h1><a name="coaches"></a>Coaches</h1>
 
     <p class="description text-center">Ability to choose the coach, who will select each user technique individually</p>
 
     <div class="gallery">
       <div class="gallery-column">
         <div class="gallery-item gallery-item-big">
-          <div class="avatar-and-links d-flex">
-            <div class="aal-item link link-left flex-fill text-center">
-              <i class="bi bi-facebook"></i>
-            </div>
-
-            <div class="aal-item avatar text-center">
-              <%= image_tag("james-brown.jpg", :alt => "James Brown") %>
-
-              <div class="verified">
-                <i class="bi bi-patch-check-fill"></i>
-              </div>
-            </div>
-
-            <div class="aal-item link link-right flex-fill text-center">
-              <i class="bi bi-linkedin"></i>
-            </div>
-          </div>
-
-          <h4 class="text-center mb-1">James Brown</h4>
-
-          <p class="slogan text-center mb-1">Current coach</p>
-
-          <p class="description text-center mb-1">I know how to help you overcome Depression and<br />
-            Anxiety. I know modern techniques that work.</p>
-
-          <p class="age text-center mb-1">36 years | Male | 27 users</p>
-
-          <div class="area mt-3">
-            <p class="section-title mb-0">Areas of Experience</p>
-
-            <div class="badges">
-              <span class="badge rounded-pill bg-light text-dark">Depression</span>
-              <span class="badge rounded-pill bg-light text-dark">Anxiety</span>
-            </div>
-          </div>
-
-          <div class="work-experience mt-3">
-            <p class="section-title mb-0">Education</p>
-            <p class="section-value">New York University, PhD in Psychology</p>
-          </div>
-
-          <div class="work-experience mt-3">
-            <p class="section-title mb-0">Work experience</p>
-            <p class="section-value">Psychologist, ABC company, 12 years</p>
-          </div>
-
-          <div class="work-experience mt-3">
-            <p class="section-title mb-0">Licenses and Certificates</p>
-            <p class="section-value">New York / 081109, New York University, 2009</p>
-          </div>
-
-          <p class="text-center mb-0"><%= link_to "SEND AN INVITATION", "signup", class: "btn btn-light" %></p>
+          <%= render 'layouts/coach', user: Coach.first.user, full_info: true %>
         </div>
       </div>
 
       <div class="gallery-column">
-        <div class="gallery-item gallery-item-small">
-          <div class="d-flex">
-            <div class="avatar">
-              <%= image_tag("amelia-adamson.jpg", :alt => "Amelia Adamson") %>
-            </div>
-
-            <div class="info flex-fill">
-              <h4 class="mb-1">Amelia Adamson</h4>
-
-              <p class="slogan mb-1">Coach</p>
-
-              <p class="age mb-1">31 years | Female | 10 users</p>
-
-              <div class="area mt-3">
-                <p class="section-title mb-0">Areas of Experience</p>
-
-                <div class="badges">
-                  <span class="badge rounded-pill bg-light text-dark">Depression</span>
-                  <span class="badge rounded-pill bg-light text-dark">Anxiety</span>
-                </div>
-              </div>
-            </div>
+        <% Coach.last(3).each do |coach| %>
+          <div class="gallery-item gallery-item-small">
+            <%= render 'layouts/coach', user: coach.user, full_info: false, show_links: false %>
           </div>
-        </div>
-
-        <div class="gallery-item gallery-item-small">
-          <div class="d-flex">
-            <div class="avatar">
-              <%= image_tag("leo-ellington.jpg", :alt => "Leo Ellington") %>
-            </div>
-
-            <div class="info flex-fill">
-              <h4 class="mb-1">Leo Ellington</h4>
-
-              <p class="slogan mb-1">Coach</p>
-
-              <p class="age mb-1">31 years | Male | 10 users</p>
-
-              <div class="area mt-3">
-                <p class="section-title mb-0">Areas of Experience</p>
-
-                <div class="badges">
-                  <span class="badge rounded-pill bg-light text-dark">Depression</span>
-                  <span class="badge rounded-pill bg-light text-dark">Anxiety</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="gallery-item gallery-item-small">
-          <div class="d-flex">
-            <div class="avatar">
-              <%= image_tag("tom-young.jpg", :alt => "Tom Young") %>
-            </div>
-
-            <div class="info flex-fill">
-              <h4 class="mb-1">Tom Young</h4>
-
-              <p class="slogan mb-1">Coach</p>
-
-              <p class="age mb-1">32 years | Male | 17 users</p>
-
-              <div class="area mt-3">
-                <p class="section-title mb-0">Areas of Experience</p>
-
-                <div class="badges">
-                  <span class="badge rounded-pill bg-light text-dark">Depression</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>
 
       <div class="gallery-column">
-        <div class="gallery-item gallery-item-small">
-          <div class="d-flex">
-            <div class="avatar">
-              <%= image_tag("gabriel-wilson.jpg", :alt => "Gabriel Wilson") %>
-            </div>
-
-            <div class="info flex-fill">
-              <h4 class="mb-1">Gabriel Wilson</h4>
-
-              <p class="slogan mb-1">Coach</p>
-
-              <p class="age mb-1">32 years | Female | 17 users</p>
-
-              <div class="area mt-3">
-                <p class="section-title mb-0">Areas of Experience</p>
-
-                <div class="badges">
-                  <span class="badge rounded-pill bg-light text-dark">Depression</span>
-                </div>
-              </div>
-            </div>
+        <% Coach.last(6).first(3).each do |coach| %>
+          <div class="gallery-item gallery-item-small">
+            <%= render 'layouts/coach', user: coach.user, full_info: false, show_links: false %>
           </div>
-        </div>
-
-        <div class="gallery-item gallery-item-small">
-          <div class="d-flex">
-            <div class="avatar">
-              <%= image_tag("leo-ellington.jpg", :alt => "Leo Ellington") %>
-            </div>
-
-            <div class="info flex-fill">
-              <h4 class="mb-1">Leo Ellington</h4>
-
-              <p class="slogan mb-1">Coach</p>
-
-              <p class="age mb-1">31 years | Male | 10 users</p>
-
-              <div class="area mt-3">
-                <p class="section-title mb-0">Areas of Experience</p>
-
-                <div class="badges">
-                  <span class="badge rounded-pill bg-light text-dark">Depression</span>
-                  <span class="badge rounded-pill bg-light text-dark">Anxiety</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="gallery-item gallery-item-small">
-          <div class="d-flex">
-            <div class="avatar">
-              <%= image_tag("tom-young.jpg", :alt => "Tom Young") %>
-            </div>
-
-            <div class="info flex-fill">
-              <h4 class="mb-1">Tom Young</h4>
-
-              <p class="slogan mb-1">Coach</p>
-
-              <p class="age mb-1">32 years | Male | 17 users</p>
-
-              <div class="area mt-3">
-                <p class="section-title mb-0">Areas of Experience</p>
-
-                <div class="badges">
-                  <span class="badge rounded-pill bg-light text-dark">Depression</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>
     </div>
 
-    <p class="description text-center mt-5 mb-0">Do you want to help people?<br />
-      Do you have experience and skills in psychotherapy?</p>
+    <div class="block-links">
+      <p class="description text-center">Do you want to help people?<br />
+        Do you have experience and skills in psychotherapy?</p>
 
-    <p class="text-center"><%= link_to "BECOME COACH", "signup", class: 'btn btn-primary' %></p>
+      <p class="text-center"><%= link_to "BECOME COACH", "signup", class: 'btn btn-primary' %></p>
+    </div>
   </div>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

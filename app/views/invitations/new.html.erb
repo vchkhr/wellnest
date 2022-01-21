@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/app', user: current_user %>
+<%= render 'layouts/navigation', nav_for: 'app', user: current_user %>
 
 <p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
@@ -11,4 +11,4 @@
   <p><%= link_to 'CONFIRM', new_invitation_path(coach_id: params['coach_id'], status: 0), class: 'btn btn-primary' %></p>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>

@@ -1,4 +1,4 @@
-<%= render 'layouts/navigation/app', user: current_user %>
+<%= render 'layouts/navigation', nav_for: 'app', user: current_user %>
 
 <p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
@@ -6,16 +6,16 @@
 <div class="my-clients">
   <div class="links">
     <p><%= link_to "My Clients", clients_path %>
-    <p><%= "Waiting for confirmation (#{CoachManager::InvitationsCount.call(current_user.coach)})" %></p>
+    <p><%= "Waiting for confirmation (#{current_user.coach.invitations_count})" %></p>
   </div>
   <hr />
 
   <div class="clients">
     <% @invitations.each do |invitation| %>
-      <%= render 'layouts/clients/invitations', user: invitation.client.user, invitation: invitation %>
+      <%= render 'layouts/client', user: invitation.client.user, invitation: invitation %>
     <% end %>
   </div>
 </div>
 
-<%= render 'layouts/footer/footer' %>
+<%= render 'layouts/footer' %>
 

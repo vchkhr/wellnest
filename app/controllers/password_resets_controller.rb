@@ -36,8 +36,11 @@ class PasswordResetsController < ApplicationController
       redirect_to edit_password_reset_path(@user.password_reset_token)
 
     elsif @user.update(user_params)
-      flash[:notice] = 'Password has been reset'
-      redirect_to new_session_path
+      text = "Your password has been reset"
+      Notification.create!(client: @user.client, text: text) unless @user.client.nil?
+      CoachNotification.create!(coach: @user.coach, text: text) unless @user.coach.nil?
+
+      redirect_to new_session_path, notice: text
     
     else
       render :edit
