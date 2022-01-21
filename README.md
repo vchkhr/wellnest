@@ -1,4 +1,4 @@
-# [mobidev-rubyInternship-mhc](https://mental.vchkhr.com/)
+# [mobidev-rubyInternship-mhc](http://mental.vchkhr.com/)
 
 Platform where coaches help users to deal with anxiety and depression.
 
