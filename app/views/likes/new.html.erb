@@ -1,8 +1,19 @@
-<h1>Congratulations!</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
-<p>You have finished completing the technique! Share with us your impressions and whether you like the technique.</p>
-<p>Do you like this technique?</p>
+<p id="alert"><%= alert %></p>
+<p id="notice"><%= notice %></p>
 
-<p><%= link_to 'I DON\'T LIKE IT', new_like_path(is_like: false, technique_id: params['technique_id']) %></p>
+<div class="like-view text-center">
+  <h1>Congratulations!</h1>
 
-<p><%= link_to 'I LIKE IT', new_like_path(is_like: true, technique_id: params['technique_id']) %></p>
+  <p>You have finished completing the technique!<br>Share with us your impressions and whether you like the technique.</p>
+  <p>Do you like this technique?</p>
+
+  <div class="buttons">
+    <p><%= link_to 'I DON\'T LIKE IT', new_like_path(is_like: false, technique_id: params['technique_id']) , class: 'unsuccess'%></p>
+
+    <p><%= link_to 'I LIKE IT', new_like_path(is_like: true, technique_id: params['technique_id']), class: 'success' %></p>
+  </div>
+</div>
+
+<%= render 'layouts/footer/footer' %>

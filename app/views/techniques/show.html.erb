@@ -1,39 +1,58 @@
-<h1>Technique</h1>
+<%= render 'layouts/navigation/app', user: current_user %>
 
+<p id="alert"><%= alert %></p>
 <p id="notice"><%= notice %></p>
 
 <% if @steps.nil? %>
-  <%= render 'layouts/techniques/technique', technique: @technique, show_continue: false %>
+  <div class="technique-view">
+    <div class="step">
+      <h1><%= @step.title %></h1>
 
-  <h1><%= @step.title %></h1>
+      <p><%= @step.description %></p>
 
-  <p><%= @step.description %></p>
+      <% unless @step.image.nil? %>
+        <%= image_tag @step.image, :alt => @step.title %>
+      <% end %>
 
-  <% unless @step.image.nil? %>
-    <%= image_tag @step.image, :alt => @step.title %>
-  <% end %>
+      <% unless @step.video.nil? %>
+        <%= video_tag @step.video, :controls => true %>
+      <% end %>
 
-  <% unless @step.video.nil? %>
-    <%= video_tag @step.video, :controls => true %>
-  <% end %>
+      <% unless @step.audio.nil? %>
+        <%= audio_tag @step.audio, :controls => true %>
+      <% end %>
 
-  <% unless @step.audio.nil? %>
-    <%= audio_tag @step.audio, :controls => true %>
-  <% end %>
+      <div class="buttons">
+        <% if @step_count == 1 %>
+          <div class="button">
+            <p>Go back</p>
+          </div>
+        <% else %>
+          <div class="button">
+            <p><%= link_to "Go Back", edit_completed_step_path(@step, step_id: (@step.id - 1), technique_id: @technique.id, delete: true) %></p>
+          </div>
+        <% end %>
 
-  <% if @step_count == 1 %>
-    <p>Go back</p>
-  <% else %>
-    <p><%= link_to "Go Back", edit_completed_step_path(@step, step_id: (@step.id - 1), technique_id: @technique.id, delete: true) %></p>
-  <% end %>
+        <div class="button text-center">
+          <p>Step <%= @step_count %> of <%= @step_all %></p>
+        </div>
 
-  <p>Step <%= @step_count %> of <%= @step_all %></p>
+        <% if @step_count < @step_all %>
+          <div class="button text-right">
+            <p><%= link_to "Next Step", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: false) %></p>
+          </div>
+        <% else %>
+          <div class="button text-right">
+            <p><%= link_to "Finish", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: true) %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-  <% if @step_count < @step_all %>
-    <p><%= link_to "Next Step", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: false) %></p>
-  <% else %>
-    <p><%= link_to "Finish", new_completed_step_path(@step, step_id: @step.id, technique_id: @technique.id, last_step: true) %></p>
-  <% end %>
+    <div class="technique">
+      <%= render 'layouts/techniques/technique', technique: @technique, show_continue: false %>
+    </div>
+  </div>
 
 <% else %>
   <%= render 'layouts/techniques/coach', technique: @technique, show_details: false %>
@@ -61,3 +80,5 @@
     <% end %>
   <% end %>
 <% end %>
+
+<%= render 'layouts/footer/footer' %>
