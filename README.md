@@ -50,5 +50,5 @@ You will see the application's front page.
 
 ### Open the Admin Panel
 1. After opening the Application, go to `http://localhost:3000/admin` page in the browser.
-2. Type `test@test.com` into the email field, and `password` into the password field.\
+2. Type `admin@example.com` into the email field, and `password` into the password field.\
 Press `Enter` and now you can use the ActiveAdmin Panel.
